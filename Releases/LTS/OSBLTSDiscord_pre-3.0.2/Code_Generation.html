@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Code & JSON Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+      background: #161620;
+      color: #eee;
+      font-family: sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      margin: 0 auto;
+      width: 90%;
+      padding: 1rem 0;
+      gap: 2rem;
+    }
+    .panel {
+      flex: 1 1 0;
+      border: 1px solid #666;
+      padding: 1rem;
+    }
+    h2, h3, label {
+      margin-top: 0.7rem;
+      margin-bottom: 0.3rem;
+    }
+    input, select, button, textarea, label, output {
+      background: #383842;
+      color: #fff;
+      border: 1px solid #666;
+      padding: 0.3rem;
+      font-size: 1rem;
+    }
+    input[type="checkbox"] {
+      width: auto;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 0.3rem;
+    }
+    input[type="range"] {
+      width: 100%;
+      margin: 0.3rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.6rem;
+    }
+    th, td {
+      border: 1px solid #666;
+      padding: 0.4rem;
+      text-align: left;
+    }
+    th {
+      background-color: #2a2a40;
+      font-weight: bold;
+    }
+    button {
+      cursor: pointer;
+    }
+    .btn-remove {
+      background-color: #a33;
+      border-color: #a33;
+    }
+    #codesDisplay {
+      width: 100%;
+      height: 10rem;
+      font-family: monospace;
+      resize: none;
+      margin-top: 0.5rem;
+    }
+    .timestamp-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .timestamp-group label {
+      background: transparent;
+      border: none;
+      font-weight: bold;
+      margin-top: 0;
+    }
+    .timestamp-group input[type="date"],
+    .timestamp-group input[type="time"],
+    .timestamp-group input[type="text"] {
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="panel" id="leftPanel">
+    <h2>Timestamp Tools</h2>
+    <p>Timestamp section</p>
+    <div style="margin-bottom:1rem;">
+      <label>
+        <input type="checkbox" id="discordToggle">
+        Use Discord Timestamps?
+      </label>
+      <label for="discordFormat">Format:</label>
+      <select id="discordFormat">
+        <option value="t">Short time (t)</option>
+        <option value="T">Long time (T)</option>
+        <option value="d">Short date (d)</option>
+        <option value="D">Long date (D)</option>
+        <option value="f">Short date/time (f)</option>
+        <option value="F">Full date/time (F)</option>
+        <option value="R">Relative (R)</option>
+      </select>
+    </div>
+
+    <h3>Start Timestamp</h3>
+    <div class="timestamp-group">
+      <label for="startDate">Date</label>
+      <input type="date" id="startDate">
+      <label for="startTime">Time</label>
+      <input type="time" id="startTime">
+    </div>
+    <div class="timestamp-group">
+      <label for="startTsField">Unix TS / Discord</label>
+      <input type="text" id="startTsField" placeholder="1672531200 or <t:1672531200:f>">
+    </div>
+
+    <br><br>
+    <h3>End Timestamp</h3>
+    <div class="timestamp-group">
+      <label for="endDate">Date</label>
+      <input type="date" id="endDate">
+      <label for="endTime">Time</label>
+      <input type="time" id="endTime">
+    </div>
+    <div class="timestamp-group">
+      <label for="endTsField">Unix TS / Discord</label>
+      <input type="text" id="endTsField" placeholder="1704067200 or <t:1704067200:f>">
+    </div>
+
+    <br><br>
+
+    <h3>Additional Timestamp 1</h3>
+    <div class="timestamp-group">
+      <label for="add1Date">Date</label>
+      <input type="date" id="add1Date">
+      <label for="add1Time">Time</label>
+      <input type="time" id="add1Time">
+    </div>
+    <div class="timestamp-group">
+      <label for="add1TsField">Unix TS / Discord</label>
+      <input type="text" id="add1TsField" placeholder="1704067200 or <t:1704067200:f>">
+    </div>
+
+    <br><br>
+
+    <h3>Additional Timestamp 2</h3>
+    <div class="timestamp-group">
+      <label for="add2Date">Date</label>
+      <input type="date" id="add2Date">
+      <label for="add2Time">Time</label>
+      <input type="time" id="add2Time">
+    </div>
+    <div class="timestamp-group">
+      <label for="add2TsField">Unix TS / Discord</label>
+      <input type="text" id="add2TsField" placeholder="1704067200 or <t:1704067200:f>">
+    </div>
+  </div>
+
+  <div class="panel" id="rightPanel">
+    <h2>Code Generator</h2>
+    <p>Code Section</p>
+
+    <label>
+      <input type="checkbox" id="randomCodeCheck">
+      Random?
+    </label>
+    <label for="codeLen">Length: <span id="codeLenValue">8</span></label>
+    <input type="range" id="codeLen" min="6" max="12" value="8">
+
+    <label for="codeField">Code</label>
+    <input type="text" id="codeField" placeholder="TESTCODE1145" />
+    <br>
+    <label for="startTsJsonField">Start Timestamp</label>
+    <input type="number" id="startTsJsonField" placeholder="1672531200" />
+    <br>
+    <label for="endTsJsonField">End Timestamp</label>
+    <input type="number" id="endTsJsonField" placeholder="1704067200" />
+    <br>
+    <label for="allowedField">Allowed Users</label>
+    <input type="text" id="allowedField" placeholder="*, 123456789, 987654321" />
+    <br>
+    <label for="copperField">Copper</label>
+    <input type="number" id="copperField" placeholder="100" />
+    <br>
+    <label for="goldField">Gold</label>
+    <input type="number" id="goldField" placeholder="5" />
+    <br>
+    <h3>Items</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item ID</th>
+          <th>Quantity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="itemsTbody">
+      </tbody>
+    </table>
+    <button id="addItemBtn">Add Item</button>
+
+    <br><br>
+    <button id="addCodeBtn">Add Code</button>
+
+    <h3>Generated JSON</h3>
+    <textarea id="codesDisplay" readonly></textarea>
+    <button id="copyBtn">Copy JSON</button>
+  </div>
+</div>
+
+<script>
+/* -------------------------
+   DISCORD TIMESTAMP TOGGLE
+   ------------------------- */
+const discordToggle = document.getElementById('discordToggle');
+const discordFormat = document.getElementById('discordFormat');
+
+const startTsField = document.getElementById('startTsField');
+const endTsField   = document.getElementById('endTsField');
+const add1TsField  = document.getElementById('add1TsField');
+const add2TsField  = document.getElementById('add2TsField');
+
+const startDateInput = document.getElementById('startDate');
+const startTimeInput = document.getElementById('startTime');
+const endDateInput   = document.getElementById('endDate');
+const endTimeInput   = document.getElementById('endTime');
+const add1DateInput  = document.getElementById('add1Date');
+const add1TimeInput  = document.getElementById('add1Time');
+const add2DateInput  = document.getElementById('add2Date');
+const add2TimeInput  = document.getElementById('add2Time');
+
+function makeDiscordTimestamp(ts) {
+  return `<t:${ts}:${discordFormat.value}>`;
+}
+
+function parseTsString(str) {
+  const trimmed = str.trim();
+  if (!trimmed) return null;
+
+  const m = trimmed.match(/^<t:(\d+):([A-Za-z]+)>$/);
+  if (m) {
+    const tsNum = parseInt(m[1], 10);
+    const fmt   = m[2];
+    if (!isNaN(tsNum)) {
+      return { ts: tsNum, isDiscord: true, format: fmt };
+    }
+  }
+
+  const num = parseInt(trimmed, 10);
+  if (!isNaN(num)) {
+    return { ts: num, isDiscord: false, format: '' };
+  }
+
+  return null;
+}
+
+function dateTimeToUnix(dateInput, timeInput) {
+  const d = dateInput.valueAsDate;
+  const t = timeInput.value;
+  if(!d || !t) return NaN;
+
+  const [hours, mins] = t.split(":").map(x => parseInt(x, 10));
+  d.setHours(hours);
+  d.setMinutes(mins);
+  d.setSeconds(0);
+  d.setMilliseconds(0);
+  return Math.floor(d.getTime() / 1000);
+}
+
+function unixToDateTime(ts, dateInput, timeInput) {
+  if(isNaN(ts)) return;
+  const d = new Date(ts * 1000);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hours = String(d.getHours()).padStart(2, "0");
+  const mins = String(d.getMinutes()).padStart(2, "0");
+
+  dateInput.value = `${year}-${month}-${day}`;
+  timeInput.value = `${hours}:${mins}`;
+}
+
+function updateFromDateTime(dateInput, timeInput, tsField) {
+  const ts = dateTimeToUnix(dateInput, timeInput);
+  if (isNaN(ts)) return;
+
+  if (discordToggle.checked) {
+    tsField.value = makeDiscordTimestamp(ts);
+  } else {
+    tsField.value = String(ts);
+  }
+}
+
+function updateFromTsField(tsField, dateInput, timeInput) {
+  const parsed = parseTsString(tsField.value);
+  if (!parsed) return; 
+
+  unixToDateTime(parsed.ts, dateInput, timeInput);
+}
+
+function reformatAllTsFields() {
+  const fields = [
+    { date: startDateInput, time: startTimeInput, field: startTsField },
+    { date: endDateInput,   time: endTimeInput,   field: endTsField },
+    { date: add1DateInput,  time: add1TimeInput,  field: add1TsField },
+    { date: add2DateInput,  time: add2TimeInput,  field: add2TsField },
+  ];
+  for (let f of fields) {
+    const parsed = parseTsString(f.field.value);
+    let tsVal;
+    if (parsed) {
+      tsVal = parsed.ts;
+    } else {
+      tsVal = dateTimeToUnix(f.date, f.time);
+    }
+    if (isNaN(tsVal)) continue;
+
+    if (discordToggle.checked) {
+      f.field.value = makeDiscordTimestamp(tsVal);
+    } else {
+      f.field.value = String(tsVal);
+    }
+  }
+}
+
+startDateInput.addEventListener('change', () => updateFromDateTime(startDateInput, startTimeInput, startTsField));
+startTimeInput.addEventListener('change', () => updateFromDateTime(startDateInput, startTimeInput, startTsField));
+
+endDateInput.addEventListener('change', () => updateFromDateTime(endDateInput, endTimeInput, endTsField));
+endTimeInput.addEventListener('change', () => updateFromDateTime(endDateInput, endTimeInput, endTsField));
+
+add1DateInput.addEventListener('change', () => updateFromDateTime(add1DateInput, add1TimeInput, add1TsField));
+add1TimeInput.addEventListener('change', () => updateFromDateTime(add1DateInput, add1TimeInput, add1TsField));
+
+add2DateInput.addEventListener('change', () => updateFromDateTime(add2DateInput, add2TimeInput, add2TsField));
+add2TimeInput.addEventListener('change', () => updateFromDateTime(add2DateInput, add2TimeInput, add2TsField));
+
+startTsField.addEventListener('input', () => updateFromTsField(startTsField, startDateInput, startTimeInput));
+endTsField.addEventListener('input', () => updateFromTsField(endTsField, endDateInput, endTimeInput));
+add1TsField.addEventListener('input', () => updateFromTsField(add1TsField, add1DateInput, add1TimeInput));
+add2TsField.addEventListener('input', () => updateFromTsField(add2TsField, add2DateInput, add2TimeInput));
+
+discordToggle.addEventListener('change', reformatAllTsFields);
+discordFormat.addEventListener('change', reformatAllTsFields);
+
+
+/* ---------------
+   CODE GENERATOR
+  --------------- */
+let codesArray = [];
+
+const randomCodeCheck = document.getElementById('randomCodeCheck');
+const codeLen = document.getElementById('codeLen');
+const codeLenValue = document.getElementById('codeLenValue');
+const codeField = document.getElementById('codeField');
+
+const startTsJsonField = document.getElementById('startTsJsonField');
+const endTsJsonField = document.getElementById('endTsJsonField');
+const allowedField = document.getElementById('allowedField');
+const copperField = document.getElementById('copperField');
+const goldField = document.getElementById('goldField');
+const itemsTbody = document.getElementById('itemsTbody');
+const addItemBtn = document.getElementById('addItemBtn');
+const addCodeBtn = document.getElementById('addCodeBtn');
+const codesDisplay = document.getElementById('codesDisplay');
+const copyBtn = document.getElementById('copyBtn');
+
+function makeRandomCode(length) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "";
+  for(let i=0; i<length; i++){
+    const rndIndex = Math.floor(Math.random() * chars.length);
+    result += chars[rndIndex];
+  }
+  return result;
+}
+function maybeGenerateCode() {
+  if(randomCodeCheck.checked) {
+    codeField.value = makeRandomCode(parseInt(codeLen.value, 10));
+  }
+}
+
+randomCodeCheck.addEventListener('change', () => {
+  maybeGenerateCode();
+});
+codeLen.addEventListener('input', () => {
+  codeLenValue.textContent = codeLen.value;
+  maybeGenerateCode();
+});
+
+
+addItemBtn.onclick = function() {
+  const row = document.createElement('tr');
+
+  const itemIdCell = document.createElement('td');
+  const itemIdInput = document.createElement('input');
+  itemIdInput.type = 'text';
+  itemIdInput.placeholder = '2001';
+  itemIdCell.appendChild(itemIdInput);
+
+  const qtyCell = document.createElement('td');
+  const qtyInput = document.createElement('input');
+  qtyInput.type = 'number';
+  qtyInput.placeholder = '1';
+  qtyCell.appendChild(qtyInput);
+
+  const actionCell = document.createElement('td');
+  const removeBtn = document.createElement('button');
+  removeBtn.textContent = 'Remove';
+  removeBtn.className = 'btn-remove';
+  removeBtn.onclick = () => {
+    itemsTbody.removeChild(row);
+  };
+  actionCell.appendChild(removeBtn);
+
+  row.appendChild(itemIdCell);
+  row.appendChild(qtyCell);
+  row.appendChild(actionCell);
+
+  itemsTbody.appendChild(row);
+};
+
+addCodeBtn.onclick = function() {
+
+  let allowedText = allowedField.value.trim();
+  let allowedUsers = [];
+  if (allowedText === '*') {
+    allowedUsers = ['*'];
+  } else if (allowedText.length > 0) {
+    allowedUsers = allowedText.split(',').map(s => s.trim()).filter(s => s !== '');
+  }
+
+  let items = {};
+  for (let row of itemsTbody.querySelectorAll('tr')) {
+    const itemIdInput = row.cells[0].querySelector('input');
+    const qtyInput = row.cells[1].querySelector('input');
+    const itemIdVal = itemIdInput.value.trim();
+    const qtyVal = parseInt(qtyInput.value.trim(), 10) || 0;
+
+    if (itemIdVal) {
+      items[itemIdVal] = qtyVal;
+    }
+  }
+
+  let newCodeObj = {
+    code: codeField.value.trim(),
+    start_ts: parseInt(startTsJsonField.value, 10) || 0,
+    end_ts: parseInt(endTsJsonField.value, 10) || 0,
+    allowed_users: allowedUsers,
+    content: {
+      copper: parseInt(copperField.value, 10) || 0,
+      gold: parseInt(goldField.value, 10) || 0,
+      items: items
+    }
+  };
+
+  codesArray.push(newCodeObj);
+
+  if(!randomCodeCheck.checked) {
+    codeField.value = '';
+  }
+  startTsJsonField.value = '';
+  endTsJsonField.value = '';
+  allowedField.value = '';
+  copperField.value = '';
+  goldField.value = '';
+  itemsTbody.innerHTML = '';
+
+  refreshCodesDisplay();
+};
+
+function refreshCodesDisplay() {
+  codesDisplay.value = JSON.stringify(codesArray, null, 2);
+}
+
+copyBtn.onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(codesDisplay.value);
+    alert('Successfully copied JSON');
+  } catch (err) {
+    alert('Failed to copy: ' + err);
+  }
+};
+
+window.addEventListener('load', () => {
+  codeLenValue.textContent = codeLen.value;
+  maybeGenerateCode();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+    "codes": [
+      {
+        "code": "GIFT2025",
+        "start_ts": 1735660800,
+        "end_ts": 1767196800,
+        "allowed_users": [
+          "*"
+        ],
+        "content": {
+          "copper": 1000,
+          "gold": 5,
+          "items": {}
+        }
+      }
+    ]
+  }

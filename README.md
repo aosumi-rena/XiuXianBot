@@ -184,7 +184,7 @@ Once running, the bot will:
 
 ## Contact
 
-Your Name – [rena.aosumi@mihoyo.day](mailto:rena.aosumi@mihoyo.day)
+Aosumi Rena – [rena.aosumi@mihoyo.day](mailto:rena.aosumi@mihoyo.day)
 
 Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/aosumi-rena/XiuXianBot)
 

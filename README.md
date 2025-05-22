@@ -2,6 +2,9 @@
 # XiuXianGame Bot
 A text-based game Bot which supports both Telegram and Discord (Matrix and more in future) at the same time, by running in a universal core logic with adapters to other platforms, all sharing the same game engine and database.
 
+**README Variations**
+
+[简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
@@ -77,13 +80,12 @@ root/
 - **commands/**  
   Implements every game feature as plain Python functions:  
   - Account creation & linking (Changing to web GUI in future)
-  - Cultivation, hunting, ascending, element system, shop, inventory, status。。。
+  - Cultivation, hunting, ascending, element system, shop, inventory, status...
 - **admin/**  
-  Legacy admin tools by using commands (Changing to local admin GUI in future)
+  Legacy admin tools by using commands (Changing to local web admin GUI in future)
 - **utils/**  
   - **database.py**: MongoDB connection, unified `user_id` generation, backup routines for both `users` and `items` collections  
   - **localisation.py**: load JSON textmaps (multi‑language support) 
-  - **elements.py**: element multipliers and translation mappings
   - **???.py**: More functions in future...
 
 ### Platform Adapters

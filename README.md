@@ -31,6 +31,10 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+      <ul>
+        <li><a href="#core">Core</a></li>
+        <li><a href="#game-functions">Game Functions</a></li>
+      </ul>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -175,6 +179,7 @@ Once running, the bot will:
 
 ## Roadmap
 
+### Core
 * [ ] Refactor core logic into **core/** package
 * [ ] Implement **Discord** adapter
 * [ ] Add **Telegram** adapter with slash commands
@@ -182,6 +187,16 @@ Once running, the bot will:
 * [ ] Build **web\_local** admin GUI
 * [ ] Build **web\_public** portal for account linking
 * [ ] Dockerize entire application
+
+### Game Functions
+* [ ] Buff systems and consumable items
+* [ ] Equipment system
+* [ ] Mail function
+* [ ] Exploration system (map)
+* [ ] Alternate cultivating pathways
+* [ ] Battle system (turn-based)
+* [ ] Gacha system
+* [ ] Trading system
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

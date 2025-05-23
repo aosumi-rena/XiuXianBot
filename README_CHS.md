@@ -34,6 +34,10 @@
     </li>
     <li><a href="#使用">使用</a></li>
     <li><a href="#后续">后续</a></li>
+      <ul>
+        <li><a href="#内核">内核</a></li>
+        <li><a href="#游戏功能">游戏功能</a></li>
+      </ul>
     <li><a href="#贡献">贡献</a></li>
     <li><a href="#许可">许可</a></li>
     <li><a href="#联系">联系</a></li>
@@ -135,9 +139,9 @@ root/
 1. **下载**
     - [从Release下载](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)
     - [从云盘下载](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
-2. **Unzip and Configure**
-    - Unzip the prebuild into any directory you prefer, using [7-Zip (Recommended)](https://www.7-zip.org/)
-    - Configure the variables (e.g. Bot Token, admin_ids...) based on the guide in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)
+2. **解压及配置设置**
+    - 使用[7-Zip(推荐)](https://www.7-zip.org/)解压下载的文件到任意路径
+    - 根据[README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)配置变量 (包括 Bot Token, admin_ids等) 
 3. **安装依赖**
     ```sh
     pip install -r requirements.txt
@@ -146,7 +150,6 @@ root/
    ```sh
    python bot.py
    ```
-
 
 ===================================
 
@@ -185,6 +188,7 @@ root/
 
 ## 后续
 
+### 内核
 * [ ] 将核心逻辑完全拆分到 **core/**
 * [ ] 完善**Discord**适配器
 * [ ] 添加**Telegram**适配器
@@ -192,6 +196,16 @@ root/
 * [ ] 构建**web\_local**管理GUI
 * [ ] 构建**web\_public**用户创建等功能
 * [ ] Docker化部署
+
+### 游戏功能
+* [ ] Buff系统及可使用物品
+* [ ] 装备系统
+* [ ] 邮件功能
+* [ ] 探索系统（地图）
+* [ ] 修仙分支（例如宇宙主题等）
+* [ ] 战斗系统（回合制）
+* [ ] 抽卡系统
+* [ ] 交易系统
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 

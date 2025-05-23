@@ -123,7 +123,7 @@ root/
 ---
 
 ## 快速上手
-
+&&&此部分未完成&&&
 ### 环境准备
 
 - Python 3.10+  
@@ -131,7 +131,26 @@ root/
 - Docker（可选，用于容器化部署）  
 
 ### 安装
-&&&此部分未完成&&&
+**[Internal-3 (i3) 版本 {直装版}](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
+1. **下载**
+    - [从Release下载](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)
+    - [从云盘下载](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
+2. **Unzip and Configure**
+    - Unzip the prebuild into any directory you prefer, using [7-Zip (Recommended)](https://www.7-zip.org/)
+    - Configure the variables (e.g. Bot Token, admin_ids...) based on the guide in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)
+3. **安装依赖**
+    ```sh
+    pip install -r requirements.txt
+    ```
+4. **启动！**
+   ```sh
+   python bot.py
+   ```
+
+
+===================================
+
+**Internal-4 (i4) 及以上版本 {开发中}**
 1. **Clone Repo**  
    ```sh
    git clone https://github.com/aosumi-rena/XiuXianBot.git
@@ -144,7 +163,7 @@ root/
    ```
 3. **配置**
    * 编辑 `config.json`，填写 MongoDB URI、Discord 与 Telegram Token、选择启用的适配器
-4. **运行**
+4. **启动！**
    ```sh
    python bot.py
    ```

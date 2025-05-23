@@ -125,6 +125,25 @@ Each adapter translates platform‑specific events into calls into the core:
 
 ### Installation
 
+**[Internal-3 (i3) {Prebuild}](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
+1. **Download Prebuild**
+    - [Download from releases](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)
+    - [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
+2. **Unzip and Configure**
+    - Unzip the prebuild into any directory you prefer, using [7-Zip (Recommended)](https://www.7-zip.org/)
+    - Configure the variables (e.g. Bot Token, admin_ids...) based on the guide in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)
+3. **Install dependencies**
+    ```sh
+    pip install -r requirements.txt
+    ```
+4. **Run**
+   ```sh
+   python bot.py
+   ```
+
+===================================
+
+**Internal-4 (i4) And Above {Under Development}**
 1. **Clone the repo**  
    ```sh
    git clone https://github.com/aosumi-rena/XiuXianBot.git

@@ -131,15 +131,15 @@ Each adapter translates platform‑specific events into calls into the core:
    cd XiuXianBot
    ```
 2. **Install dependencies**
-  ```sh
-  pip install -r requirements.txt
-  ```
+   ```sh
+   pip install -r requirements.txt
+   ```
 3. **Configure**
-  - Edit `config.json` with your MongoDB URI, Discord & Telegram tokens, and etc. to run
+   - Edit `config.json` with your MongoDB URI, Discord & Telegram tokens, and etc. to run
 4. **Run**
-  ```sh
-  python bot.py
-  ```
+   ```sh
+   python bot.py
+   ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---

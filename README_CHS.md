@@ -72,12 +72,12 @@ root/
 │   └── utils/      # 数据库模型、本地化、计算工具、ID 生成
 │   └── …           # 未来扩展功能文件夹
 ├── adapters/
-│   ├── discord/    # Discord 专用：命令、模态框、Embed
-│   ├── telegram/   # Telegram 专用：Slash 命令、内联键盘
+│   ├── discord/    # Discord 适配：斜杠命令、前缀命令、Modal、Embed
+│   ├── telegram/   # Telegram 适配：斜杠命令、Inline keyboard
 │   └── matrix/     # Matrix 适配（TBA）
 │   └── …           # 其他平台（TBA）
-├── web\_local/     # 本地Admin的网页版GUI（配置管理、服务器控制等）
-├── web\_public/    # 公共域名的网页版GUI（账号关联、注册等）
+├── web_local/      # 本地的Bot/数据管理网页版GUI（配置管理、服务器控制等）
+├── web_public/     # 公共域名的网页版GUI（账号关联、注册等）
 ├── backups/        # 用户与物品数据备份
 ├── config.json     # Token、适配器开关、数据库配置等
 └── bot.py          # 一键启动

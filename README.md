@@ -84,8 +84,8 @@ root/
 ├── web_local/    # Local admin GUI (config management, server control)
 ├── web_public/   # Public web portal (account linking, registration)
 ├── backups/      # Backups of users and items
-├── config.json   # Tokens, adapter toggles, DB settings
-└── start.py        # Main switch to load core and adapters
+├── config.yml    # Tokens, adapter toggles, DB settings
+└── start.py      # Main switch to load core and adapters
 ```
 
 ### Core Modules

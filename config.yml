@@ -1,0 +1,15 @@
+{
+    "adapters": {                   # Select which platforms would you like to run the bot(s) on
+      "discord": true,              # Make sure to put in `false` if you do not want to run the bot
+      "telegram": true,             # Else there will be issues when running `start.py`
+      "matrix": false,
+    },
+    "tokens": {                     # Tokens for your bots
+      "discord_token": "",          # Your Discord Bot token, you can get it from Discord Dev Portal `https://discord.com/developers/applications`
+      "telegram_token": "",         # Your Telegram Bot token, you can get it from BotFather `https://t.me/BotFather`
+    },
+    "db": {                         # Database configurations
+      "mongo_uri": "",              # URI to your MongoDB, usually it is `mongodb://localhost:27017`
+      "mongo_db": ""                # Name of your MongoDB database for the bots to run on
+    },
+}  

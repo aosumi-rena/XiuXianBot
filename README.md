@@ -222,7 +222,9 @@ Once running, the bot will:
 ## License
 
 XiuXianBot ©2024-2025 By Aosumi Rena
+
 This program comes with ABSOLUTELY NO WARRANTY; for details, see [LICENSE.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/LICENSE.txt).
+
 This is free software, and you are welcome to redistribute it under the terms of the GNU GPL v3.0.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

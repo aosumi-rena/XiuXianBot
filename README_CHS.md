@@ -231,7 +231,9 @@ root/
 ## 许可
 
 XiuXianBot ©2024-2025 By 青澄玲奈
+
 此程序不含有任何担保；具体细节请查看[LICENSE.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/LICENSE.txt)。
+
 此程序为免费程序，你可以根据GNU GPL v3.0的条款重新分发/转载。
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>

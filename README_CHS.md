@@ -1,4 +1,5 @@
 <a id="readme-top"></a>
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/aosumi-rena/XiuXianBot)
 # 修仙机器人
 
 *此文件由AI翻译，本人做了部分的修改，有些可能看得很入机，欢迎修改（不得不说还是AI方便（*

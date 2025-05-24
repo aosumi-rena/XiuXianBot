@@ -54,7 +54,7 @@
 - **核心库**：实现所有游戏逻辑、数据库模型和本地化  
 - 多个**适配器**：支持不同聊天平台（Discord、Telegram、Matrix等）  
 - **Web界面**（可选）：用于管理员控制与公开账号管理  
-- 单**启动脚本** (`bot.py`)：加载配置并启动对应的适配器  
+- 单**启动脚本** (`start.py`)：加载配置并启动对应的适配器  
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 
@@ -80,7 +80,7 @@ root/
 ├── web_public/     # 公共域名的网页版GUI（账号关联、注册等）
 ├── backups/        # 用户与物品数据备份
 ├── config.json     # Token、适配器开关、数据库配置等
-└── bot.py          # 一键启动
+└── start.py          # 一键启动
 ```
 
 ### 核心模块
@@ -168,7 +168,7 @@ root/
    * 编辑 `config.json`，填写 MongoDB URI、Discord 与 Telegram Token、选择启用的适配器
 4. **启动！**
    ```sh
-   python bot.py
+   python start.py
    ```
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>

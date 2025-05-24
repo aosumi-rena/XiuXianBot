@@ -25,7 +25,7 @@ class HelpCommand(commands.Cog):
             )
 
             tos_button = Button(
-                label="服务条款 | TOC",
+                label="服务条款 | ToS",
                 url="https://www.google.com/error"
             )
             privacy_button = Button(
@@ -76,7 +76,7 @@ class HelpCommand(commands.Cog):
             )
 
             tos_button = Button(
-                label="服务条款 | TOC",
+                label="服务条款 | ToS",
                 url="https://www.google.com/error"
             )
             privacy_button = Button(

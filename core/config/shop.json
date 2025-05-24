@@ -1,0 +1,12 @@
+{
+    "shop_items": [
+      {
+        "shop_item_id": 1,
+        "currency": "copper",
+        "price": 1,
+        "item_id": 10001,
+        "quantity": 1
+      }
+    ]
+  }
+  

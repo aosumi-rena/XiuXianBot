@@ -1,5 +1,13 @@
 <a id="readme-top"></a>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stars][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![GPL-3.0 License][license-shield]][license-url]
+
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/aosumi-rena/XiuXianBot)
+[![Downloads][downloads-shield]][downloads-url]
+
 # XiuXianGame Bot
 A text-based game Bot which supports both Telegram and Discord (Matrix and more in future) at the same time, by running in a universal core logic with adapters to other platforms, all sharing the same game engine and database.
 
@@ -213,7 +221,9 @@ Once running, the bot will:
 
 ## License
 
-&&&TBA&&&
+XiuXianBot ©2024-2025 By Aosumi Rena
+This program comes with ABSOLUTELY NO WARRANTY; for details, see [LICENSE.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/LICENSE.txt).
+This is free software, and you are welcome to redistribute it under the terms of the GNU GPL v3.0.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -234,3 +244,23 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 &&&TBA&&&
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- URL -->
+[downloads-shield]: https://img.shields.io/github/downloads/aosumi-rena/XiuXianBot/total?logo=github&style=flat-square
+[downloads-url]: https://github.com/aosumi-rena/XiuXianBot/releases/latest
+
+[contributors-shield]: https://img.shields.io/github/contributors/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[contributors-url]: https://github.com/aosumi-rena/XiuXianBot/graphs/contributors
+
+[forks-shield]: https://img.shields.io/github/forks/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[forks-url]: https://github.com/aosumi-rena/XiuXianBot/network/members
+
+[stars-shield]: https://img.shields.io/github/stars/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[stars-url]: https://github.com/aosumi-rena/XiuXianBot/stargazers
+
+[issues-shield]: https://img.shields.io/github/issues/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[issues-url]: https://github.com/aosumi-rena/XiuXianBot/issues
+
+[license-shield]: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=for-the-badge
+[license-url]: https://www.gnu.org/licenses/gpl-3.0

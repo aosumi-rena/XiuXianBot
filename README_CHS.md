@@ -1,5 +1,13 @@
 <a id="readme-top"></a>
+[![贡献者][contributors-shield]][contributors-url]
+[![Forks数][forks-shield]][forks-url]
+[![Stars数][stars-shield]][stars-url]
+[![Issues数][issues-shield]][issues-url]
+[![GPL-3.0 License][license-shield]][license-url]
+
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/aosumi-rena/XiuXianBot)
+[![下载量][downloads-shield]][downloads-url]
+
 # 修仙机器人
 
 *此文件由AI翻译，本人做了部分的修改，有些可能看得很入机，欢迎修改（不得不说还是AI方便（*
@@ -222,7 +230,9 @@ root/
 
 ## 许可
 
-&&&此部分未完成&&&
+XiuXianBot ©2024-2025 By 青澄玲奈
+此程序不含有任何担保；具体细节请查看[LICENSE.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/LICENSE.txt)。
+此程序为免费程序，你可以根据GNU GPL v3.0的条款重新分发/转载。
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 
@@ -243,3 +253,23 @@ root/
 &&&此部分未完成&&&
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+
+
+<!-- URL -->
+[downloads-shield]: https://img.shields.io/github/downloads/aosumi-rena/XiuXianBot/total?logo=github&style=flat-square
+[downloads-url]: https://github.com/aosumi-rena/XiuXianBot/releases/latest
+
+[contributors-shield]: https://img.shields.io/github/contributors/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[contributors-url]: https://github.com/aosumi-rena/XiuXianBot/graphs/contributors
+
+[forks-shield]: https://img.shields.io/github/forks/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[forks-url]: https://github.com/aosumi-rena/XiuXianBot/network/members
+
+[stars-shield]: https://img.shields.io/github/stars/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[stars-url]: https://github.com/aosumi-rena/XiuXianBot/stargazers
+
+[issues-shield]: https://img.shields.io/github/issues/aosumi-rena/XiuXianBot.svg?style=for-the-badge
+[issues-url]: https://github.com/aosumi-rena/XiuXianBot/issues
+
+[license-shield]: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=for-the-badge
+[license-url]: https://www.gnu.org/licenses/gpl-3.0

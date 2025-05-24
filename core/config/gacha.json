@@ -1,0 +1,16 @@
+{
+    "gacha": [
+      {
+        "start_ts": 1735660800,
+        "end_ts": 1767196800,
+        "banner_id": 100001,
+        "title": "Gacha Title",
+        "currency": "gold",
+        "price": "160",
+        "rate_details": {
+            "placeholder": "placeholder_value"
+        }
+      }
+    ]
+}
+  

@@ -150,7 +150,7 @@
         "already_sign": {
             "description": "Already signed in today",
             "type": "plain",
-            "text": "{user_ingame_name}，您今日已签到过了！请明日04:00(GMT+8)再次使用此命令。",
+            "text": "{user_ingame_name}，您今日已签到过了！请明日04:00(服务器时间)再次使用此命令。",
             "text_TG": "",
             "text_Matrix": ""
         },

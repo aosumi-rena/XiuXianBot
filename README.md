@@ -135,7 +135,7 @@ Each adapter translates platform‑specific events into calls into the core:
     - [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
 2. **Unzip and Configure**
     - Unzip the prebuild into any directory you prefer, using [7-Zip (Recommended)](https://www.7-zip.org/)
-    - Configure the variables (e.g. Bot Token, admin_ids...) based on the guide in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)
+    - Configure the variables (e.g. Bot Token, admin_ids...) based on the guide in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/0-Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)
 3. **Install dependencies**
     ```sh
     pip install -r requirements.txt

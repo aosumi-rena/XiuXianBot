@@ -141,7 +141,7 @@ root/
     - [从云盘下载](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
 2. **解压及配置设置**
     - 使用[7-Zip(推荐)](https://www.7-zip.org/)解压下载的文件到任意路径
-    - 根据[README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)配置变量 (包括 Bot Token, admin_ids等) 
+    - 根据[README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/0-Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt)配置变量 (包括 Bot Token, admin_ids等) 
 3. **安装依赖**
     ```sh
     pip install -r requirements.txt

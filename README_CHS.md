@@ -99,8 +99,16 @@ root/
   将所有游戏功能通过纯Python实现：  
   - 账号创建与关联（未来将改为使用Web界面）  
   - 修炼（cul）、打野（hunt）、突破（asc）、元素系统（ele）、商店（shop）、物品栏（inventory）、状态（status）等  
-- **admin/**  
-  老版本的Discord Bot Admin命令（未来切换到网页GUI）  
+- **config/**  
+  游戏内的一些json设置，例如卡池、商店、兑换码和地图等
+- **textmaps/**  
+  储存Textmap的文件夹，机器人将通过使用这里面的文字完成本地化
+
+  目前本地化进度（欢迎各位大佬贡献）：
+    - [X] 英语
+    - [X] 简体中文
+    - [ ] 繁体中文（部分完成）
+    - [ ] ？？？
 - **utils/**  
   - **database.py**：MongoDB 连接、`user_id`自动生成、备份  
   - **localisation.py**：加载 json textmap

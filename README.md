@@ -95,8 +95,16 @@ root/
   Implements every game feature as plain Python functions:  
   - Account creation & linking (Changing to web GUI in future)
   - Cultivation, hunting, ascending, element system, shop, inventory, status...
-- **admin/**  
-  Legacy admin tools by using commands (Changing to local web admin GUI in future)
+- **config/**  
+  Additional game configuaations json files, used for gacha, shops, redemption codes and maps...
+- **textmaps/**  
+  Folder where textmaps are stored, the bot uses these for localisations
+
+  Currently localised for (You are welcomed to contribute if you can):
+    - [X] EN
+    - [X] CHS
+    - [ ] CHT (Partially done)
+    - [ ] ???
 - **utils/**  
   - **database.py**: MongoDB connection, unified `user_id` generation, backup routines for both `users` and `items` collections  
   - **localisation.py**: load JSON textmaps (multi‑language support) 

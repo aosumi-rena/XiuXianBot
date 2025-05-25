@@ -1,7 +1,7 @@
 {
   "admin_panel": {                                          # Settings about the admin dashboard
     "port": 11451,                                          # Port for the dashboard to run on
-    "api_switch": true,                                     # Whether to accept api request (This is for advanced users, keep this off if you only control the servers manually at the port)
+    "api_switch": true,                                     # Whether to accept api request (This is for advanced users, keep this off if you only control the servers manually at the port) [Pending development, unable to use for now]
     "api_with_password": true,                              # Whether api request needs password
     "api_password": "123456"                                # Password for api requests
   },

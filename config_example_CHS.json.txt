@@ -1,0 +1,31 @@
+{
+  "admin_panel": {                                          # 管理员控制台的设置
+    "port": 11451,                                          # 选择管理员控制台的端口
+    "api_switch": true,                                     # 是否启用API请求（供高级用户使用，如果你只会在设定的端口中控制服务器，请保持这一部分关闭）
+    "api_with_password": true,                              # API请求是否需要通过密码认证
+    "api_password": "123456"                                # API请求的密码
+  },
+  "adapters": {                                             # 选择你需要Bot启动在哪些平台
+    "discord": true,
+    "telegram": true,
+    "matrix": true
+  },
+  "tokens": {                                               # 机器人的Token/认证方式
+    "discord_token": "MTE...",                              # 你的Discord机器人的Token，可在Discord Dev Portal中获取（`https://discord.com/developers/applications`）
+    "telegram_token": "12345....",                          # 你的Telegram机器人的Token，可在BotFather获取（`https://t.me/BotFather`）
+
+    "matrix_server_address": "https://matrix.example.com",  # Matrix服务器地址（如果你不是Matrix服主，请确保服主*没有*明令禁止机器人使用正常用户的方式登录，否则后果自负，和此程序无关！）
+    "matrix_ID": "@XiuXianBot:matrix.example.com",          # 你的机器人的“用户名”
+    "matrix_pass": "123456"                                 # 你的机器人用户的密码
+  },
+  "db": {                                                   # 数据库配置
+    "mongo_uri": "mongodb://localhost:27017",               # 你的MongoDB的URI，一般情况下为`mongodb://localhost:27017`
+    "mongo_db_name": "XiuXianBotV4"                         # Bot储存数据时使用的数据库的名字
+  },
+  "game": {                                                 # 游戏数据配置（此部分未完成）
+    "constants": {
+      "sign_in_copper": 500,
+      "sign_in_gold": 1
+    }
+  }
+}

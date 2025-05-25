@@ -75,20 +75,21 @@
 
 ```
 root/
-├── core/
-│   ├── commands/   # 游戏命令（hunt.py、cul.py、asc.py、account.py、ele.py 等）
-│   ├── admin/      # 老版本的管理工具（textmap 索引、统计、备份）
-│   └── utils/      # 数据库模型、本地化、计算工具、ID 生成
-│   └── …           # 未来扩展功能文件夹
 ├── adapters/
 │   ├── discord/    # Discord 适配：斜杠命令、前缀命令、Modal、Embed
 │   ├── telegram/   # Telegram 适配：斜杠命令、Inline keyboard
-│   └── matrix/     # Matrix 适配（TBA）
+│   ├── matrix/     # Matrix 适配（TBA）
 │   └── …           # 其他平台（TBA）
+├── core/
+│   ├── commands/   # 游戏命令（hunt.py、cul.py、asc.py、account.py、ele.py 等）
+│   ├── config/     # 游戏内的一些设置，例如卡池、商店、地图等
+│   ├── textmaps/   # 储存Textmap的文件夹，机器人将通过使用这里面的文字完成本地化
+│   ├── utils/      # 数据库模型、本地化、计算工具、ID 生成
+│   └── …           # 未来扩展功能文件夹
 ├── web_local/      # 本地的Bot/数据管理网页版GUI（配置管理、服务器控制等）
 ├── web_public/     # 公共域名的网页版GUI（账号关联、注册等）
 ├── backups/        # 用户与物品数据备份
-├── config.yml      # Token、适配器开关、数据库配置等
+├── config.json     # Token、适配器开关、数据库配置等
 └── start.py        # 一键启动
 ```
 
@@ -175,21 +176,28 @@ root/
    ```
 3. **配置**
    * 编辑 `config.json`，填写 MongoDB URI、Discord 与 Telegram Token、选择启用的适配器
-4. **启动！**
+4. **启动本地控制台网页**
    ```sh
    python start.py
    ```
+   之后会在预设的端口中打开机器人控制台网页，使用浏览器进入网页以再次检查配置是否正确
+5. **启动相应的Bot平台**
 
+   全部检查好之后，在网页中启动你需要Bot运行在的平台
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 
 ---
 
 ## 使用
 
-运行后，机器人将能够：
+运行后，将：
+* 在`http://127.0.0.1:11451`（预设端口，可在`config.json`中更改所选端口）打开机器人控制台网页
+
+启动需要的平台，之后机器人将：
 * 连接 Discord 并响应 `^start`、`^cul`、`^hunt`、`^asc`、`^ele`、`/shop` 等各种命令
 * 连接 Telegram（若启用）并相应对应的的斜杠命令
-* 在`http://127.0.0.1:11451`提供本地的机器人管理功能
+* 连接 Matrix（若启用）并？？？（暂时没有计划，所以我也不知道会发生什么）
+
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 

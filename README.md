@@ -71,21 +71,22 @@ XiuXianBot is a cultivation‑themed RPG text-based game bot originally built fo
 ### File Structure
 ```
 root/
-├── core/
-│ ├── commands/   # Game commands (hunt.py, cul.py, asc.py, account.py, ele.py, etc.)
-│ ├── admin/      # Admin utilities (textmap indexing, stats, backups)
-│ └── utils/      # DB models, localization, calculations, ID generation
-│ └── ???/        # Additional folders containing future features   
 ├── adapters/
-│ ├── discord/    # Discord‑specific commands, modals, embeds
-│ ├── telegram/   # Telegram slash commands, inline keyboards
-│ └── matrix/     # Matrix (future)
-│ └── ???/        # More platforms (future)
-├── web_local/    # Local admin GUI (config management, server control)
-├── web_public/   # Public web portal (account linking, registration)
-├── backups/      # Backups of users and items
-├── config.yml    # Tokens, adapter toggles, DB settings
-└── start.py      # Main switch to load core and adapters
+│   ├── discord/    # Discord‑specific commands, modals, embeds
+│   ├── telegram/   # Telegram slash commands, inline keyboards
+│   ├── matrix/     # Matrix (future)
+│   └── ???/        # More platforms (future)
+├── core/
+│   ├── commands/   # Game commands (hunt.py, cul.py, asc.py, account.py, ele.py, etc.)
+│   ├── config/     # Additional game configuaations, for example gacha, shops and maps
+│   ├── textmaps/   # Folder where textmaps are stored, the bot uses these for localisations
+│   ├── utils/      # DB models, localization, calculations, ID generation
+│   └── ???/        # Additional folders containing future features   
+├── web_local/      # Local admin GUI (config management, server control)
+├── web_public/     # Public web portal (account linking, registration)
+├── backups/        # Backups of users and items
+├── config.json     # Tokens, adapter toggles, DB settings
+└── start.py        # Main switch to load core and adapters
 ```
 
 ### Core Modules
@@ -168,19 +169,26 @@ Each adapter translates platform‑specific events into calls into the core:
    ```
 3. **Configure**
    - Edit `config.json` with your MongoDB URI, Discord & Telegram tokens, and etc. to run
-4. **Run**
+4. **Start the local admin dashboard webpage**
    ```sh
    python start.py
    ```
+   This will start the local web admin panel in your preset port, open the webpage in browser for final check and configurations
+5. **Start the bot on respective servers/platforms**
+
+   Once everything is configured correctly and checked, start the servers (platforms) you need in the admin panel webpage
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
 ### Usage
 Once running, the bot will:
+- Provide a local web dashboard at http://127.0.0.1:11451 (By default, you may change it in config.json) for admin control.
+
+Select the servers/platforms you need the bot to run on, and the it will then
 - Connect to Discord and respond to ^start, ^cul, ^hunt, ^asc, ^ele, /shop, etc.
-- Connect to Telegram (if enabled) and mirror the same slash commands.
-- Provide a local web dashboard at http://127.0.0.1:11451 for admin control.
+- Connect to Telegram (if enabled) and mirror the same commands slash commands.
+- Connect to Matrix (if enabled) and ??? (Matrix is not prototyped, unable to provide possible results here).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

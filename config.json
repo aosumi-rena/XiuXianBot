@@ -1,0 +1,31 @@
+{
+  "admin_panel": {
+    "port": 11451,
+    "api_switch": true,
+    "api_with_password": true,
+    "api_password": "123456"
+  },
+  "adapters": {
+    "discord": true,
+    "telegram": true,
+    "matrix": true
+  },
+  "tokens": {
+    "discord_token": "MTE...",
+    "telegram_token": "12345....",
+
+    "matrix_server_address": "https://matrix.example.com",
+    "matrix_ID": "@XiuXianBot:matrix.example.com",
+    "matrix_pass": "123456"
+  },
+  "db": {
+    "mongo_uri": "mongodb://localhost:27017",
+    "mongo_db_name": "XiuXianBotV4"
+  },
+  "game": {
+    "constants": {
+      "sign_in_copper": 500,
+      "sign_in_gold": 1
+    }
+  }
+}

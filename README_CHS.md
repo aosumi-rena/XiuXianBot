@@ -1,4 +1,7 @@
 <a id="readme-top"></a>
+![XiuXianBot](https://socialify.git.ci/aosumi-rena/XiuXianBot/image?custom_description=%E4%B8%80%E6%AC%BE%E5%8F%AF%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E8%81%8A%E5%A4%A9%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%87%E6%9C%AC%E4%BF%AE%E4%BB%99%E6%B8%B8%E6%88%8F%E6%9C%BA%E5%99%A8%E4%BA%BA&description=1&forks=1&issues=1&language=1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
+
+
 [![贡献者][contributors-shield]][contributors-url]
 [![Forks数][forks-shield]][forks-url]
 [![Stars数][stars-shield]][stars-url]

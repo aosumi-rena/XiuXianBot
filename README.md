@@ -145,10 +145,51 @@ Each adapter translates platform‑specific events into calls into the core:
 ### Web Interfaces
 
 - **Local admin GUI** (`web_local/`)  
-  - Manage `config.json`, start/stop adapters, view server logs, utilise the original admin commands in a convenient way.
-- **Public portal** (`web_public/`)  [Public domain]
-  - Register new accounts  
-  - Link existing accounts via OTP sent to chat platforms  
+  A Flask-based dashboard running on your local machine (e.g. `http://127.0.0.1:11451`) that provides a single-page, tabbed interface for:
+  
+  1. **Config Management** (`127.0.0.1:11451/config`)  
+     - Loads `config.json` into a user-friendly form: each key/value rendered as an editable field.  
+     - Highlights which settings require a full restart of `start.py` (“Core Restart”) versus which only need an adapter restart (“Adapter Restart”).  
+     - "Save" button sends the updated JSON via Fetch to a POST endpoint, writes back to disk, and displays success feedback—all without reloading the page.  
+
+  2. **Server Control** (`127.0.0.1:11451/servers`)  
+     - Lists the Core process and each enabled adapter (Discord, Telegram, etc.) with toggle switches.  
+     - Choosing "Start/Stop" invokes a subprocess or system call to launch or terminate only the required service.
+     - (Future) Options like "Pause/Resume" similar to docker containers
+     - Status indicators (green/red dots) show which components are running at a glance.  
+
+  3. **Admin Tools** (`127.0.0.1:11451/admin`)  
+     - A GUI wrapper around the legacy admin commands (e.g. textmap indexing, player data overrides, permission changes).  
+     - TBA (Adding when page is done)
+
+  4. **Logs Viewer** (`127.0.0.1:11451/logs`)  
+     - Streams recent log entries in real time.
+     - Buttons to download log files.  
+     - TBA (Adding when page is done)
+
+  5. **Account Management** (`127.0.0.1:11451/accounts`)  
+     - Browse and search player information.
+     - Ban/unban, deactivate/reactivate, or manually link third-party IDs.  
+     - TBA (Adding when page is done)
+
+  6. **Database Browser** (`127.0.0.1:11451/database`)  
+     - Query `users` (automatically locates item informations in `items` for specified user/owner) collections with filters.  
+     - Display results in a paginated table with export options.  
+     - TBA (Adding when page is done)
+
+  **Technical Highlights**  
+  - **Flask Blueprints** organize routes (`admin_bp`).  
+  - **Jinja2 Templates** (`base.html`, `index.html`, `config.html`, etc.) provide a consistent nav-tab layout.  
+  - **Bootstrap 5** for responsive, polished UI (nav-tabs, cards, badges).  
+  - **Static assets** in `static/css` and `static/js` separate styling and client logic.  
+  - No external authentication by default (localhost only), but easily bolted on (API key, IP whitelist).  
+
+- **Public portal** (`web_public/`)
+  Public domain that allows users to
+  - View server status
+  - Register new accounts via web form  
+  - Link existing accounts with OTP sent to the user’s chat platform  
+  - View personal stats, inventory, and more via web  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

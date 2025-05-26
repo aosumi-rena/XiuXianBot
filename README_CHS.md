@@ -112,6 +112,7 @@ root/
     - [X] 简体中文
     - [ ] 繁体中文（部分完成）
     - [ ] ？？？
+    
 - **utils/**  
   - **database.py**：MongoDB 连接、`user_id`自动生成、备份  
   - **localisation.py**：加载 json textmap
@@ -241,7 +242,8 @@ root/
 
 ## 贡献
 
-&&&此部分未完成&&&
+- 欢迎任何人为此仓库贡献，你可以通过Pull requestse和Issues提出你认为可以改进 此项目的想法和建议
+- 对于本地化贡献，我会使用Weblate搭建网页版贡献工具，现在可以临时使用Issues或Pull requests
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 

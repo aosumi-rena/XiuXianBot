@@ -230,7 +230,8 @@ Select the servers/platforms you need the bot to run on, and the it will then
 
 ## Contributing
 
-&&&TBA&&&
+- All contributions are welcomed, you may make pull requests or post any issues if you would like to contribute
+- For localisation, a Weblate site will be hosted for public contributions
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

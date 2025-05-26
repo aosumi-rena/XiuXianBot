@@ -84,6 +84,22 @@ root/
 │   ├── utils/      # DB models, localization, calculations, ID generation
 │   └── ???/        # Additional folders containing future features   
 ├── web_local/      # Local admin GUI (config management, server control)
+│   ├── app.py                  # To launch the admin dash page at specified port
+│   ├── templates/
+│   │   ├── base.html           # Common layout (nav-tabs, footer)
+│   │   ├── index.html          # Home/dashboard overview
+│   │   ├── config.html         # Page for main configs (root/config.json)
+│   │   ├── servers.html        # For switching on/off of core and adapters
+│   │   ├── admin.html          # To use admin commands/functions (e.g. Edit player's values, Change player's permissions | i.e. A better GUI to edit the database)
+│   │   ├── logs.html           # To view/export logs
+│   │   ├── accounts.html       # To control accounts status (e.g. Banning, deactivating, linking manually, etc.) 
+│   │   └── database.html       # To query player's information / render info from database in a more user friendly way
+│   └── static/
+│       ├── css/
+│       │   └── styles.css
+│       └── js/
+│           ├── config.js       # Logic for config's page
+│           └── ...             # Logic for other pages (TBA)
 ├── web_public/     # Public web portal (account linking, registration)
 ├── backups/        # Backups of users and items
 ├── config.json     # Tokens, adapter toggles, DB settings

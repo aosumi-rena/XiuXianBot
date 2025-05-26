@@ -90,6 +90,22 @@ root/
 │   ├── utils/      # 数据库模型、本地化、计算工具、ID 生成
 │   └── …           # 未来扩展功能文件夹
 ├── web_local/      # 本地的Bot/数据管理网页版GUI（配置管理、服务器控制等）
+│   ├── app.py                  # 在预设的端口中开放管理员控制台
+│   ├── templates/
+│   │   ├── base.html           # 基础的html格式(nav-tabs, footer)
+│   │   ├── index.html          # 主页
+│   │   ├── config.html         # 修改配置（root/config.json）的页面
+│   │   ├── servers.html        # 控制开/关主服务器（游戏内核）及Bot启用的平台的页面
+│   │   ├── admin.html          # 使用管理员功能/命令的页面（例：修改玩家的数值、权限 | 换句话说：一个比直接修改数据库更方便的GUI页面）
+│   │   ├── logs.html           # 查看/导出日志
+│   │   ├── accounts.html       # 控制玩家账号的状态（例：封禁、取消激活、手动关联账号等）
+│   │   └── database.html       # 查看玩家的信息/显示数据库的数据
+│   └── static/
+│       ├── css/
+│       │   └── styles.css
+│       └── js/
+│           ├── config.js       # 修改配置的页面的逻辑
+│           └── ...             # 其他页面的逻辑
 ├── web_public/     # 公共域名的网页版GUI（账号关联、注册等）
 ├── backups/        # 用户与物品数据备份
 ├── config.json     # Token、适配器开关、数据库配置等

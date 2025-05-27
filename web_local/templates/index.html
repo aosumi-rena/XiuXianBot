@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ trans.get('home_title') }}</h1>
+  <p>{{ trans.get('dashboard_welcome', 'Welcome to the admin panel.') }}</p>
+
+  <div class="row gy-3">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">{{ trans.get('panel_config') }}</div>
+        <div class="card-body">
+          <p>
+            <strong>{{ trans.get('panel_port') }}:</strong>
+            {{ config.admin_panel.port }}
+          </p>
+          <p>
+            <strong>{{ trans.get('api_switch') }}:</strong>
+            {{ config.admin_panel.api_switch }}
+          </p>
+          <a
+            href="{{ url_for('config_get', lang=current_lang) }}"
+            class="btn btn-primary"
+          >{{ trans.get('edit_config') }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">{{ trans.get('adapters_enabled') }}</div>
+        <div class="card-body">
+          {% for name, on in config.adapters.items() %}
+            <span class="badge {{ 'bg-success' if on else 'bg-secondary' }}">
+              {{ name }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

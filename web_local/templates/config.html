@@ -1,2 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ trans.get('config_heading') }}</h1>
+<div id="jsoneditor"
+     data-config='{{ config_json|safe }}'
+     style="height:60vh; border:1px solid #ccc;"></div>
+
+<button id="save-btn" class="btn btn-success mt-3">
+  {{ trans.get('save_changes') }}
+</button>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/config.js') }}"></script>
+<script>
+  const container = document.getElementById('jsoneditor');
+  const initialConfig = JSON.parse(container.getAttribute('data-config'));
+  window.editor = new JSONEditor(container, { mode: 'tree', onError: err => alert(err) });
+  editor.set(initialConfig);
+</script>
+{% endblock %}

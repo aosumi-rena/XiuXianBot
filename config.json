@@ -8,12 +8,11 @@
   "adapters": {
     "discord": true,
     "telegram": true,
-    "matrix": true
+    "matrix": false
   },
   "tokens": {
     "discord_token": "MTE...",
     "telegram_token": "12345....",
-
     "matrix_server_address": "https://matrix.example.com",
     "matrix_ID": "@XiuXianBot:matrix.example.com",
     "matrix_pass": "123456"

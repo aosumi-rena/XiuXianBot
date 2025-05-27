@@ -1,0 +1,12 @@
+{
+    "home_title": "XiuXian Bot Admin Dashboard",
+    "home_panel_config": "Dashboard Configuration",
+    "panel_port": "Port: ",
+    "api_switch": "API Enabled: ",
+    "adapters_enabled": "Adapters Enabled",
+    "edit_config": "Edit Config",
+    "config_heading": "Configuration",
+    "save_changes": "Save Changes",
+    "config_saved": "Configuration saved successfully!"
+  }
+  

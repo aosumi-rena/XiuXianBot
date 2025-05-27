@@ -235,6 +235,41 @@ Each adapter translates platform‑specific events into calls into the core:
    ```
 3. **Configure**
    - Edit `config.json` with your MongoDB URI, Discord & Telegram tokens, and etc. to run
+   
+   **[config.json](https://github.com/aosumi-rena/XiuXianBot/blob/main/config_example_EN.json.txt) sample**:
+   ```
+   {
+    "admin_panel": {                                          # Settings about the admin dashboard
+      "port": 11451,                                          # Port for the dashboard to run on
+      "api_switch": false,                                    # Whether to accept api request (This is for advanced users, keep this off if you only control the servers manually at the port) [Pending development, unable to use for now]
+      "api_with_password": true,                              # Whether api request needs password
+      "api_password": "123456"                                # Password for api requests
+     },
+    "adapters": {                                             # Select which platforms would you like to run the bot(s) on
+      "discord": true,
+      "telegram": true,
+      "matrix": true
+     },
+    "tokens": {                                               # Tokens/Authentication for your bots
+      "discord_token": "MTE...",                              # Your Discord Bot token, you can get it from Discord Dev Portal `https://discord.com/developers/applications`
+      "telegram_token": "12345....",                          # Your Telegram Bot token, you can get it from BotFather `https://t.me/BotFather`
+
+      "matrix_server_address": "https://matrix.example.com",  # Address to your matrix server (If you are not the Matrix server owner, plese check with the owner that they are *NOT* banning bots from logging-in with normal user's authentication, this program is not responsible if you are banned!)
+      "matrix_ID": "@XiuXianBot:matrix.example.com",          # "Username" of your bot account
+      "matrix_pass": "123456"                                 # Password of your bot's account
+     },
+    "db": {                                                   # Database configurations
+      "mongo_uri": "mongodb://localhost:27017",               # URI to your MongoDB, usually it is `mongodb://localhost:27017`
+      "mongo_db_name": "XiuXianBotV4"                         # Name of your MongoDB database for the bots to store information on
+      },
+    "game": {                                                 # Game particulars (This section is incomplete)
+      "constants": {
+        "sign_in_copper": 500,
+        "sign_in_gold": 1
+        }
+      }
+   }
+   ```
 4. **Start the local admin dashboard webpage**
    ```sh
    python start.py

@@ -1,8 +1,8 @@
 {
   "home_title": "修仙机器人控制面板",
-  "home_panel_config": "控制面板设置",
-  "panel_port": "端口：",
-  "api_switch": "API已启用：",
+  "panel_config": "控制面板设置",
+  "panel_port": "端口",
+  "api_switch": "API已启用",
   "adapters_enabled": "已启用适配器",
   "edit_config": "编辑配置",
   "config_heading": "配置",

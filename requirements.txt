@@ -1,0 +1,13 @@
+pymongo
+discord
+discord.py
+python-dotenv
+asyncio
+datetime
+time
+json
+cnlunar
+random
+os
+sys
+flask

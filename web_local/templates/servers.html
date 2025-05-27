@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="servers-container">
+  <h1>{{ trans.get('servers_title', 'Server Control') }}</h1>
+
+  <div class="server-card core-server mb-4">
+    <div class="server-header">
+      <h2>{{ trans.get('core_server', 'Core Server') }}</h2>
+      <div class="status-indicator">
+        <span id="core-status-dot" class="status-dot"></span>
+        <span id="core-status-text">{{ trans.get('status_checking', 'Checking...') }}</span>
+      </div>
+    </div>
+    <div class="server-body">
+      <div class="server-controls">
+        <button id="core-start" class="btn btn-success">{{ trans.get('start', 'Start') }}</button>
+        <button id="core-stop" class="btn btn-danger">{{ trans.get('stop', 'Stop') }}</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="adapters-info mb-3">
+    <p>{{ trans.get('adapters_info', 'Specific adapters not displayed or grayed until core server is switched on by user') }}</p>
+  </div>
+
+  <div class="adapters-container" id="adapters-container">
+    <div class="row">
+      {% for adapter_name, enabled in config.get('adapters', {}).items() %}
+        {% if enabled %}
+        <div class="col-md-6 mb-3">
+          <div class="server-card adapter-card" data-adapter="{{ adapter_name }}">
+            <div class="server-header">
+              <h3>{{ trans.get(adapter_name + '_adapter', adapter_name|capitalize + ' Adapter') }}</h3>
+              <div class="status-indicator">
+                <span id="{{ adapter_name }}-status-dot" class="status-dot"></span>
+                <span id="{{ adapter_name }}-status-text">{{ trans.get('status_disabled', 'Disabled') }}</span>
+              </div>
+            </div>
+            <div class="server-body">
+              <div class="server-controls">
+                <button id="{{ adapter_name }}-start" class="btn btn-success adapter-start" disabled>{{ trans.get('start', 'Start') }}</button>
+                <button id="{{ adapter_name }}-stop" class="btn btn-danger adapter-stop" disabled>{{ trans.get('stop', 'Stop') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    checkStatus();
+
+    setInterval(checkStatus, 5000);
+    
+    document.getElementById('core-start').addEventListener('click', function() {
+      toggleService('core', 'start');
+    });
+    
+    document.getElementById('core-stop').addEventListener('click', function() {
+      toggleService('core', 'stop');
+    });
+
+    document.querySelectorAll('.adapter-start').forEach(button => {
+      button.addEventListener('click', function() {
+        const adapter = this.closest('.adapter-card').dataset.adapter;
+        toggleService(adapter, 'start');
+      });
+    });
+    
+    document.querySelectorAll('.adapter-stop').forEach(button => {
+      button.addEventListener('click', function() {
+        const adapter = this.closest('.adapter-card').dataset.adapter;
+        toggleService(adapter, 'stop');
+      });
+    });
+
+    function checkStatus() {
+      fetch('/servers/status?lang=' + '{{ current_lang }}')
+        .then(response => response.json())
+        .then(data => {
+          updateServiceStatus('core', data.core);
+
+          for (const [adapter, status] of Object.entries(data.adapters)) {
+            updateServiceStatus(adapter, status);
+          }
+
+          const adaptersEnabled = data.core.running;
+          document.querySelectorAll('.adapter-start, .adapter-stop').forEach(button => {
+            button.disabled = !adaptersEnabled;
+          });
+        })
+        .catch(error => {
+          console.error('Error checking status:', error);
+        });
+    }
+
+    function updateServiceStatus(service, status) {
+      const statusDot = document.getElementById(`${service}-status-dot`);
+      const statusText = document.getElementById(`${service}-status-text`);
+      const startButton = document.getElementById(`${service}-start`);
+      const stopButton = document.getElementById(`${service}-stop`);
+      
+      if (status.running) {
+        statusDot.className = 'status-dot status-running';
+        statusText.textContent = '{{ trans.get("status_running", "Running") }}';
+        startButton.disabled = true;
+        stopButton.disabled = false;
+      } else {
+        statusDot.className = 'status-dot status-stopped';
+        statusText.textContent = '{{ trans.get("status_stopped", "Stopped") }}';
+        startButton.disabled = false;
+        stopButton.disabled = true;
+
+        if (service !== 'core') {
+          const coreRunning = document.getElementById('core-status-dot').classList.contains('status-running');
+          startButton.disabled = !coreRunning;
+          stopButton.disabled = true;
+        }
+      }
+    }
+
+    function toggleService(service, action) {
+      fetch(`/servers/${action}/${service}?lang={{ current_lang }}`, {
+        method: 'POST'
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            checkStatus();
+          } else {
+            alert(data.message || 'An error occurred');
+          }
+        })
+        .catch(error => {
+          console.error(`Error ${action}ing ${service}:`, error);
+        });
+    }
+  });
+</script>
+{% endblock %}

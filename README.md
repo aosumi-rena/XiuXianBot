@@ -353,7 +353,8 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 
 ## Acknowledgments
 
-&&&TBA&&&
+### Media
+* [api.tomys.top](https://tomys.top) - Random anime background image (for local admin dashboard)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

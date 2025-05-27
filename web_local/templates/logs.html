@@ -1,2 +1,218 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="logs-container">
+  <h1>{{ trans.get('logs_title', 'Logs') }}</h1>
+  
+  <div class="logs-filters">
+    <div class="row">
+      <!-- Source Filter -->
+      <div class="col-md-4 mb-3">
+        <label for="source-filter" class="form-label">{{ trans.get('logs_filter_source', 'Filter by Source') }}</label>
+        <select id="source-filter" class="form-select">
+          <option value="all">{{ trans.get('logs_source_all', 'All Sources') }}</option>
+          <option value="core">{{ trans.get('logs_source_core', 'Core') }}</option>
+          <option value="discord">{{ trans.get('logs_source_discord', 'Discord') }}</option>
+          <option value="telegram">{{ trans.get('logs_source_telegram', 'Telegram') }}</option>
+          <option value="matrix">{{ trans.get('logs_source_matrix', 'Matrix') }}</option>
+          <option value="web">{{ trans.get('logs_source_web', 'Web Interface') }}</option>
+        </select>
+      </div>
+      
+      <!-- Level Filter -->
+      <div class="col-md-4 mb-3">
+        <label for="level-filter" class="form-label">{{ trans.get('logs_filter_level', 'Filter by Level') }}</label>
+        <select id="level-filter" class="form-select">
+          <option value="all">{{ trans.get('logs_level_all', 'All Levels') }}</option>
+          <option value="debug">{{ trans.get('logs_level_debug', 'Debug') }}</option>
+          <option value="info">{{ trans.get('logs_level_info', 'Info') }}</option>
+          <option value="warning">{{ trans.get('logs_level_warning', 'Warning') }}</option>
+          <option value="error">{{ trans.get('logs_level_error', 'Error') }}</option>
+          <option value="critical">{{ trans.get('logs_level_critical', 'Critical') }}</option>
+        </select>
+      </div>
+      
+      <!-- Time Filter -->
+      <div class="col-md-4 mb-3">
+        <label for="time-filter" class="form-label">{{ trans.get('logs_filter_time', 'Filter by Time') }}</label>
+        <select id="time-filter" class="form-select">
+          <option value="all">{{ trans.get('logs_time_all', 'All Time') }}</option>
+          <option value="hour">{{ trans.get('logs_time_hour', 'Last Hour') }}</option>
+          <option value="day">{{ trans.get('logs_time_day', 'Last Day') }}</option>
+          <option value="week">{{ trans.get('logs_time_week', 'Last Week') }}</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="d-flex justify-content-end gap-2">
+      <button id="refresh-logs" class="btn btn-primary">
+        <i class="bi bi-arrow-clockwise"></i> {{ trans.get('logs_refresh', 'Refresh') }}
+      </button>
+      <button id="download-logs" class="btn btn-secondary">
+        <i class="bi bi-download"></i> {{ trans.get('logs_download', 'Download Logs') }}
+      </button>
+      <button id="clear-logs" class="btn btn-outline-secondary">
+        <i class="bi bi-x-lg"></i> {{ trans.get('logs_clear', 'Clear View') }}
+      </button>
+    </div>
+  </div>
+  
+  <div class="logs-content" id="logs-content">
+    <div id="logs-placeholder" class="text-center p-5">
+      {{ trans.get('logs_empty', 'No logs to display') }}
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sourceFilter = document.getElementById('source-filter');
+    const levelFilter = document.getElementById('level-filter');
+    const timeFilter = document.getElementById('time-filter');
+    const refreshButton = document.getElementById('refresh-logs');
+    const downloadButton = document.getElementById('download-logs');
+    const clearButton = document.getElementById('clear-logs');
+    const logsContent = document.getElementById('logs-content');
+    const logsPlaceholder = document.getElementById('logs-placeholder');
+    let logsData = [];
+    
+    fetchLogs();
+    
+    sourceFilter.addEventListener('change', applyFilters);
+    levelFilter.addEventListener('change', applyFilters);
+    timeFilter.addEventListener('change', applyFilters);
+    refreshButton.addEventListener('click', fetchLogs);
+    downloadButton.addEventListener('click', downloadLogs);
+    clearButton.addEventListener('click', clearLogsView);
+    
+    setInterval(fetchLogs, 10000); // 10s
+    
+    function fetchLogs() {
+      fetch('/logs/data?lang={{ current_lang }}')
+        .then(response => response.json())
+        .then(data => {
+          logsData = data.logs;
+          applyFilters();
+        })
+        .catch(error => {
+          console.error('Error fetching logs:', error);
+        });
+    }
+    
+    function applyFilters() {
+      const source = sourceFilter.value;
+      const level = levelFilter.value;
+      const time = timeFilter.value;
+      
+      const filteredLogs = logsData.filter(log => {
+        if (source !== 'all' && log.source !== source) {
+          return false;
+        }
+        
+        if (level !== 'all' && log.level !== level) {
+          return false;
+        }
+        
+        if (time !== 'all') {
+          const logTime = new Date(log.timestamp);
+          const now = new Date();
+          
+          if (time === 'hour' && (now - logTime) > 3600000) {
+            return false;
+          } else if (time === 'day' && (now - logTime) > 86400000) {
+            return false;
+          } else if (time === 'week' && (now - logTime) > 604800000) {
+            return false;
+          }
+        }
+        
+        return true;
+      });
+      
+      renderLogs(filteredLogs);
+    }
+    
+    function renderLogs(logs) {
+      if (logs.length === 0) {
+        logsPlaceholder.style.display = 'block';
+        logsContent.innerHTML = '';
+        logsContent.appendChild(logsPlaceholder);
+        return;
+      }
+      
+      logsPlaceholder.style.display = 'none';
+      
+      logs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+      let logsHTML = '';
+      
+      logs.forEach(log => {
+        const timestamp = new Date(log.timestamp).toLocaleString();
+        
+        logsHTML += `
+          <div class="log-entry log-level-${log.level}">
+            <span class="log-timestamp">${timestamp}</span>
+            <span class="log-source">[${log.source}]</span>
+            <span class="log-level">[${log.level.toUpperCase()}]</span>
+            <span class="log-message">${log.message}</span>
+          </div>
+        `;
+      });
+      
+      logsContent.innerHTML = logsHTML;
+    }
+    
+    function downloadLogs() {
+      const source = sourceFilter.value;
+      const level = levelFilter.value;
+      const time = timeFilter.value;
+      
+      const filteredLogs = logsData.filter(log => {
+        if (source !== 'all' && log.source !== source) return false;
+        if (level !== 'all' && log.level !== level) return false;
+        
+        if (time !== 'all') {
+          const logTime = new Date(log.timestamp);
+          const now = new Date();
+          
+          if (time === 'hour' && (now - logTime) > 3600000) return false;
+          if (time === 'day' && (now - logTime) > 86400000) return false;
+          if (time === 'week' && (now - logTime) > 604800000) return false;
+        }
+        
+        return true;
+      });
+      
+      let textContent = '';
+      
+      filteredLogs.forEach(log => {
+        const timestamp = new Date(log.timestamp).toLocaleString();
+        textContent += `${timestamp} [${log.source}] [${log.level.toUpperCase()}] ${log.message}\n`;
+      });
+      
+      const blob = new Blob([textContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      
+      a.href = url;
+      a.download = `xiuxianbot_logs_${new Date().toISOString().slice(0, 10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 0);
+    }
+    
+    function clearLogsView() {
+      logsContent.innerHTML = '';
+      logsPlaceholder.style.display = 'block';
+      logsContent.appendChild(logsPlaceholder);
+    }
+  });
+</script>
+{% endblock %}

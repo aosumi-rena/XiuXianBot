@@ -1,12 +1,60 @@
 {
-    "home_title": "XiuXian Bot Admin Dashboard",
-    "home_panel_config": "Dashboard Configuration",
-    "panel_port": "Port: ",
-    "api_switch": "API Enabled: ",
-    "adapters_enabled": "Adapters Enabled",
-    "edit_config": "Edit Config",
-    "config_heading": "Configuration",
-    "save_changes": "Save Changes",
-    "config_saved": "Configuration saved successfully!"
-  }
+  "home_title": "XiuXian Bot Admin Dashboard",
+  "home_panel_config": "Dashboard Configuration",
+  "panel_port": "Port: ",
+  "api_switch": "API Enabled: ",
+  "adapters_enabled": "Adapters Enabled",
+  "edit_config": "Edit Config",
+  "config_heading": "Configuration",
+  "save_changes": "Save Changes",
+  "config_saved": "Configuration saved successfully!",
+  
+  "servers_title": "Server Control",
+  "core_server": "Core Server",
+  "status_checking": "Checking...",
+  "status_running": "Running",
+  "status_stopped": "Stopped",
+  "status_disabled": "Disabled",
+  "start": "Start",
+  "stop": "Stop",
+  "adapters_info": "Adapters are disabled until the core server is running",
+  
+  "discord_adapter": "Discord Adapter",
+  "telegram_adapter": "Telegram Adapter",
+  "matrix_adapter": "Matrix Adapter",
+  
+  "logs_title": "System Logs",
+  "logs_filter": "Filter Logs",
+  "logs_source": "Source",
+  "logs_severity": "Severity",
+  "logs_timerange": "Time Range",
+  "logs_search": "Search",
+  "logs_download": "Download Logs",
+  "logs_clear_filters": "Clear Filters",
+  "logs_no_results": "No log entries match your filters",
+  
+  "source_all": "All Sources",
+  "source_core": "Core",
+  "source_discord": "Discord",
+  "source_telegram": "Telegram",
+  "source_matrix": "Matrix",
+  "source_web_local": "Admin Dashboard",
+  
+  "severity_all": "All Levels",
+  "severity_debug": "Debug",
+  "severity_info": "Info",
+  "severity_warning": "Warning",
+  "severity_error": "Error",
+  "severity_critical": "Critical",
+  
+  "timerange_all": "All Time",
+  "timerange_hour": "Last Hour",
+  "timerange_day": "Last 24 Hours",
+  "timerange_week": "Last Week",
+  
+  "timestamp": "Timestamp",
+  "source": "Source",
+  "level": "Level",
+  "message": "Message"
+}
   

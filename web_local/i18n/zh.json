@@ -1,12 +1,60 @@
 {
-    "home_title": "修仙机器人控制面板",
-    "home_panel_config": "控制面板设置",
-    "panel_port": "端口：",
-    "api_switch": "API已启用：",
-    "adapters_enabled": "已启用适配器",
-    "edit_config": "编辑配置",
-    "config_heading": "配置",
-    "save_changes": "保存更改",
-    "config_saved": "配置已成功保存！"
-  }
+  "home_title": "修仙机器人控制面板",
+  "home_panel_config": "控制面板设置",
+  "panel_port": "端口：",
+  "api_switch": "API已启用：",
+  "adapters_enabled": "已启用适配器",
+  "edit_config": "编辑配置",
+  "config_heading": "配置",
+  "save_changes": "保存更改",
+  "config_saved": "配置已成功保存！",
+  
+  "servers_title": "服务器控制",
+  "core_server": "核心服务器",
+  "status_checking": "检查中...",
+  "status_running": "运行中",
+  "status_stopped": "已停止",
+  "status_disabled": "已禁用",
+  "start": "启动",
+  "stop": "停止",
+  "adapters_info": "适配器在核心服务器运行前将被禁用",
+  
+  "discord_adapter": "Discord 适配器",
+  "telegram_adapter": "Telegram 适配器",
+  "matrix_adapter": "Matrix 适配器",
+  
+  "logs_title": "系统日志",
+  "logs_filter": "筛选日志",
+  "logs_source": "来源",
+  "logs_severity": "严重程度",
+  "logs_timerange": "时间范围",
+  "logs_search": "搜索",
+  "logs_download": "下载日志",
+  "logs_clear_filters": "清除筛选",
+  "logs_no_results": "没有符合筛选条件的日志条目",
+  
+  "source_all": "所有来源",
+  "source_core": "核心",
+  "source_discord": "Discord",
+  "source_telegram": "Telegram",
+  "source_matrix": "Matrix",
+  "source_web_local": "管理面板",
+  
+  "severity_all": "所有级别",
+  "severity_debug": "调试",
+  "severity_info": "信息",
+  "severity_warning": "警告",
+  "severity_error": "错误",
+  "severity_critical": "严重",
+  
+  "timerange_all": "全部时间",
+  "timerange_hour": "最近一小时",
+  "timerange_day": "最近24小时",
+  "timerange_week": "最近一周",
+  
+  "timestamp": "时间戳",
+  "source": "来源",
+  "level": "级别",
+  "message": "消息"
+}
   

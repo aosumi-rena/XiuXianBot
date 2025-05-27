@@ -9,6 +9,11 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   >
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    rel="stylesheet"
+  >
   <!-- JSONEditor CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/jsoneditor@9.10.3/dist/jsoneditor.min.css"
@@ -20,49 +25,106 @@
   >
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a
-      class="navbar-brand"
-      href="{{ url_for('index', lang=current_lang) }}"
-    >{{ trans.get('home_title') }}</a>
-
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a
-          class="nav-link {% if request.path=='/' %}active{% endif %}"
-          href="{{ url_for('index', lang=current_lang) }}"
-        >{{ trans.get('home_title') }}</a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link {% if '/config' in request.path %}active{% endif %}"
-          href="{{ url_for('config_get', lang=current_lang) }}"
-        >{{ trans.get('config_heading') }}</a>
-      </li>
-      <!-- future tabs... -->
-    </ul>
-
-    <form method="get" id="lang-form" class="ms-auto">
-      <select
-        name="lang"
-        id="lang-select"
-        class="form-select form-select-sm"
-        onchange="this.form.submit()"
-      >
-        <option value="en" {% if current_lang=='en'%}selected{%endif%}>English</option>
-        <option value="zh" {% if current_lang=='zh'%}selected{%endif%}>简体中文</option>
-      </select>
-    </form>
+<div class="app-container">
+  <!-- sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h3 class="sidebar-title">XiuXianBot</h3>
+    </div>
+    
+    <div class="sidebar-menu">
+      <a href="{{ url_for('index', lang=current_lang) }}" class="sidebar-item {% if request.path=='/' %}active{% endif %}">
+        <div class="sidebar-icon">
+          <img src="{{ url_for('static', filename='icons/dashboard.svg') }}" alt="Dashboard" class="icon-svg">
+        </div>
+        <span>{{ trans.get('home_title') }}</span>
+      </a>
+      
+      <a href="{{ url_for('config_get', lang=current_lang) }}" class="sidebar-item {% if '/config' in request.path %}active{% endif %}">
+        <div class="sidebar-icon">
+          <img src="{{ url_for('static', filename='icons/config.svg') }}" alt="Config" class="icon-svg">
+        </div>
+        <span>{{ trans.get('config_heading') }}</span>
+      </a>
+      
+      <a href="{{ url_for('servers', lang=current_lang) }}" class="sidebar-item {% if '/servers' in request.path %}active{% endif %}">
+        <div class="sidebar-icon">
+          <img src="{{ url_for('static', filename='icons/servers.svg') }}" alt="Servers" class="icon-svg">
+        </div>
+        <span>{{ trans.get('servers_title', 'Servers') }}</span>
+      </a>
+      
+      <a href="{{ url_for('logs', lang=current_lang) }}" class="sidebar-item {% if '/logs' in request.path %}active{% endif %}">
+        <div class="sidebar-icon">
+          <img src="{{ url_for('static', filename='icons/logs.svg') }}" alt="Logs" class="icon-svg">
+        </div>
+        <span>{{ trans.get('logs_title', 'Logs') }}</span>
+      </a>
+      
+      <!-- future sidebar items... -->
+    </div>
+    
+    <div class="sidebar-footer">
+      <form method="get" id="lang-form" action="{{ request.path }}" class="language-selector">
+        <select
+          name="lang"
+          id="lang-select"
+          class="form-select form-select-sm"
+          onchange="this.form.submit()"
+        >
+          <option value="en" {% if current_lang=='en'%}selected{%endif%}>English</option>
+          <option value="zh" {% if current_lang=='zh'%}selected{%endif%}>简体中文</option>
+        </select>
+      </form>
+      
+      <div class="version-info">
+        <small>Core-vNaN</small>
+        <small>Web-v0.1.0</small>
+      </div>
+    </div>
   </div>
-</nav>
-
-<div class="container my-4">
-  {% block content %}{% endblock %}
+  
+  <div class="main-content">
+    <div class="content-header">
+      <h1 class="page-title">
+        {% if request.path=='/' %}
+          {{ trans.get('home_title') }}
+        {% elif '/config' in request.path %}
+          {{ trans.get('config_heading') }}
+        {% elif '/servers' in request.path %}
+          {{ trans.get('servers_title', 'Servers') }}
+        {% elif '/logs' in request.path %}
+          {{ trans.get('logs_title', 'Logs') }}
+        {% endif %}
+      </h1>
+    </div>
+    
+    <div class="content-body">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
 </div>
+
+<button class="menu-toggle d-lg-none">
+  <i class="bi bi-list"></i>
+</button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsoneditor@9.10.3/dist/jsoneditor.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (menuToggle && sidebar) {
+      menuToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('show');
+      });
+    }
+  });
+</script>
+
 {% block scripts %}{% endblock %}
 </body>
 </html>

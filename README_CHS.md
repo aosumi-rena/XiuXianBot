@@ -361,7 +361,8 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 
 ## 致谢
 
-&&&此部分未完成&&&
+### 媒体资源
+* [api.tomys.top](https://tomys.top) - 提供随机二次元背景图（本地管理员控制面板网页）
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 

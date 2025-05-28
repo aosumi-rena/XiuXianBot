@@ -1,0 +1,463 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="database-container">
+  <div class="database-header">
+    <h2>{{ trans.get('database_title', 'Database Management') }}</h2>
+    <p>{{ trans.get('database_description', 'Query and manage database collections') }}</p>
+  </div>
+  
+  <div class="database-controls">
+    <div class="collection-selector">
+      <label for="collection-select">{{ trans.get('database_collection', 'Collection') }}</label>
+      <select id="collection-select" class="form-select">
+        <option value="users">{{ trans.get('database_collection_users', 'Users') }}</option>
+        <option value="items">{{ trans.get('database_collection_items', 'Items') }}</option>
+        <option value="timings">{{ trans.get('database_collection_timings', 'Timings') }}</option>
+      </select>
+    </div>
+    
+    <div class="view-toggle">
+      <label>{{ trans.get('database_view_mode', 'View Mode') }}</label>
+      <div class="btn-group" role="group">
+        <input type="radio" class="btn-check" name="view-mode" id="table-view" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="table-view">
+          <i class="bi bi-table"></i> {{ trans.get('database_view_table', 'Table') }}
+        </label>
+        
+        <input type="radio" class="btn-check" name="view-mode" id="json-view" autocomplete="off">
+        <label class="btn btn-outline-primary" for="json-view">
+          <i class="bi bi-code-square"></i> {{ trans.get('database_view_json', 'JSON') }}
+        </label>
+      </div>
+    </div>
+  </div>
+  
+  <div class="query-builder">
+    <div class="query-builder-header">
+      <h3>{{ trans.get('database_query_builder', 'Query Builder') }}</h3>
+      <button type="button" id="add-filter-btn" class="btn btn-sm btn-primary">
+        <i class="bi bi-plus"></i> {{ trans.get('database_add_filter', 'Add Filter') }}
+      </button>
+    </div>
+    
+    <div id="filters-container" class="filters-container">
+    </div>
+    
+    <div class="query-actions">
+      <button type="button" id="run-query-btn" class="btn btn-primary">
+        <i class="bi bi-play-fill"></i> {{ trans.get('database_run_query', 'Run Query') }}
+      </button>
+      <button type="button" id="clear-filters-btn" class="btn btn-secondary">
+        <i class="bi bi-x"></i> {{ trans.get('database_clear_filters', 'Clear Filters') }}
+      </button>
+    </div>
+  </div>
+  
+  <div class="results-container">
+    <div class="results-header">
+      <h3>{{ trans.get('database_results', 'Results') }}</h3>
+      <span id="results-count" class="results-count">0 {{ trans.get('database_results_found', 'results found') }}</span>
+    </div>
+    
+    <div id="table-view-container" class="view-container">
+      <table class="table table-striped">
+        <thead id="results-table-header">
+          <tr>
+          </tr>
+        </thead>
+        <tbody id="results-table-body">
+        </tbody>
+      </table>
+    </div>
+    
+    <div id="json-view-container" class="view-container" style="display: none;">
+      <pre id="json-results" class="json-results"></pre>
+    </div>
+    
+    <div class="pagination-controls">
+      <button type="button" id="prev-page-btn" class="btn btn-secondary" disabled>
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <span id="page-indicator">{{ trans.get('database_page_indicator', 'Page {0} of {1}') }}</span>
+      <button type="button" id="next-page-btn" class="btn btn-secondary" disabled>
+        <i class="bi bi-chevron-right"></i>
+      </button>
+      <div class="items-per-page-control ms-3">
+        <label for="items-per-page-select" class="me-2">{{ trans.get('database_items_per_page', 'Items per page:') }}</label>
+        <select id="items-per-page-select" class="form-select form-select-sm" style="width: auto; display: inline-block;">
+          <option value="10">10</option>
+          <option value="20" selected>20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const collectionSchemas = {
+      users: [
+        { field: 'user_id', type: 'string', label: '{{ trans.get("database_field_user_id", "User ID") }}' },
+        { field: 'in_game_username', type: 'string', label: '{{ trans.get("database_field_username", "Username") }}' },
+        { field: 'exp', type: 'number', label: '{{ trans.get("database_field_exp", "Experience") }}' },
+        { field: 'copper', type: 'number', label: '{{ trans.get("database_field_copper", "Copper") }}' },
+        { field: 'gold', type: 'number', label: '{{ trans.get("database_field_gold", "Gold") }}' },
+        { field: 'rank', type: 'number', label: '{{ trans.get("database_field_rank", "Rank") }}' }
+      ],
+      items: [
+        { field: 'item_id', type: 'string', label: '{{ trans.get("database_field_item_id", "Item ID") }}' },
+        { field: 'user_id', type: 'string', label: '{{ trans.get("database_field_user_id", "User ID") }}' },
+        { field: 'name', type: 'string', label: '{{ trans.get("database_field_item_name", "Item Name") }}' },
+        { field: 'quantity', type: 'number', label: '{{ trans.get("database_field_quantity", "Quantity") }}' },
+        { field: 'level', type: 'number', label: '{{ trans.get("database_field_level", "Level") }}' }
+      ],
+      timings: [
+        { field: 'user_id', type: 'string', label: '{{ trans.get("database_field_user_id", "User ID") }}' },
+        { field: 'action', type: 'string', label: '{{ trans.get("database_field_action", "Action") }}' },
+        { field: 'timestamp', type: 'date', label: '{{ trans.get("database_field_timestamp", "Timestamp") }}' }
+      ]
+    };
+    
+    let currentCollection = 'users';
+    let currentPage = 1;
+    let totalPages = 1;
+    let currentFilters = [];
+    let viewMode = 'table';
+    let itemsPerPage = 20;
+    
+    const collectionSelect = document.getElementById('collection-select');
+    const tableViewRadio = document.getElementById('table-view');
+    const jsonViewRadio = document.getElementById('json-view');
+    const tableViewContainer = document.getElementById('table-view-container');
+    const jsonViewContainer = document.getElementById('json-view-container');
+    const addFilterBtn = document.getElementById('add-filter-btn');
+    const filtersContainer = document.getElementById('filters-container');
+    const runQueryBtn = document.getElementById('run-query-btn');
+    const clearFiltersBtn = document.getElementById('clear-filters-btn');
+    const resultsCount = document.getElementById('results-count');
+    const resultsTableHeader = document.getElementById('results-table-header');
+    const resultsTableBody = document.getElementById('results-table-body');
+    const jsonResults = document.getElementById('json-results');
+    const itemsPerPageSelect = document.getElementById('items-per-page-select');
+    const prevPageBtn = document.getElementById('prev-page-btn');
+    const nextPageBtn = document.getElementById('next-page-btn');
+    const pageIndicator = document.getElementById('page-indicator');
+    
+    initializePage();
+    
+    collectionSelect.addEventListener('change', function() {
+      currentCollection = this.value;
+      currentFilters = [];
+      filtersContainer.innerHTML = '';
+      runQuery();
+    });
+    
+    tableViewRadio.addEventListener('change', function() {
+      if (this.checked) {
+        viewMode = 'table';
+        tableViewContainer.style.display = 'block';
+        jsonViewContainer.style.display = 'none';
+      }
+    });
+    
+    jsonViewRadio.addEventListener('change', function() {
+      if (this.checked) {
+        viewMode = 'json';
+        tableViewContainer.style.display = 'none';
+        jsonViewContainer.style.display = 'block';
+      }
+    });
+    
+    addFilterBtn.addEventListener('click', function() {
+      addFilter();
+    });
+    
+    runQueryBtn.addEventListener('click', function() {
+      runQuery();
+    });
+    
+    clearFiltersBtn.addEventListener('click', function() {
+      currentFilters = [];
+      filtersContainer.innerHTML = '';
+      runQuery();
+    });
+    
+    prevPageBtn.addEventListener('click', function() {
+      if (currentPage > 1) {
+        currentPage--;
+        runQuery();
+      }
+    });
+    
+    nextPageBtn.addEventListener('click', function() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        runQuery();
+      }
+    });
+    
+    itemsPerPageSelect.addEventListener('change', function() {
+      itemsPerPage = parseInt(this.value);
+      currentPage = 1;
+      runQuery();
+    });
+    
+    function initializePage() {
+      addFilter();
+
+      runQuery();
+    }
+    
+    function addFilter() {
+      const filterId = Date.now();
+      const schema = collectionSchemas[currentCollection];
+      
+      const filterElement = document.createElement('div');
+      filterElement.className = 'filter-row';
+      filterElement.dataset.id = filterId;
+      
+      let fieldOptions = '';
+      schema.forEach(field => {
+        fieldOptions += `<option value="${field.field}">${field.label}</option>`;
+      });
+      
+      filterElement.innerHTML = `
+        <div class="filter-field">
+          <select class="form-select field-select">
+            ${fieldOptions}
+          </select>
+        </div>
+        <div class="filter-operator">
+          <select class="form-select operator-select">
+            <option value="eq">{{ trans.get('database_operator_equals', 'Equals') }}</option>
+            <option value="ne">{{ trans.get('database_operator_not_equals', 'Not Equals') }}</option>
+            <option value="gt">{{ trans.get('database_operator_greater_than', 'Greater Than') }}</option>
+            <option value="gte">{{ trans.get('database_operator_greater_equals', 'Greater Than or Equal') }}</option>
+            <option value="lt">{{ trans.get('database_operator_less_than', 'Less Than') }}</option>
+            <option value="lte">{{ trans.get('database_operator_less_equals', 'Less Than or Equal') }}</option>
+            <option value="regex">{{ trans.get('database_operator_regex', 'Regex') }}</option>
+          </select>
+        </div>
+        <div class="filter-value">
+          <input type="text" class="form-control value-input">
+        </div>
+        <div class="filter-actions">
+          <button type="button" class="btn btn-sm btn-danger remove-filter-btn">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      `;
+      
+      const removeBtn = filterElement.querySelector('.remove-filter-btn');
+      removeBtn.addEventListener('click', function() {
+        filterElement.remove();
+      });
+      
+      filtersContainer.appendChild(filterElement);
+    }
+    
+    function buildQuery() {
+      const query = {};
+      const filterRows = filtersContainer.querySelectorAll('.filter-row');
+      
+      filterRows.forEach(row => {
+        const field = row.querySelector('.field-select').value;
+        const operator = row.querySelector('.operator-select').value;
+        const value = row.querySelector('.value-input').value;
+        
+        if (value.trim() === '') return;
+        
+        const fieldSchema = collectionSchemas[currentCollection].find(f => f.field === field);
+        let processedValue = value;
+        
+        if (fieldSchema.type === 'number') {
+          processedValue = parseFloat(value);
+          if (isNaN(processedValue)) return;
+        } else if (fieldSchema.type === 'date') {
+          try {
+            processedValue = new Date(value).toISOString();
+          } catch (e) {
+            return;
+          }
+        }
+        
+        if (operator === 'eq') {
+          query[field] = processedValue;
+        } else {
+          query[field] = query[field] || {};
+          
+          switch (operator) {
+            case 'ne':
+              query[field]['$ne'] = processedValue;
+              break;
+            case 'gt':
+              query[field]['$gt'] = processedValue;
+              break;
+            case 'gte':
+              query[field]['$gte'] = processedValue;
+              break;
+            case 'lt':
+              query[field]['$lt'] = processedValue;
+              break;
+            case 'lte':
+              query[field]['$lte'] = processedValue;
+              break;
+            case 'regex':
+              query[field]['$regex'] = processedValue;
+              query[field]['$options'] = 'i';
+              break;
+          }
+        }
+      });
+      
+      return query;
+    }
+    
+    function runQuery() {
+      const query = buildQuery();
+      
+      fetch(`/database/query/${currentCollection}?page=${currentPage}&items_per_page=${itemsPerPage}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query: query })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          displayResults(data.results);
+          updatePagination(data.page, data.total_pages, data.count);
+        } else {
+          alert('Error: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error running query:', error);
+        alert('Error running query. Please try again.');
+      });
+    }
+    
+    function displayResults(results) {
+      if (viewMode === 'table') {
+        displayTableResults(results);
+      } else {
+        displayJsonResults(results);
+      }
+    }
+    
+    function displayTableResults(results) {
+      resultsTableHeader.innerHTML = '<tr></tr>';
+      resultsTableBody.innerHTML = '';
+      
+      if (results.length === 0) {
+        resultsTableBody.innerHTML = `
+          <tr>
+            <td colspan="100%" class="text-center">{{ trans.get('database_no_results', 'No results found') }}</td>
+          </tr>
+        `;
+        return;
+      }
+      
+      const allKeys = new Set();
+      results.forEach(result => {
+        Object.keys(result).forEach(key => allKeys.add(key));
+      });
+      
+      const headerRow = resultsTableHeader.querySelector('tr');
+      const schema = collectionSchemas[currentCollection];
+      
+      schema.forEach(field => {
+        const th = document.createElement('th');
+        th.textContent = field.label;
+        headerRow.appendChild(th);
+      });
+      
+      allKeys.forEach(key => {
+        if (key === '_id' || schema.some(f => f.field === key)) return;
+        const th = document.createElement('th');
+        th.textContent = key;
+        headerRow.appendChild(th);
+      });
+      
+      results.forEach(result => {
+        const row = document.createElement('tr');
+        
+        schema.forEach(field => {
+          const td = document.createElement('td');
+          const value = result[field.field];
+          
+          if (value === undefined || value === null) {
+            td.textContent = '-';
+          } else if (typeof value === 'object') {
+            td.textContent = JSON.stringify(value);
+          } else {
+            td.textContent = value;
+          }
+          
+          row.appendChild(td);
+        });
+        
+        allKeys.forEach(key => {
+          if (key === '_id' || schema.some(f => f.field === key)) return;
+          const td = document.createElement('td');
+          const value = result[key];
+          
+          if (value === undefined || value === null) {
+            td.textContent = '-';
+          } else if (typeof value === 'object') {
+            td.textContent = JSON.stringify(value);
+          } else {
+            td.textContent = value;
+          }
+          
+          row.appendChild(td);
+        });
+        
+        resultsTableBody.appendChild(row);
+      });
+    }
+    
+    function displayJsonResults(results) {
+      if (!results || results.length === 0) {
+        jsonResults.textContent = '[]';
+        return;
+      }
+      
+      try {
+        const formattedJson = JSON.stringify(results, null, 2);
+        jsonResults.textContent = formattedJson;
+        
+        if (viewMode === 'json') {
+          tableViewContainer.style.display = 'none';
+          jsonViewContainer.style.display = 'block';
+        } else {
+          tableViewContainer.style.display = 'block';
+          jsonViewContainer.style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error displaying JSON results:', error);
+        jsonResults.textContent = 'Error displaying results: ' + error.message;
+      }
+    }
+    
+    function updatePagination(page, pages, count) {
+      currentPage = page;
+      totalPages = pages;
+      pageIndicator.textContent = '{{ trans.get("database_page_indicator", "Page {0} of {1}") }}'
+        .replace('{0}', page)
+        .replace('{1}', pages);
+      
+      prevPageBtn.disabled = page <= 1;
+      nextPageBtn.disabled = page >= totalPages;
+      
+      resultsCount.textContent = `${count} {{ trans.get('database_results_found', 'results found') }}`;
+    }
+  });
+</script>
+{% endblock %}

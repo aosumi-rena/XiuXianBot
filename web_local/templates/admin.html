@@ -1,2 +1,353 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+  <div class="admin-section">
+    <div class="dropdown-container">
+      <div class="dropdown-header" id="player-specifics-header">
+        <h3>{{ trans.get('admin_player_specifics', 'Set Player Specifics') }}</h3>
+        <i class="bi bi-chevron-down"></i>
+      </div>
+      <div class="dropdown-content" id="player-specifics-content">
+        <form id="player-specifics-form" class="admin-form">
+          <div class="form-group">
+            <label for="user-search">{{ trans.get('admin_user_search', 'User ID or Username') }}</label>
+            <div class="search-container">
+              <input type="text" id="user-search" class="form-control" placeholder="{{ trans.get('admin_user_search_placeholder', 'Enter user ID or username') }}">
+              <button type="button" id="search-user-btn" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div id="user-info" class="user-info-container" style="display: none;">
+            <div class="user-info-header">
+              <h4 id="user-display-name">User Name</h4>
+              <span id="user-id" class="user-id-display">ID: 000000000</span>
+            </div>
+            
+            <div class="form-group">
+              <label for="field-select">{{ trans.get('admin_field_select', 'Select Field') }}</label>
+              <select id="field-select" class="form-select">
+                <option value="exp">{{ trans.get('admin_field_exp', 'Experience') }}</option>
+                <option value="copper">{{ trans.get('admin_field_copper', 'Copper') }}</option>
+                <option value="gold">{{ trans.get('admin_field_gold', 'Gold') }}</option>
+                <option value="rank">{{ trans.get('admin_field_rank', 'Cultivation Rank') }}</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="action-select">{{ trans.get('admin_action_select', 'Action') }}</label>
+              <select id="action-select" class="form-select">
+                <option value="set">{{ trans.get('admin_action_set', 'Set') }}</option>
+                <option value="add">{{ trans.get('admin_action_add', 'Add') }}</option>
+                <option value="minus">{{ trans.get('admin_action_minus', 'Subtract') }}</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="value-input">{{ trans.get('admin_value_input', 'Value') }}</label>
+              <input type="number" id="value-input" class="form-control" min="0">
+            </div>
+            
+            <button type="button" id="apply-changes-btn" class="btn btn-primary">
+              {{ trans.get('admin_apply_changes', 'Apply Changes') }}
+            </button>
+          </div>
+          
+          <div id="search-results" class="search-results" style="display: none;">
+            <h4>{{ trans.get('admin_search_results', 'Search Results') }}</h4>
+            <div id="results-container" class="results-container">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="dropdown-container">
+      <div class="dropdown-header" id="inventory-header">
+        <h3>{{ trans.get('admin_inventory', 'Inventory Viewer') }}</h3>
+        <i class="bi bi-chevron-down"></i>
+      </div>
+      <div class="dropdown-content" id="inventory-content">
+        <form id="inventory-form" class="admin-form">
+          <div class="form-group">
+            <label for="inventory-user-search">{{ trans.get('admin_user_search', 'User ID or Username') }}</label>
+            <div class="search-container">
+              <input type="text" id="inventory-user-search" class="form-control" placeholder="{{ trans.get('admin_user_search_placeholder', 'Enter user ID or username') }}">
+              <button type="button" id="inventory-search-btn" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div id="inventory-display" class="inventory-display" style="display: none;">
+            <div class="inventory-header">
+              <h4 id="inventory-user-name">User Name</h4>
+              <div class="currency-display">
+                <span class="copper-display">
+                  <i class="bi bi-coin"></i> <span id="copper-amount">0</span>
+                </span>
+                <span class="gold-display">
+                  <i class="bi bi-gem"></i> <span id="gold-amount">0</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="inventory-items">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>{{ trans.get('admin_item_name', 'Item Name') }}</th>
+                    <th>{{ trans.get('admin_item_quantity', 'Quantity') }}</th>
+                    <th>{{ trans.get('admin_item_level', 'Level') }}</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-items-container">
+                </tbody>
+              </table>
+              
+              <div class="pagination-controls">
+                <button type="button" id="prev-page-btn" class="btn btn-secondary" disabled>
+                  <i class="bi bi-chevron-left"></i>
+                </button>
+                <span id="page-indicator">{{ trans.get('admin_page_indicator', 'Page {0} of {1}') }}</span>
+                <button type="button" id="next-page-btn" class="btn btn-secondary" disabled>
+                  <i class="bi bi-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dropdownHeaders = document.querySelectorAll('.dropdown-header');
+    dropdownHeaders.forEach(header => {
+      header.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('i');
+        
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          icon.classList.remove('bi-chevron-up');
+          icon.classList.add('bi-chevron-down');
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          icon.classList.remove('bi-chevron-down');
+          icon.classList.add('bi-chevron-up');
+        }
+      });
+    });
+    
+    const searchUserBtn = document.getElementById('search-user-btn');
+    if (searchUserBtn) {
+      searchUserBtn.addEventListener('click', function() {
+        const userId = document.getElementById('user-search').value.trim();
+        if (!userId) return;
+        
+        fetch(`/admin/search_user?query=${encodeURIComponent(userId)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.users && data.users.length > 0) {
+              displaySearchResults(data.users);
+            } else {
+              displayUserInfo(data.user);
+            }
+          })
+          .catch(error => {
+            console.error('Error searching for user:', error);
+            alert('Error searching for user. Please try again.');
+          });
+      });
+    }
+    
+    const applyChangesBtn = document.getElementById('apply-changes-btn');
+    if (applyChangesBtn) {
+      applyChangesBtn.addEventListener('click', function() {
+        const userId = document.getElementById('user-id').textContent.replace('ID: ', '');
+        const field = document.getElementById('field-select').value;
+        const action = document.getElementById('action-select').value;
+        const value = document.getElementById('value-input').value;
+        
+        if (!userId || !field || !action || !value) {
+          alert('Please fill in all fields');
+          return;
+        }
+        
+        fetch('/admin/modify_user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            field: field,
+            action: action,
+            value: parseInt(value)
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            alert(data.message);
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error modifying user:', error);
+          alert('Error modifying user. Please try again.');
+        });
+      });
+    }
+    
+    const inventorySearchBtn = document.getElementById('inventory-search-btn');
+    if (inventorySearchBtn) {
+      inventorySearchBtn.addEventListener('click', function() {
+        const userId = document.getElementById('inventory-user-search').value.trim();
+        if (!userId) return;
+        
+        fetch(`/admin/get_inventory/${encodeURIComponent(userId)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'ok') {
+              displayInventory(data);
+            } else {
+              alert('Error: ' + data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching inventory:', error);
+            alert('Error fetching inventory. Please try again.');
+          });
+      });
+    }
+    
+    const prevPageBtn = document.getElementById('prev-page-btn');
+    const nextPageBtn = document.getElementById('next-page-btn');
+    
+    if (prevPageBtn) {
+      prevPageBtn.addEventListener('click', function() {
+        const currentPage = parseInt(document.getElementById('page-indicator').getAttribute('data-current-page'));
+        if (currentPage > 1) {
+          loadInventoryPage(currentPage - 1);
+        }
+      });
+    }
+    
+    if (nextPageBtn) {
+      nextPageBtn.addEventListener('click', function() {
+        const currentPage = parseInt(document.getElementById('page-indicator').getAttribute('data-current-page'));
+        const totalPages = parseInt(document.getElementById('page-indicator').getAttribute('data-total-pages'));
+        if (currentPage < totalPages) {
+          loadInventoryPage(currentPage + 1);
+        }
+      });
+    }
+    
+    function displaySearchResults(users) {
+      const resultsContainer = document.getElementById('results-container');
+      resultsContainer.innerHTML = '';
+      
+      users.forEach(user => {
+        const userElement = document.createElement('div');
+        userElement.className = 'user-result';
+        userElement.innerHTML = `
+          <div class="user-result-info">
+            <span class="user-result-name">${user.in_game_username}</span>
+            <span class="user-result-id">ID: ${user.user_id}</span>
+          </div>
+          <button type="button" class="btn btn-sm btn-primary select-user-btn">Select</button>
+        `;
+        
+        userElement.querySelector('.select-user-btn').addEventListener('click', function() {
+          displayUserInfo(user);
+        });
+        
+        resultsContainer.appendChild(userElement);
+      });
+      
+      document.getElementById('search-results').style.display = 'block';
+      document.getElementById('user-info').style.display = 'none';
+    }
+    
+    function displayUserInfo(user) {
+      if (!user) {
+        alert('User not found');
+        return;
+      }
+      
+      document.getElementById('user-display-name').textContent = user.in_game_username;
+      document.getElementById('user-id').textContent = 'ID: ' + user.user_id;
+      
+      document.getElementById('search-results').style.display = 'none';
+      document.getElementById('user-info').style.display = 'block';
+    }
+    
+    function displayInventory(data) {
+      const user = data.user;
+      const items = data.items;
+      const currentPage = data.page || 1;
+      const totalPages = data.total_pages || 1;
+      
+      document.getElementById('inventory-user-name').textContent = user.in_game_username;
+      document.getElementById('copper-amount').textContent = user.copper;
+      document.getElementById('gold-amount').textContent = user.gold;
+      
+      const itemsContainer = document.getElementById('inventory-items-container');
+      itemsContainer.innerHTML = '';
+      
+      if (items.length === 0) {
+        const emptyRow = document.createElement('tr');
+        emptyRow.innerHTML = `<td colspan="3" class="text-center">No items found</td>`;
+        itemsContainer.appendChild(emptyRow);
+      } else {
+        items.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.quantity || 1}</td>
+            <td>${item.level || '-'}</td>
+          `;
+          itemsContainer.appendChild(row);
+        });
+      }
+      
+      const pageIndicator = document.getElementById('page-indicator');
+      pageIndicator.textContent = pageIndicator.textContent.replace('{0}', currentPage).replace('{1}', totalPages);
+      pageIndicator.setAttribute('data-current-page', currentPage);
+      pageIndicator.setAttribute('data-total-pages', totalPages);
+      
+      document.getElementById('prev-page-btn').disabled = currentPage <= 1;
+      document.getElementById('next-page-btn').disabled = currentPage >= totalPages;
+      
+      document.getElementById('inventory-display').style.display = 'block';
+    }
+    
+    function loadInventoryPage(page) {
+      const userId = document.getElementById('inventory-user-search').value.trim();
+      
+      fetch(`/admin/get_inventory/${encodeURIComponent(userId)}?page=${page}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            displayInventory(data);
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching inventory page:', error);
+          alert('Error fetching inventory page. Please try again.');
+        });
+    }
+  });
+</script>
+{% endblock %}

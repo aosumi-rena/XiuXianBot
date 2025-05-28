@@ -6,13 +6,15 @@ import psutil
 import logging
 import datetime
 import re
+from core.database.connection import connect_mongo 
+connect_mongo(db_name='XiuXianBotDev')  # Need to find a way to load db_name as the predefined db_name in config.json
 from flask import Flask, render_template, request, jsonify, send_file
 
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("web_local.log"),
+        logging.FileHandler(os.path.join("logs", "web_local.log")),
         logging.StreamHandler()
     ]
 )
@@ -25,6 +27,18 @@ I18N_DIR    = os.path.join(BASE_DIR, 'i18n')
 LOG_DIR     = os.path.join(ROOT_DIR, 'logs')
 
 os.makedirs(LOG_DIR, exist_ok=True)
+
+# This will cause bug somehow
+# def load_config():
+#     try:
+#         with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
+#             return json.load(f)
+#     except Exception as e:
+#         logger.error(f"Failed to load config: {e}")
+#         return {}
+# cfg  = load_config()
+# db_name = load_config.get('db', {}).get('mongo_db_name', 'XiuXianGameV4')
+# connect_mongo(db_name=db_name)
 
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
@@ -208,6 +222,141 @@ def servers():
 def logs():
     return render_template('logs.html')
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+@app.route('/database')
+def database():
+    return render_template('database.html')
+
+@app.route('/admin/search_user')
+def search_user():
+    try:
+        query = request.args.get('query', '')
+        logger.info(f"Search user request with query: {query}")
+        
+        if not query:
+            logger.warning("No query provided in search_user")
+            return jsonify({'status': 'error', 'message': 'No query provided'}), 400
+        
+        from core.admin.user_management import search_users, get_user
+        
+        logger.info(f"Attempting to find user by ID: {query}")
+        user = get_user(query)
+        if user:
+            logger.info(f"User found by ID: {user.get('user_id')} / {user.get('in_game_username')}")
+            if '_id' in user:
+                user['_id'] = str(user['_id'])
+            return jsonify({'status': 'ok', 'user': user})
+        
+        logger.info(f"User not found by ID, searching by username regex: {query}")
+        users = search_users({'in_game_username': {'$regex': query, '$options': 'i'}}, limit=10)
+        if users:
+            logger.info(f"Found {len(users)} users by username search")
+            for u in users:
+                if '_id' in u:
+                    u['_id'] = str(u['_id'])
+            return jsonify({'status': 'ok', 'users': users})
+        
+        logger.warning(f"No users found for query: {query}")
+        return jsonify({'status': 'error', 'message': 'No users found'}), 404
+    except Exception as e:
+        logger.error(f"Error in search_user: {str(e)}", exc_info=True)
+        return jsonify({'status': 'error', 'message': f'Server error: {str(e)}'}), 500
+    except Exception as e:
+        logger.error(f"Error in search_user: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+@app.route('/admin/modify_user', methods=['POST'])
+def modify_user():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'status': 'error', 'message': 'No data provided'}), 400
+        
+        user_id = data.get('user_id')
+        field = data.get('field')
+        action = data.get('action')
+        value = data.get('value')
+        
+        if not all([user_id, field, action, value is not None]):
+            return jsonify({'status': 'error', 'message': 'Missing required fields'}), 400
+        
+        from core.admin.user_management import modify_user_field
+        
+        success, message = modify_user_field(user_id, field, action, value)
+        
+        if success:
+            return jsonify({'status': 'ok', 'message': message})
+        else:
+            return jsonify({'status': 'error', 'message': message}), 400
+    except Exception as e:
+        logger.error(f"Error in modify_user: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+@app.route('/admin/get_inventory/<user_id>')
+def get_inventory(user_id):
+    try:
+        page = int(request.args.get('page', 1))
+        items_per_page = 10
+        
+        from core.admin.user_management import get_user
+        from core.database.connection import get_collection
+        
+        user = get_user(user_id)
+        if not user:
+            logger.warning(f"User not found in get_inventory: {user_id}")
+            return jsonify({'status': 'error', 'message': 'User not found'}), 404
+        
+        if 'copper' not in user:
+            user['copper'] = 0
+        if 'gold' not in user:
+            user['gold'] = 0
+        
+        if '_id' in user:
+            user['_id'] = str(user['_id'])
+        
+        if 'inventory' in user and isinstance(user['inventory'], list):
+            logger.info(f"Using embedded inventory for user {user_id}")
+            all_items = user['inventory']
+            total_items = len(all_items)
+            total_pages = (total_items + items_per_page - 1) // items_per_page
+            
+            start_idx = (page - 1) * items_per_page
+            end_idx = min(start_idx + items_per_page, total_items)
+            items = all_items[start_idx:end_idx]
+            
+            for item in items:
+                if '_id' in item:
+                    item['_id'] = str(item['_id'])
+        else:
+            logger.info(f"Using items collection for user {user_id}")
+            items_collection = get_collection('items')
+            total_items = items_collection.count_documents({'user_id': user_id})
+            total_pages = (total_items + items_per_page - 1) // items_per_page
+            
+            items = list(items_collection.find(
+                {'user_id': user_id},
+                skip=(page - 1) * items_per_page,
+                limit=items_per_page
+            ))
+            
+            for item in items:
+                if '_id' in item:
+                    item['_id'] = str(item['_id'])
+        
+        return jsonify({
+            'status': 'ok',
+            'user': user,
+            'items': items,
+            'page': page,
+            'total_pages': max(1, total_pages)
+        })
+    except Exception as e:
+        logger.error(f"Error in get_inventory: {str(e)}", exc_info=True)
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
 @app.route('/logs/download')
 def download_logs():
     try:
@@ -222,8 +371,8 @@ def download_logs():
             out_file.write("=" * 80 + "\n\n")
             
             log_files = {
-                'core': os.path.join(ROOT_DIR, 'xiuxianbot.log'),
-                'web': os.path.join(BASE_DIR, 'web_local.log')
+                'core': os.path.join(LOG_DIR, 'xiuxianbot.log'),
+                'web' : os.path.join(LOG_DIR, 'web_local.log')
             }
             
             for adapter in ['discord', 'telegram', 'matrix']:
@@ -275,8 +424,8 @@ def logs_data():
         logs = []
         
         log_files = {
-            'core': os.path.join(ROOT_DIR, 'xiuxianbot.log'),
-            'web': os.path.join(BASE_DIR, 'web_local.log')
+                'core': os.path.join(LOG_DIR, 'xiuxianbot.log'),
+                'web' : os.path.join(LOG_DIR, 'web_local.log')
         }
         
         for adapter in ['discord', 'telegram', 'matrix']:
@@ -338,7 +487,7 @@ def logs_data():
             except Exception as e:
                 logger.error(f"Error reading log file {log_file}: {e}")
                 continue
-        
+# For testing, removing in released
         if not logs:
             logs = [
                 {
@@ -474,6 +623,51 @@ def stop_adapter_route(adapter_name):
             'message': trans.get('adapter_stop_failed', 'Failed to stop adapter').replace('{adapter}', adapter_name)
         }), 500
 
+@app.route('/database/query/<collection_name>', methods=['POST'])
+def database_query(collection_name):
+    try:
+        data = request.get_json()
+        query = data.get('query', {})
+        page = int(request.args.get('page', 1))
+        items_per_page = int(request.args.get('items_per_page', 20))
+        
+        from core.database.connection import get_collection
+        
+        if collection_name not in ['users', 'items', 'timings']:
+            return jsonify({
+                'status': 'error',
+                'message': f'Invalid collection name: {collection_name}'
+            }), 400
+        
+        collection = get_collection(collection_name)
+        
+        total_items = collection.count_documents(query)
+        total_pages = (total_items + items_per_page - 1) // items_per_page
+        
+        results = list(collection.find(
+            query,
+            skip=(page - 1) * items_per_page,
+            limit=items_per_page
+        ))
+        
+        for result in results:
+            if '_id' in result:
+                result['_id'] = str(result['_id'])
+        
+        return jsonify({
+            'status': 'ok',
+            'results': results,
+            'count': total_items,
+            'page': page,
+            'total_pages': max(1, total_pages)
+        })
+    except Exception as e:
+        logger.error(f"Error in database_query: {e}")
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+    
 if __name__ == '__main__':
     cfg  = load_config()
     port = cfg.get('admin_panel', {}).get('port', 11451)

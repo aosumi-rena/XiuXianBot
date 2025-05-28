@@ -17,7 +17,7 @@
 
 一个文字游戏机器人，通过使用通用的核心逻辑及“适配器”，并共享同一套游戏引擎和数据库，同时在Telegram和Discord运行
 
-**README 差分**
+**其他语言的README**
 
 [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md)
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
@@ -54,6 +54,10 @@
     <li><a href="#许可">许可</a></li>
     <li><a href="#联系">联系</a></li>
     <li><a href="#致谢">致谢</a></li>
+      <ul>
+        <li><a href="#灵感">灵感</a></li>
+        <li><a href="#媒体资源">媒体资源</a></li>
+      </ul>
   </ol>
 </details>
 
@@ -84,10 +88,12 @@ root/
 │   ├── matrix/     # Matrix 适配（TBA）
 │   └── …           # 其他平台（TBA）
 ├── core/
-│   ├── commands/   # 游戏命令（hunt.py、cul.py、asc.py、account.py、ele.py 等）
+│   ├── commands/   # 游戏命令（hunt.py、cul.py、asc.py、account.py、ele.py 等），决定Bot如何回应命令
 │   ├── config/     # 游戏内的一些设置，例如卡池、商店、地图等
 │   ├── textmaps/   # 储存Textmap的文件夹，机器人将通过使用这里面的文字完成本地化
-│   ├── utils/      # 数据库模型、本地化、计算工具、ID 生成
+│   ├── database/   # 允许Bot连接到数据库并管理
+│   ├── admin/      # 额外的管理员逻辑系统，增强本地管理面板的功能
+│   ├── game/       # 修改i3版本后游戏内核逻辑系统，现与命令完全分开
 │   └── …           # 未来扩展功能文件夹
 ├── web_local/      # 本地的Bot/数据管理网页版GUI（配置管理、服务器控制等）
 │   ├── app.py                  # 在预设的端口中开放管理员控制台
@@ -103,6 +109,7 @@ root/
 │   └── static/
 │       ├── css/
 │       │   └── styles.css
+│       ├── icons/              # 本地管理面板会用到的SVG图
 │       └── js/
 │           ├── config.js       # 修改配置的页面的逻辑
 │           └── ...             # 其他页面的逻辑
@@ -360,7 +367,8 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 ---
 
 ## 致谢
-
+### 灵感
+* [BlueArchiveGM](https://github.com/PrimeStudentCouncil/BlueArchiveGM) - 提供本地管理面板页面的设计的灵感
 ### 媒体资源
 * [api.tomys.top](https://tomys.top) - 提供随机二次元背景图（本地管理员控制面板网页）
 

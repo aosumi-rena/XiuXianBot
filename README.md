@@ -49,6 +49,10 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
+      <ul>
+        <li><a href="#inspirations">Inspirations</a></li>
+        <li><a href="#media">Media Resources</a></li>
+      </ul>
   </ol>
 </details>
 
@@ -78,10 +82,12 @@ root/
 │   ├── matrix/     # Matrix (future)
 │   └── ???/        # More platforms (future)
 ├── core/
-│   ├── commands/   # Game commands (hunt.py, cul.py, asc.py, account.py, ele.py, etc.)
+│   ├── commands/   # Game commands (hunt.py, cul.py, asc.py, account.py, ele.py, etc.), which decides how the bot will react
 │   ├── config/     # Additional game configuaations, for example gacha, shops and maps
 │   ├── textmaps/   # Folder where textmaps are stored, the bot uses these for localisations
-│   ├── utils/      # DB models, localization, calculations, ID generation
+│   ├── database/   # Allow the bot to connect to database and manage it
+│   ├── admin/      # Additional admin logics to assist the web_local admin dash pages
+│   ├── game/       # Migrated core logics for the main game from i3 versions, now fully separated from commands
 │   └── ???/        # Additional folders containing future features   
 ├── web_local/      # Local admin GUI (config management, server control)
 │   ├── app.py                  # To launch the admin dash page at specified port
@@ -97,6 +103,7 @@ root/
 │   └── static/
 │       ├── css/
 │       │   └── styles.css
+│       ├── icons/              # SVG icons for the admin dash pages
 │       └── js/
 │           ├── config.js       # Logic for config's page
 │           └── ...             # Logic for other pages (TBA)
@@ -352,7 +359,8 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 ---
 
 ## Acknowledgments
-
+### Inspirations
+* [BlueArchiveGM](https://github.com/PrimeStudentCouncil/BlueArchiveGM) - Provide inspirations about the admin dash page design
 ### Media
 * [api.tomys.top](https://tomys.top) - Random anime background image (for local admin dashboard)
 

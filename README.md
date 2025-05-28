@@ -114,7 +114,10 @@ root/
 ```
 
 ### Core Modules
-
+- **admin/**  
+  Additional admin logics to assist the web_local admin dash pages
+- **game/**
+  Migrated core logics for the main game from i3 versions, now fully separated from commands
 - **commands/**  
   Implements every game feature as plain Python functions:  
   - Account creation & linking (Changing to web GUI in future)
@@ -129,10 +132,8 @@ root/
     - [X] CHS
     - [ ] CHT (Partially done)
     - [ ] ???
-- **utils/**  
-  - **database.py**: MongoDB connection, unified `user_id` generation, backup routines for both `users` and `items` collections  
-  - **localisation.py**: load JSON textmaps (multi‑language support) 
-  - **???.py**: More functions in future...
+- **database/**  
+  - **connection.py**: MongoDB connection, unified `user_id` generation, backup routines for both `users` and `items` collections  
 
 ### Platform Adapters
 
@@ -156,32 +157,29 @@ Each adapter translates platform‑specific events into calls into the core:
   
   1. **Config Management** (`127.0.0.1:11451/config`)  
      - Loads `config.json` into a user-friendly form: each key/value rendered as an editable field.  
-     - Highlights which settings require a full restart of `start.py` (“Core Restart”) versus which only need an adapter restart (“Adapter Restart”).  
-     - "Save" button sends the updated JSON via Fetch to a POST endpoint, writes back to disk, and displays success feedback—all without reloading the page.  
+     - "Save" button sends the updated JSON via Fetch to a POST endpoint, writes back to disk, and displays success feedback—all without reloading the page, and reminds user whether a full restart of `start.py` is required based on the config editted.  
 
   2. **Server Control** (`127.0.0.1:11451/servers`)  
      - Lists the Core process and each enabled adapter (Discord, Telegram, etc.) with toggle switches.  
      - Choosing "Start/Stop" invokes a subprocess or system call to launch or terminate only the required service.
-     - (Future) Options like "Pause/Resume" similar to docker containers
      - Status indicators (green/red dots) show which components are running at a glance.  
+     - (Future) Options like "Pause/Resume" similar to docker containers
 
   3. **Admin Tools** (`127.0.0.1:11451/admin`)  
      - A GUI wrapper around the legacy admin commands (e.g. textmap indexing, player data overrides, permission changes).  
-     - TBA (Adding when page is done)
 
   4. **Logs Viewer** (`127.0.0.1:11451/logs`)  
      - Streams recent log entries in real time.
      - Buttons to download log files.  
-     - TBA (Adding when page is done)
+     - Filtering of source of log and severity level.
 
-  5. **Account Management** (`127.0.0.1:11451/accounts`)  
-     - Browse and search player information.
-     - Ban/unban, deactivate/reactivate, or manually link third-party IDs.  
-     - TBA (Adding when page is done)
-
-  6. **Database Browser** (`127.0.0.1:11451/database`)  
+  5. **Database Browser** (`127.0.0.1:11451/database`)  
      - Query `users` (automatically locates item informations in `items` for specified user/owner) collections with filters.  
      - Display results in a paginated table with export options.  
+
+  6. **Account Management** (`127.0.0.1:11451/accounts`)  
+     - Browse and search player information.
+     - Ban/unban, deactivate/reactivate, or manually link third-party IDs.  
      - TBA (Adding when page is done)
 
   **Technical Highlights**  

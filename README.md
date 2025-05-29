@@ -64,7 +64,7 @@ XiuXianBot is a cultivation‑themed RPG text-based game bot originally built fo
 
 - A **core** library containing all game logic, database models, and localization.
 - Multiple **adapters** for different chat platforms (Discord, Telegram, Matrix…).
-- Optional **web interfaces** for admin control and public account management.
+- **Web interfaces** for admin control and public account management.
 - A **single bootstrap** (`start.py`) that loads configuration and starts the desired adapters.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -303,11 +303,12 @@ Select the servers/platforms you need the bot to run on, and the it will then
 ## Roadmap
 
 ### Core
-* [ ] Refactor core logic into **core/** package
+* [X] Refactor core logic into **core/** package
+* [ ] Create command listener and response logics in **core/commnads/**
 * [ ] Implement **Discord** adapter
 * [ ] Add **Telegram** adapter with slash commands
 * [ ] Prototype **Matrix** adapter
-* [ ] Build **web\_local** admin GUI
+* [X] Build **web\_local** admin GUI
 * [ ] Build **web\_public** portal for account linking
 * [ ] Dockerize entire application
 

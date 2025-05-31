@@ -54,6 +54,10 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
         <li><a href="#inspirations">Inspirations</a></li>
         <li><a href="#media">Media Resources</a></li>
       </ul>
+    <li><a href="#others">Others</a></li>
+      <ul>
+        <li><a href="#star-history">Star History</a></li>
+      </ul>
   </ol>
 </details>
 
@@ -374,6 +378,21 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 
 <p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
+---
+
+## Others
+
+### Star History
+
+<a href="https://www.star-history.com/#aosumi-rena/XiuXianBot&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=aosumi-rena/XiuXianBot&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=aosumi-rena/XiuXianBot&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=aosumi-rena/XiuXianBot&type=Date" />
+ </picture>
+</a>
+
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 <!-- URL -->
 [downloads-shield]: https://img.shields.io/github/downloads/aosumi-rena/XiuXianBot/total?logo=github&style=flat-square

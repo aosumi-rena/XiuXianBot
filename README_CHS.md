@@ -59,6 +59,10 @@
         <li><a href="#灵感">灵感</a></li>
         <li><a href="#媒体资源">媒体资源</a></li>
       </ul>
+    <li><a href="#其他">其他</a></li>
+      <ul>
+        <li><a href="#star历史">Star历史</a></li>
+      </ul>
   </ol>
 </details>
 
@@ -381,6 +385,21 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
+---
+
+## 其他
+
+### Star历史
+
+<a href="https://www.star-history.com/#aosumi-rena/XiuXianBot&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=aosumi-rena/XiuXianBot&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=aosumi-rena/XiuXianBot&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=aosumi-rena/XiuXianBot&type=Date" />
+ </picture>
+</a>
+
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 <!-- URL -->
 [downloads-shield]: https://img.shields.io/github/downloads/aosumi-rena/XiuXianBot/total?logo=github&style=flat-square

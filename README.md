@@ -15,7 +15,8 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
 **README Variations**
 
 [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md)
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -67,7 +68,7 @@ XiuXianBot is a cultivation‑themed RPG text-based game bot originally built fo
 - **Web interfaces** for admin control and public account management.
 - A **single bootstrap** (`start.py`) that loads configuration and starts the desired adapters.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -113,10 +114,12 @@ root/
 └── start.py        # Main switch to load core and adapters
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
+
 ### Core Modules
 - **admin/**  
   Additional admin logics to assist the web_local admin dash pages
-- **game/**
+- **game/**  
   Migrated core logics for the main game from i3 versions, now fully separated from commands
 - **commands/**  
   Implements every game feature as plain Python functions:  
@@ -135,6 +138,8 @@ root/
 - **database/**  
   - **connection.py**: MongoDB connection, unified `user_id` generation, backup routines for both `users` and `items` collections  
 
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
+
 ### Platform Adapters
 
 Each adapter translates platform‑specific events into calls into the core:
@@ -149,6 +154,8 @@ Each adapter translates platform‑specific events into calls into the core:
 - **Matrix**  
   - To be prototyped using a Matrix SDK (e.g. `matrix-nio`)  
   - Uses plain text messages and reply buttons  
+
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ### Web Interfaces
 
@@ -196,12 +203,12 @@ Each adapter translates platform‑specific events into calls into the core:
   - Link existing accounts with OTP sent to the user’s chat platform  
   - View personal stats, inventory, and more via web  
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
 ## Getting Started
-&&&This Section is WIP&&&
+
 ### Prerequisites
 
 - Python 3.10+  
@@ -225,6 +232,8 @@ Each adapter translates platform‑specific events into calls into the core:
    ```sh
    python bot.py
    ```
+
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ===================================
 
@@ -283,7 +292,7 @@ Each adapter translates platform‑specific events into calls into the core:
 5. **Start the bot on respective servers/platforms**
 
    Once everything is configured correctly and checked, start the servers (platforms) you need in the admin panel webpage
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -296,7 +305,7 @@ Select the servers/platforms you need the bot to run on, and the it will then
 - Connect to Telegram (if enabled) and mirror the same commands slash commands.
 - Connect to Matrix (if enabled) and ??? (Matrix is not prototyped, unable to provide possible results here).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -322,7 +331,7 @@ Select the servers/platforms you need the bot to run on, and the it will then
 * [ ] Gacha system
 * [ ] Trading system
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -331,7 +340,7 @@ Select the servers/platforms you need the bot to run on, and the it will then
 - All contributions are welcomed, you may make pull requests or post any issues if you would like to contribute
 - For localisation, a Weblate site will be hosted for public contributions
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -343,7 +352,7 @@ This program comes with ABSOLUTELY NO WARRANTY; for details, see [LICENSE.txt](h
 
 This is free software, and you are welcome to redistribute it under the terms of the GNU GPL v3.0.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -353,7 +362,7 @@ Aosumi Rena – [rena.aosumi@mihoyo.day](mailto:rena.aosumi@mihoyo.day)
 
 Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/aosumi-rena/XiuXianBot)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
@@ -363,7 +372,7 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 ### Media
 * [api.tomys.top](https://tomys.top) - Random anime background image (for local admin dashboard)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 
 <!-- URL -->

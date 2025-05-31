@@ -20,7 +20,8 @@
 **其他语言的README**
 
 [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md)
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -72,7 +73,7 @@
 - **Web界面**：用于管理员控制与公开账号管理  
 - 单**启动脚本** (`start.py`)：加载配置并启动对应的适配器  
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -119,10 +120,12 @@ root/
 └── start.py        # 一键启动
 ```
 
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
+
 ### 核心模块
-- **admin/**
+- **admin/**  
   额外的管理员逻辑系统，增强本地管理面板的功能
-- **game/**
+- **game/**  
   修改i3版本后游戏内核逻辑系统，现与命令完全分开
 - **commands/**  
   将所有游戏功能通过纯Python实现：  
@@ -142,6 +145,8 @@ root/
 - **database/**  
   - **connection.py**：MongoDB 连接、`user_id`自动生成、备份  
 
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
+
 ### 平台适配器
 
 各适配器负责将平台消息/事件映射到核心命令，并将核心返回格式化为平台消息：
@@ -156,6 +161,8 @@ root/
 - **Matrix**  
   - 使用Matrix SDK（如 `matrix-nio`）进行原型开发  
   - 纯文本和回复按钮  
+
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ### 网页界面
 - **本地网页管理面板** (`web_local/`)  
@@ -201,12 +208,12 @@ root/
   - 发送 OTP 到聊天平台以关联已有账号  
   - 在网页端查看个人状态、物品栏等  
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
 ## 快速上手
-&&&此部分未完成&&&
+
 ### 环境准备
 
 - Python 3.10+  
@@ -229,6 +236,8 @@ root/
    ```sh
    python bot.py
    ```
+
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ===================================
 
@@ -288,7 +297,7 @@ root/
 5. **启动相应的Bot平台**
 
    全部检查好之后，在网页中启动你需要Bot运行在的平台
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -303,7 +312,7 @@ root/
 * 连接 Matrix（若启用）并？？？（暂时没有计划，所以我也不知道会发生什么）
 
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -329,7 +338,7 @@ root/
 * [ ] 抽卡系统
 * [ ] 交易系统
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -338,7 +347,7 @@ root/
 - 欢迎任何人为此仓库贡献，你可以通过Pull requestse和Issues提出你认为可以改进 此项目的想法和建议
 - 对于本地化贡献，我会使用Weblate搭建网页版贡献工具，现在可以临时使用Issues或Pull requests
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -350,7 +359,7 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 
 此程序为免费程序，你可以根据GNU GPL v3.0的条款重新分发/转载。
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -360,7 +369,7 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 
 项目地址: [https://github.com/aosumi-rena/XiuXianBot](https://github.com/aosumi-rena/XiuXianBot)
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
@@ -370,7 +379,7 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 ### 媒体资源
 * [api.tomys.top](https://tomys.top) - 提供随机二次元背景图（本地管理员控制面板网页）
 
-<p align="right">(<a href="#readme-top">回到顶部</a>)</p>
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 
 <!-- URL -->

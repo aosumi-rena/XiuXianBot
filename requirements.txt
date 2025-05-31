@@ -8,6 +8,4 @@ cnlunar
 flask
 psutil
 telegram
-telegram.ext
 uuid
-telegram.helpers

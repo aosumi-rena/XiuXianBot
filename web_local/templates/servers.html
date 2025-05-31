@@ -3,7 +3,7 @@
 {% block content %}
 <div class="servers-container">
   <h1>{{ trans.get('servers_title', 'Server Control') }}</h1>
-
+  
   <div class="server-card core-server mb-4">
     <div class="server-header">
       <h2>{{ trans.get('core_server', 'Core Server') }}</h2>
@@ -34,7 +34,7 @@
               <h3>{{ trans.get(adapter_name + '_adapter', adapter_name|capitalize + ' Adapter') }}</h3>
               <div class="status-indicator">
                 <span id="{{ adapter_name }}-status-dot" class="status-dot"></span>
-                <span id="{{ adapter_name }}-status-text">{{ trans.get('status_disabled', 'Disabled') }}</span>
+                <span id="{{ adapter_name }}-status-text">{{ trans.get('status_checking', 'Checking...') }}</span>
               </div>
             </div>
             <div class="server-body">
@@ -56,7 +56,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     checkStatus();
-
+    
     setInterval(checkStatus, 5000);
     
     document.getElementById('core-start').addEventListener('click', function() {
@@ -66,7 +66,7 @@
     document.getElementById('core-stop').addEventListener('click', function() {
       toggleService('core', 'stop');
     });
-
+    
     document.querySelectorAll('.adapter-start').forEach(button => {
       button.addEventListener('click', function() {
         const adapter = this.closest('.adapter-card').dataset.adapter;
@@ -80,17 +80,17 @@
         toggleService(adapter, 'stop');
       });
     });
-
+    
     function checkStatus() {
       fetch('/servers/status?lang=' + '{{ current_lang }}')
         .then(response => response.json())
         .then(data => {
           updateServiceStatus('core', data.core);
-
+      
           for (const [adapter, status] of Object.entries(data.adapters)) {
             updateServiceStatus(adapter, status);
           }
-
+       
           const adaptersEnabled = data.core.running;
           document.querySelectorAll('.adapter-start, .adapter-stop').forEach(button => {
             button.disabled = !adaptersEnabled;
@@ -113,8 +113,13 @@
         startButton.disabled = true;
         stopButton.disabled = false;
       } else {
-        statusDot.className = 'status-dot status-stopped';
-        statusText.textContent = '{{ trans.get("status_stopped", "Stopped") }}';
+        if (service !== 'core' && status.enabled) {
+          statusDot.className = 'status-dot status-enabled';
+          statusText.textContent = '{{ trans.get("status_enabled", "Enabled") }}';
+        } else {
+          statusDot.className = 'status-dot status-stopped';
+          statusText.textContent = '{{ trans.get("status_stopped", "Stopped") }}';
+        }
         startButton.disabled = false;
         stopButton.disabled = true;
 

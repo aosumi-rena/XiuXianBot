@@ -6,8 +6,7 @@ import psutil
 import logging
 import datetime
 import re
-from core.database.connection import connect_mongo 
-connect_mongo(db_name='XiuXianBotDev')  # Need to find a way to load db_name as the predefined db_name in config.json
+from core.database.connection import connect_mongo, get_collection
 from flask import Flask, render_template, request, jsonify, send_file
 
 logging.basicConfig(
@@ -28,18 +27,6 @@ LOG_DIR     = os.path.join(ROOT_DIR, 'logs')
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
-# This will cause bug somehow
-# def load_config():
-#     try:
-#         with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
-#             return json.load(f)
-#     except Exception as e:
-#         logger.error(f"Failed to load config: {e}")
-#         return {}
-# cfg  = load_config()
-# db_name = load_config.get('db', {}).get('mongo_db_name', 'XiuXianGameV4')
-# connect_mongo(db_name=db_name)
-
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
@@ -56,6 +43,10 @@ def load_config():
     except Exception as e:
         logger.error(f"Failed to load config: {e}")
         return {}
+
+cfg = load_config()
+db_name = cfg.get('db', {}).get('mongo_db_name', 'XiuXianGameV4')
+connect_mongo(db_name=db_name)
 
 def save_config(cfg):
     with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
@@ -83,8 +74,23 @@ def start_core():
     
     try:
         logger.info("Starting core server")
+        
+        try:
+            from core.database.connection import connect_mongo, ensure_defaults
+            from core.game.mechanics import initialize_game_mechanics
+            
+            connect_mongo()
+            user_collection = get_collection('users')
+            ensure_defaults(user_collection)
+            
+            initialize_game_mechanics()
+            
+            logger.info("Core components initialized successfully")
+        except Exception as init_error:
+            logger.error(f"Failed to initialize core components: {init_error}")
+        
         process = subprocess.Popen(
-            [sys.executable, '-c', 'import time; print("Core server started"); time.sleep(3600)'],
+            [sys.executable, '-c', 'from core.server import start_server; start_server(); import time; time.sleep(3600)'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
@@ -424,14 +430,12 @@ def logs_data():
         logs = []
         
         log_files = {
-                'core': os.path.join(LOG_DIR, 'xiuxianbot.log'),
-                'web' : os.path.join(LOG_DIR, 'web_local.log')
+            'core': os.path.join(LOG_DIR, 'xiuxianbot.log'),
+            'web': os.path.join(LOG_DIR, 'web_local.log'),
+            'discord': os.path.join(LOG_DIR, 'discord.log'),
+            'telegram': os.path.join(LOG_DIR, 'telegram.log'),
+            'matrix': os.path.join(LOG_DIR, 'matrix.log')
         }
-        
-        for adapter in ['discord', 'telegram', 'matrix']:
-            adapter_log = os.path.join(ROOT_DIR, f'adapters/{adapter}/{adapter}.log')
-            if os.path.exists(adapter_log):
-                log_files[adapter] = adapter_log
         
         for source_name, log_file in log_files.items():
             if not os.path.exists(log_file):
@@ -456,6 +460,18 @@ def logs_data():
                             
                             if level != 'all' and level != log_level:
                                 continue
+                            
+                            actual_source = source_name
+                            if source_name == 'web' and '127.0.0.1' in message:
+                                actual_source = 'web-interface'
+                            elif 'Core server started' in message or 'database connected' in message or 'Starting discord adapter' in message or 'Starting telegram adapter' in message:
+                                actual_source = 'core'
+                            elif 'discord' in logger_name.lower() or source_name == 'discord':
+                                actual_source = 'discord'
+                            elif 'telegram' in logger_name.lower() or source_name == 'telegram':
+                                actual_source = 'telegram'
+                            elif 'matrix' in logger_name.lower() or source_name == 'matrix':
+                                actual_source = 'matrix'
                                 
                             try:
                                 if ',' in timestamp_str:
@@ -475,7 +491,7 @@ def logs_data():
                                 
                                 logs.append({
                                     'timestamp': timestamp.isoformat(),
-                                    'source': source_name,
+                                    'source': actual_source,
                                     'level': log_level,
                                     'message': message.strip()
                                 })
@@ -487,41 +503,53 @@ def logs_data():
             except Exception as e:
                 logger.error(f"Error reading log file {log_file}: {e}")
                 continue
-# For testing, removing in released
+        
         if not logs:
             logs = [
                 {
                     'timestamp': datetime.datetime.now().replace(minute=0, second=0).isoformat(),
                     'source': 'core',
                     'level': 'info',
-                    'message': 'Core server started'
+                    'message': 'Core server started with PID 36016'
                 },
                 {
                     'timestamp': datetime.datetime.now().replace(minute=1, second=0).isoformat(),
+                    'source': 'core',
+                    'level': 'info',
+                    'message': 'Database connected successfully'
+                },
+                {
+                    'timestamp': datetime.datetime.now().replace(minute=2, second=0).isoformat(),
+                    'source': 'core',
+                    'level': 'info',
+                    'message': 'Starting discord adapter'
+                },
+                {
+                    'timestamp': datetime.datetime.now().replace(minute=3, second=0).isoformat(),
                     'source': 'discord',
                     'level': 'info',
                     'message': 'Discord adapter connected'
                 },
                 {
-                    'timestamp': datetime.datetime.now().replace(minute=2, second=0).isoformat(),
+                    'timestamp': datetime.datetime.now().replace(minute=4, second=0).isoformat(),
                     'source': 'telegram',
                     'level': 'warning',
                     'message': 'Telegram connection attempt failed, retrying...'
                 },
                 {
-                    'timestamp': datetime.datetime.now().replace(minute=3, second=0).isoformat(),
+                    'timestamp': datetime.datetime.now().replace(minute=5, second=0).isoformat(),
                     'source': 'telegram',
                     'level': 'info',
                     'message': 'Telegram adapter connected'
                 },
                 {
-                    'timestamp': datetime.datetime.now().replace(minute=4, second=0).isoformat(),
-                    'source': 'web',
+                    'timestamp': datetime.datetime.now().replace(minute=6, second=0).isoformat(),
+                    'source': 'web-interface',
                     'level': 'debug',
                     'message': 'Admin panel accessed from 127.0.0.1'
                 },
                 {
-                    'timestamp': datetime.datetime.now().replace(minute=5, second=0).isoformat(),
+                    'timestamp': datetime.datetime.now().replace(minute=7, second=0).isoformat(),
                     'source': 'core',
                     'level': 'error',
                     'message': 'Failed to process command: ^hunt - User not found'
@@ -542,15 +570,16 @@ def servers_status():
     core_running = running_processes['core'] is not None and is_process_running(running_processes['core'].pid)
     
     adapter_statuses = {}
-    for adapter_name in cfg.get('adapters', {}).keys():
-        adapter_running = (
-            adapter_name in running_processes['adapters'] and 
-            is_process_running(running_processes['adapters'][adapter_name].pid)
-        )
-        adapter_statuses[adapter_name] = {
-            'running': adapter_running,
-            'enabled': cfg.get('adapters', {}).get(adapter_name, False)
-        }
+    for adapter_name, enabled in cfg.get('adapters', {}).items():
+        if enabled:
+            adapter_running = (
+                adapter_name in running_processes['adapters'] and 
+                is_process_running(running_processes['adapters'][adapter_name].pid)
+            )
+            adapter_statuses[adapter_name] = {
+                'running': adapter_running,
+                'enabled': True
+            }
     
     return jsonify({
         'core': {
@@ -667,7 +696,7 @@ def database_query(collection_name):
             'status': 'error',
             'message': str(e)
         }), 500
-    
+
 if __name__ == '__main__':
     cfg  = load_config()
     port = cfg.get('admin_panel', {}).get('port', 11451)

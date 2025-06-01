@@ -20,11 +20,5 @@
   "db": {
     "mongo_uri": "mongodb://localhost:27017",
     "mongo_db_name": "XiuXianGameV4"
-  },
-  "game": {
-    "constants": {
-      "sign_in_copper": 500,
-      "sign_in_gold": 1
-    }
   }
 }

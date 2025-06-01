@@ -21,11 +21,5 @@
   "db": {                                                   # Database configurations
     "mongo_uri": "mongodb://localhost:27017",               # URI to your MongoDB, usually it is `mongodb://localhost:27017`
     "mongo_db_name": "XiuXianBotV4"                         # Name of your MongoDB database for the bots to store information on
-  },
-  "game": {                                                 # Game particulars (This section is incomplete)
-    "constants": {
-      "sign_in_copper": 500,
-      "sign_in_gold": 1
-    }
   }
 }

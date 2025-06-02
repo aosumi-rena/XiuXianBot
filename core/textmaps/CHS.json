@@ -10,22 +10,22 @@
         "test_rewards": {
             "description": "test",
             "type": "embed",
-            "text": "修仙版本：`{version} (Official Release)`\n\n此轮测试无奖励。",
-            "text_TG": "",
+            "text": "\\此\\信\\息\\为\\测\\试\\版\\特\\有\\，\\正\\式\\版\\将\\不\\再\\提\\供\\！",
+            "text_TG": "\\此\\信\\息\\为\\测\\试\\版\\特\\有\\，\\正\\式\\版\\将\\不\\再\\提\\供\\！",
             "text_Matrix": ""
         },
         "welcome_message": {
             "description": "welcome",
             "type": "plain",
             "text": "欢迎 {user} 加入，您的账号已创建，请开始您的修仙之旅！",
-            "text_TG": "",
+            "text_TG": "欢迎 {user} 加入，您的账号已创建，请开始您的修仙之旅！",
             "text_Matrix": ""
         },
         "user_status": {
             "description": "User status details",
             "type": "embed",
-            "text": "用户：{user}（UID: `{user_id}`）\n当前修为：{exp} / {max_exp}\n修炼阶段：{stage_description}（id=`{rank}`）\n元素：{element}",
-            "text_TG": "",
+            "text": "👤 **{status_info['in_game_username']}**\n🆔 UID: `{status_info['user_id']}`\n⭐ 境界: {status_info['stage_description']} (第{status_info['rank']}重)\n💫 修为: {status_info['exp']:,}/{status_info['max_exp']:,}\n📊 进度: {progress_bar} {progress:.1f}%\n🔥 五行: {status_info['element']}\n💰 铜币: {status_info['copper']:,}\n💎 元宝: {status_info['gold']:,}\n📅 打野次数: {status_info['dy_times']}/3\n🧘 状态: {'修炼中' if status_info['state'] else '空闲'}",
+            "text_TG": "👤 **{status_info['in_game_username']}**\n🆔 UID: `{status_info['user_id']}`\n⭐ 境界: {status_info['stage_description']} (第{status_info['rank']}重)\n💫 修为: {status_info['exp']:,}/{status_info['max_exp']:,}\n📊 进度: {progress_bar} {progress:.1f}%\n🔥 五行: {status_info['element']}\n💰 铜币: {status_info['copper']:,}\n💎 元宝: {status_info['gold']:,}\n📅 打野次数: {status_info['dy_times']}/3\n🧘 状态: {'修炼中' if status_info['state'] else '空闲'}",
             "text_Matrix": ""
         },
         "no_account": {

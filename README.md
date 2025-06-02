@@ -288,14 +288,9 @@ Each adapter translates platform‑specific events into calls into the core:
      },
     "db": {                                                   # Database configurations
       "mongo_uri": "mongodb://localhost:27017",               # URI to your MongoDB, usually it is `mongodb://localhost:27017`
-      "mongo_db_name": "XiuXianBotV4"                         # Name of your MongoDB database for the bots to store information on
-      },
-    "game": {                                                 # Game particulars (This section is incomplete)
-      "constants": {
-        "sign_in_copper": 500,
-        "sign_in_gold": 1
-        }
-      }
+      "mongo_db_name": "XiuXianBotV4",                        # Name of your MongoDB database for the bots to store information on
+      "universal_uid_start": 1000000                          # Sets the starting universal uid generation value, "1000000" means the first user will get "1000001" for their uid
+     }
    }
    ```
 4. **Start the local admin dashboard webpage**

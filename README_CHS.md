@@ -292,14 +292,8 @@ root/
       "matrix_pass": "123456"                                 # 你的机器人用户的密码
     },
     "db": {                                                   # 数据库配置
-      "mongo_uri": "mongodb://localhost:27017",               # 你的MongoDB的URI，一般情况下为`mongodb://localhost:27017`
-      "mongo_db_name": "XiuXianBotV4"                         # Bot储存数据时使用的数据库的名字
-    },
-    "game": {                                                 # 游戏数据配置（此部分未完成）
-      "constants": {
-        "sign_in_copper": 500,
-        "sign_in_gold": 1
-      }
+      "mongo_db_name": "XiuXianBotV4",                        # Bot储存数据时使用的数据库的名字
+      "universal_uid_start": 1000000                          # 设置通用uid起始数，设定为"1000000"即表示第一个用户的uid为"1000001"
     }
    }
    ```

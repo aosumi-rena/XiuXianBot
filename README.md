@@ -83,8 +83,11 @@ XiuXianBot is a cultivation‑themed RPG text-based game bot originally built fo
 root/
 ├── adapters/
 │   ├── discord/    # Discord‑specific commands, modals, embeds
+│   |   └── bot.py              # To activate the bot  
 │   ├── telegram/   # Telegram slash commands, inline keyboards
+│   |   └── bot.py              # To activate the bot  
 │   ├── matrix/     # Matrix (future)
+│   |   └── bot.py              # To activate the bot  
 │   └── ???/        # More platforms (future)
 ├── core/
 │   ├── commands/   # Game commands (hunt.py, cul.py, asc.py, account.py, ele.py, etc.), which decides how the bot will react
@@ -93,6 +96,7 @@ root/
 │   ├── database/   # Allow the bot to connect to database and manage it
 │   ├── admin/      # Additional admin logics to assist the web_local admin dash pages
 │   ├── game/       # Migrated core logics for the main game from i3 versions, now fully separated from commands
+│   ├── utils/      # Additional utility tools for the bot to execute certain sub-functions of commands
 │   └── ???/        # Additional folders containing future features   
 ├── web_local/      # Local admin GUI (config management, server control)
 │   ├── app.py                  # To launch the admin dash page at specified port
@@ -131,6 +135,12 @@ root/
   - Cultivation, hunting, ascending, element system, shop, inventory, status...
 - **config/**  
   Additional game configuaations json files, used for gacha, shops, redemption codes and maps...
+- **utils/**  
+  Additional utility tools for the bot to execute certain sub-functions of commands
+    - `account_status.py` Helps the bot to get user's data&status, and then generates markdown texts visuals display of the data
+    - `database.py` Back ups user's data, generates universal uid for new uers, ensures value defaults (to prevent errors)
+    - `localisation.py` Allows the bot to get localised text and sends them to users
+    - `otp.py` Generates the one-time password code for users to link accounts
 - **textmaps/**  
   Folder where textmaps are stored, the bot uses these for localisations
 
@@ -164,31 +174,31 @@ Each adapter translates platform‑specific events into calls into the core:
 ### Web Interfaces
 
 - **Local admin GUI** (`web_local/`)  
-  A Flask-based dashboard running on your local machine (e.g. `http://127.0.0.1:11451`) that provides a single-page, tabbed interface for:
+  A Flask-based dashboard running on your local machine (e.g. `http://localhost:11451`) that provides a single-page, tabbed interface for:
   
-  1. **Config Management** (`127.0.0.1:11451/config`)  
+  1. **Config Management** (`localhost:11451/config`)  
      - Loads `config.json` into a user-friendly form: each key/value rendered as an editable field.  
      - "Save" button sends the updated JSON via Fetch to a POST endpoint, writes back to disk, and displays success feedback—all without reloading the page, and reminds user whether a full restart of `start.py` is required based on the config editted.  
 
-  2. **Server Control** (`127.0.0.1:11451/servers`)  
+  2. **Server Control** (`localhost:11451/servers`)  
      - Lists the Core process and each enabled adapter (Discord, Telegram, etc.) with toggle switches.  
      - Choosing "Start/Stop" invokes a subprocess or system call to launch or terminate only the required service.
      - Status indicators (green/red dots) show which components are running at a glance.  
      - (Future) Options like "Pause/Resume" similar to docker containers
 
-  3. **Admin Tools** (`127.0.0.1:11451/admin`)  
+  3. **Admin Tools** (`localhost:11451/admin`)  
      - A GUI wrapper around the legacy admin commands (e.g. textmap indexing, player data overrides, permission changes).  
 
-  4. **Logs Viewer** (`127.0.0.1:11451/logs`)  
+  4. **Logs Viewer** (`localhost:11451/logs`)  
      - Streams recent log entries in real time.
      - Buttons to download log files.  
      - Filtering of source of log and severity level.
 
-  5. **Database Browser** (`127.0.0.1:11451/database`)  
+  5. **Database Browser** (`localhost:11451/database`)  
      - Query `users` (automatically locates item informations in `items` for specified user/owner) collections with filters.  
      - Display results in a paginated table with export options.  
 
-  6. **Account Management** (`127.0.0.1:11451/accounts`)  
+  6. **Account Management** (`localhost:11451/accounts`)  
      - Browse and search player information.
      - Ban/unban, deactivate/reactivate, or manually link third-party IDs.  
      - TBA (Adding when page is done)
@@ -302,7 +312,7 @@ Each adapter translates platform‑specific events into calls into the core:
 
 ### Usage
 Once running, the bot will:
-- Provide a local web dashboard at http://127.0.0.1:11451 (By default, you may change it in config.json) for admin control.
+- Provide a local web dashboard at http://localhost:11451 (By default, you may change it in config.json) for admin control.
 
 Select the servers/platforms you need the bot to run on, and the it will then
 - Connect to Discord and respond to ^start, ^cul, ^hunt, ^asc, ^ele, /shop, etc.

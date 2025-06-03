@@ -51,6 +51,7 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
       <ul>
+        <li><a href="#ai">AI</a></li>
         <li><a href="#inspirations">Inspirations</a></li>
         <li><a href="#media">Media Resources</a></li>
       </ul>
@@ -376,6 +377,9 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 ---
 
 ## Acknowledgments
+### AI
+* [OpenAI](https://chat.openai.com) - General assistance
+* [Deepwiki](https://deepwiki.com) - Documentation
 ### Inspirations
 * [BlueArchiveGM](https://github.com/PrimeStudentCouncil/BlueArchiveGM) - Provide inspirations about the admin dash page design
 ### Media

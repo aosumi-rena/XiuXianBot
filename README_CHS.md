@@ -56,6 +56,7 @@
     <li><a href="#联系">联系</a></li>
     <li><a href="#致谢">致谢</a></li>
       <ul>
+        <li><a href="#ai">AI</a></li>
         <li><a href="#灵感">灵感</a></li>
         <li><a href="#媒体资源">媒体资源</a></li>
       </ul>
@@ -382,6 +383,9 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 ---
 
 ## 致谢
+### AI
+* [OpenAI](https://chat.openai.com) - 一般的帮助
+* [Deepwiki](https://deepwiki.com) - 文档化
 ### 灵感
 * [BlueArchiveGM](https://github.com/PrimeStudentCouncil/BlueArchiveGM) - 提供本地管理面板页面的设计的灵感
 ### 媒体资源

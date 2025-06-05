@@ -13,9 +13,9 @@
 
 # 修仙机器人
 
-*此文件的部分由AI翻译（会专门标出），可能有些入机感*
-
 一个文字游戏机器人，通过使用通用的核心逻辑及“适配器”，并共享同一套游戏引擎和数据库，同时在Telegram和Discord运行
+
+![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
 
 **其他语言的README**
 
@@ -43,6 +43,10 @@
       <ul>
         <li><a href="#环境准备">环境准备</a></li>
         <li><a href="#安装">安装</a></li>
+          <ul>
+            <li><a href="#docker">Docker部署</a></li>
+            <li><a href="#自建">自建</a></li>
+          </ul>
       </ul>
     </li>
     <li><a href="#使用">使用</a></li>
@@ -52,6 +56,9 @@
         <li><a href="#游戏功能">游戏功能</a></li>
       </ul>
     <li><a href="#贡献">贡献</a></li>
+      <ul>
+        <li><a href="#贡献者">贡献者名单</a></li>
+      </ul>
     <li><a href="#许可">许可</a></li>
     <li><a href="#联系">联系</a></li>
     <li><a href="#致谢">致谢</a></li>
@@ -231,12 +238,46 @@ root/
 
 ### 环境准备
 
-- Python 3.10+  
+*Docker部署*: 
+- Docker (废话
+
+*自建*: 
+- Python 3.12+  
 - MongoDB  
-- Docker（可选，用于容器化部署）  
+
 
 ### 安装
-**[Internal-3 (i3) 版本 {直装版}](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
+
+#### Docker
+&&& This Section Is Incomplete &&&  
+**Official Releases (`OSRELDocker1.0.0_*` 版本及以上) {开发中}**
+1. **Clone the repo**  
+   ```sh
+   git clone https://github.com/aosumi-rena/XiuXianBot.git
+   cd XiuXianBot
+   ```
+2. **配置**
+   - 修改`docker-compose.yml`：添加你的机器人Token，并按需修改其他环境变量
+   
+   **[docker-compose.yml](https://github.com/aosumi-rena/XiuXianBot/blob/main/docker-compose.yml) sample**:
+   ```
+   ？？？
+   ```
+3. **Docker编译**
+   ```
+   docker-compose up -d
+   ```
+4. **启动！**
+   编译后将自动启动
+
+   之后会在预设的端口中打开机器人控制台网页，使用浏览器进入网页以再次检查配置是否正确
+5. **启动相应的Bot平台**  
+   全部检查好之后，在网页中启动你需要Bot运行在的平台
+
+<p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
+
+#### 自建
+**[Internal-3 (i3) 版本](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
 1. **下载**
     - [从Release下载](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)
     - [从云盘下载](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
@@ -303,9 +344,9 @@ root/
    python start.py
    ```
    之后会在预设的端口中打开机器人控制台网页，使用浏览器进入网页以再次检查配置是否正确
-5. **启动相应的Bot平台**
-
+5. **启动相应的Bot平台**  
    全部检查好之后，在网页中启动你需要Bot运行在的平台
+
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
@@ -356,11 +397,58 @@ root/
 - 欢迎任何人为此仓库贡献，你可以通过Pull requestse和Issues提出你认为可以改进 此项目的想法和建议
 - 对于本地化贡献，我会使用Weblate搭建网页版贡献工具，现在可以临时使用Issues或Pull requests
 
+### 贡献者
+
+<a href="https://github.com/aosumi-rena" target="_blank">
+  <img
+    src="https://github.com/aosumi-rena.png"
+    alt="头像-青澄玲奈"
+    width="50"
+    height="50"
+    style="border-radius:50%; vertical-align:middle;"
+  />
+</a>
+<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
+  项目指导 | 游戏逻辑代码 | 本地控制面板HTML
+</span>
+
+<br/>
+
+<a href="https://github.com/Columbina-Dev" target="_blank">
+  <img
+    src="https://github.com/Columbina-Dev.png"
+    alt="头像-Columbina"
+    width="50"
+    height="50"
+    style="border-radius:50%; vertical-align:middle;"
+  />
+</a>
+<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
+  游戏逻辑设计 | Discord适配 | 数据库读写逻辑 | 本地化逻辑
+</span>
+
+<br/>
+
+<a href="https://github.com/ThirtySeven377" target="_blank">
+  <img
+    src="https://github.com/ThirtySeven377.png"
+    alt="头像-ThirtySeven377"
+    width="50"
+    height="50"
+    style="border-radius:50%; vertical-align:middle;"
+  />
+</a>
+<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
+  Telegram适配 | 文本化
+</span>
+
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 
 ---
 
 ## 许可
+
+[![License](https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/GPLv3_Logo.svg/330px-GPLv3_Logo.svg.png)](https://www.gnu.org/licenses/gpl-3.0)
 
 XiuXianBot ©2024-2025 By 青澄玲奈
 

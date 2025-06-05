@@ -12,6 +12,8 @@
 # XiuXianGame Bot
 A text-based game Bot which supports both Telegram and Discord (Matrix and more in future) at the same time, by running in a universal core logic with adapters to other platforms, all sharing the same game engine and database.
 
+![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
+
 **README Variations**
 
 [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md)
@@ -38,6 +40,10 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+          <ul>
+            <li><a href="#docker">Docker Installation</a></li>
+            <li><a href="#build">Self Build</a></li>
+          </ul>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -47,6 +53,9 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
         <li><a href="#game-functions">Game Functions</a></li>
       </ul>
     <li><a href="#contributing">Contributing</a></li>
+      <ul>
+        <li><a href="#contributors">Contributors List</a></li>
+      </ul>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -226,13 +235,43 @@ Each adapter translates platform‑specific events into calls into the core:
 
 ### Prerequisites
 
-- Python 3.10+  
+*Docker Deployment*:
+- Docker (duh)  
+  
+*Self Build*:
+- Python 3.12+  
 - MongoDB  
-- (Optional) Docker for containerized deployment
 
-### Installation
+### Installation  
+#### Docker  
+&&& This Section Is Incomplete &&&  
+**Official Releases (`OSRELDocker1.0.0_*` and above) {Under Development}**
+1. **Clone the repo**  
+   ```sh
+   git clone https://github.com/aosumi-rena/XiuXianBot.git
+   cd XiuXianBot
+   ```
+2. **Configure**
+   - Edit `docker-compose.yml`: Add your Discord & Telegram tokens to the environments, and edit other environments variables if needed.
+   
+   **[docker-compose.yml](https://github.com/aosumi-rena/XiuXianBot/blob/main/docker-compose.yml) sample**:
+   ```
+   ？？？
+   ```
+3. **Docker compose**
+   ```
+   docker-compose up -d
+   ```
+4. **Start the local admin dashboard webpage**  
+   Once composed, the required containers should start automatically.
 
-**[Internal-3 (i3) {Prebuild}](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
+   This will start the local web admin panel in your preset port, open the webpage in browser for final check and configurations
+5. **Start the bot on respective servers/platforms**  
+   Once everything is configured correctly and checked, start the servers (platforms) you need in the admin panel webpage
+<p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
+
+#### Build  
+**Pre-release: [Internal-3 (i3)](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
 1. **Download Prebuild**
     - [Download from releases](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)
     - [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
@@ -252,7 +291,7 @@ Each adapter translates platform‑specific events into calls into the core:
 
 ===================================
 
-**Internal-4 (i4) And Above {Under Development}**
+**Pre-release: Internal-4 (i4) {Under Development}**
 1. **Clone the repo**  
    ```sh
    git clone https://github.com/aosumi-rena/XiuXianBot.git
@@ -263,7 +302,7 @@ Each adapter translates platform‑specific events into calls into the core:
    pip install -r requirements.txt
    ```
 3. **Configure**
-   - Edit `config.json` with your MongoDB URI, Discord & Telegram tokens, and etc. to run
+   - Edit `config.json` with your MongoDB URI, Discord & Telegram tokens, and etc.
    
    **[config.json](https://github.com/aosumi-rena/XiuXianBot/blob/main/config_example_EN.json.txt) sample**:
    ```
@@ -294,14 +333,14 @@ Each adapter translates platform‑specific events into calls into the core:
      }
    }
    ```
-4. **Start the local admin dashboard webpage**
+4. **Start the local admin dashboard webpage**  
    ```sh
    python start.py
    ```
    This will start the local web admin panel in your preset port, open the webpage in browser for final check and configurations
-5. **Start the bot on respective servers/platforms**
-
+5. **Start the bot on respective servers/platforms**  
    Once everything is configured correctly and checked, start the servers (platforms) you need in the admin panel webpage
+
 <p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
@@ -350,11 +389,57 @@ Select the servers/platforms you need the bot to run on, and the it will then
 - All contributions are welcomed, you may make pull requests or post any issues if you would like to contribute
 - For localisation, a Weblate site will be hosted for public contributions
 
+### Contributors
+<a href="https://github.com/aosumi-rena" target="_blank">
+  <img
+    src="https://github.com/aosumi-rena.png"
+    alt="Aosumi Rena’s GitHub avatar"
+    width="50"
+    height="50"
+    style="border-radius:50%; vertical-align:middle;"
+  />
+</a>
+<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
+  Project Leader | Game Logic Codes | Local Admin Dash HTML
+</span>
+
+<br/>
+
+<a href="https://github.com/Columbina-Dev" target="_blank">
+  <img
+    src="https://github.com/Columbina-Dev.png"
+    alt="Columbina’s GitHub avatar"
+    width="50"
+    height="50"
+    style="border-radius:50%; vertical-align:middle;"
+  />
+</a>
+<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
+  Game Mechanism Designer | Discord Adapter | Database w/r Logics| Localisations
+</span>
+
+<br/>
+
+<a href="https://github.com/ThirtySeven377" target="_blank">
+  <img
+    src="https://github.com/ThirtySeven377.png"
+    alt="ThirtySeven377’s GitHub avatar"
+    width="50"
+    height="50"
+    style="border-radius:50%; vertical-align:middle;"
+  />
+</a>
+<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
+  Telegram Adapter | Documentations
+</span>
+
 <p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 
 ---
 
 ## License
+
+[![License](https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/GPLv3_Logo.svg/330px-GPLv3_Logo.svg.png)](https://www.gnu.org/licenses/gpl-3.0)
 
 XiuXianBot ©2024-2025 By Aosumi Rena
 

@@ -390,48 +390,59 @@ Select the servers/platforms you need the bot to run on, and the it will then
 - For localisation, a Weblate site will be hosted for public contributions
 
 ### Contributors
-<a href="https://github.com/aosumi-rena" target="_blank">
-  <img
-    src="https://github.com/aosumi-rena.png"
-    alt="Aosumi Rena’s GitHub avatar"
-    width="50"
-    height="50"
-    style="border-radius:50%; vertical-align:middle;"
-  />
-</a>
-<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
-  Project Leader | Game Logic Codes | Local Admin Dash HTML
-</span>
 
-<br/>
+<table cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="middle">
+      <a href="https://github.com/aosumi-rena" target="_blank">
+        <img
+          src="https://github.com/aosumi-rena.png"
+          alt="Aosumi Rena’s GitHub avatar"
+          width="50"
+          height="50"
+          style="border-radius:50%;"
+        />
+      </a>
+    </td>
+    <td valign="middle" style="padding-left:0.5em;">
+      <h4 style="margin:0;">Project Leader | Game Logic Codes | Local Admin Dash HTML</h4>
+    </td>
+  </tr>
 
-<a href="https://github.com/Columbina-Dev" target="_blank">
-  <img
-    src="https://github.com/Columbina-Dev.png"
-    alt="Columbina’s GitHub avatar"
-    width="50"
-    height="50"
-    style="border-radius:50%; vertical-align:middle;"
-  />
-</a>
-<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
-  Game Mechanism Designer | Discord Adapter | Database w/r Logics| Localisations
-</span>
+  <tr>
+    <td valign="middle" style="padding-top:0.75em;">
+      <a href="https://github.com/Columbina-Dev" target="_blank">
+        <img
+          src="https://github.com/Columbina-Dev.png"
+          alt="Columbina’s GitHub avatar"
+          width="50"
+          height="50"
+          style="border-radius:50%;"
+        />
+      </a>
+    </td>
+    <td valign="middle" style="padding-left:0.5em; padding-top:0.75em;">
+      <h4 style="margin:0;">Game Mechanism Designer | Discord Adapter | Database w/r Logics | Localisations</h4>
+    </td>
+  </tr>
 
-<br/>
-
-<a href="https://github.com/ThirtySeven377" target="_blank">
-  <img
-    src="https://github.com/ThirtySeven377.png"
-    alt="ThirtySeven377’s GitHub avatar"
-    width="50"
-    height="50"
-    style="border-radius:50%; vertical-align:middle;"
-  />
-</a>
-<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
-  Telegram Adapter | Documentations
-</span>
+  <tr>
+    <td valign="middle" style="padding-top:0.75em;">
+      <a href="https://github.com/ThirtySeven377" target="_blank">
+        <img
+          src="https://github.com/ThirtySeven377.png"
+          alt="ThirtySeven377’s GitHub avatar"
+          width="50"
+          height="50"
+          style="border-radius:50%;"
+        />
+      </a>
+    </td>
+    <td valign="middle" style="padding-left:0.5em; padding-top:0.75em;">
+      <h4 style="margin:0;">Telegram Adapter | Documentations</h4>
+    </td>
+  </tr>
+</table>
 
 <p align="right">(<a href="#readme-top">back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md">简中</a>)</p>
 

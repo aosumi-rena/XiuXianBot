@@ -399,48 +399,58 @@ root/
 
 ### 贡献者
 
-<a href="https://github.com/aosumi-rena" target="_blank">
-  <img
-    src="https://github.com/aosumi-rena.png"
-    alt="头像-青澄玲奈"
-    width="50"
-    height="50"
-    style="border-radius:50%; vertical-align:middle;"
-  />
-</a>
-<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
-  项目指导 | 游戏逻辑代码 | 本地控制面板HTML
-</span>
+<table cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="middle">
+      <a href="https://github.com/aosumi-rena" target="_blank">
+        <img
+          src="https://github.com/aosumi-rena.png"
+          alt="头像-青澄玲奈"
+          width="50"
+          height="50"
+          style="border-radius:50%;"
+        />
+      </a>
+    </td>
+    <td valign="middle" style="padding-left:0.5em;">
+      <b style="margin:0;">项目指导 | 游戏逻辑代码 | 本地控制面板HTML</b>
+    </td>
+  </tr>
 
-<br/>
-
-<a href="https://github.com/Columbina-Dev" target="_blank">
-  <img
-    src="https://github.com/Columbina-Dev.png"
-    alt="头像-Columbina"
-    width="50"
-    height="50"
-    style="border-radius:50%; vertical-align:middle;"
-  />
-</a>
-<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
-  游戏逻辑设计 | Discord适配 | 数据库读写逻辑 | 本地化逻辑
-</span>
-
-<br/>
-
-<a href="https://github.com/ThirtySeven377" target="_blank">
-  <img
-    src="https://github.com/ThirtySeven377.png"
-    alt="头像-ThirtySeven377"
-    width="50"
-    height="50"
-    style="border-radius:50%; vertical-align:middle;"
-  />
-</a>
-<span style="vertical-align:middle; font-size:18px; margin-left:0.5em;">
-  Telegram适配 | 文本化
-</span>
+  <tr>
+    <td valign="middle" style="padding-top:0.75em;">
+      <a href="https://github.com/Columbina-Dev" target="_blank">
+        <img
+          src="https://github.com/Columbina-Dev.png"
+          alt="头像-Columbina"
+          width="50"
+          height="50"
+          style="border-radius:50%;"
+        />
+      </a>
+    </td>
+    <td valign="middle" style="padding-left:0.5em; padding-top:0.75em;">
+      <b style="margin:0;">游戏逻辑设计 | Discord适配 | 数据库读写逻辑 | 本地化逻辑</b>
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="middle" style="padding-top:0.75em;">
+      <a href="https://github.com/ThirtySeven377" target="_blank">
+        <img
+          src="https://github.com/ThirtySeven377.png"
+          alt="头像-ThirtySeven377"
+          width="50"
+          height="50"
+          style="border-radius:50%;"
+        />
+      </a>
+    </td>
+    <td valign="middle" style="padding-left:0.5em; padding-top:0.75em;">
+      <b style="margin:0;">Telegram适配 | 文本化</b>
+    </td>
+  </tr>
+</table>
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md">English</a>)</p>
 

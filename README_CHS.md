@@ -269,11 +269,11 @@ root/
    ```sh
    docker-compose up -d
    ```
-4. **启动本地管理面板网页**
-   执行完 `docker-compose up` 后，相关容器会自动启动。
+4. **启动本地管理面板网页**  
+   执行完 `docker-compose up` 后，相关容器会自动启动。  
    打开浏览器访问 `http://localhost:11451`（或配置中指定的端口），检查和最终确认设置。
-5. **启动机器人各平台适配器**
-   在本地管理面板中，启用所需平台适配器（Discord、Telegram 等），对应容器将被启动。
+5. **启动机器人各平台适配器**  
+   在本地管理面板中，启用所需平台适配器（Discord、Telegram 等），对应容器将被启动。  
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#docker">English</a>)</p>
 

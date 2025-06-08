@@ -266,10 +266,11 @@ Each adapter translates platform-specific events into calls into the core and fo
    ```sh
    docker-compose up -d
    ```
-4. **Start the local admin dashboard webpage**
+4. **Start the local admin dashboard webpage**  
    Once compose is up, the required containers start automatically.
+   
    Then open your browser to the configured port (e.g. `http://localhost:11451`) to check/finalize settings.
-5. **Start the bot on respective servers/platforms**
+5. **Start the bot on respective servers/platforms**  
    From the local admin panel, enable whichever platform adapters you need (Discord, Telegram, etc.), and the containers covering those adapters will launch.
 
 <p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#docker">简中</a>)</p>

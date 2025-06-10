@@ -279,8 +279,7 @@ Each adapter translates platform-specific events into calls into the core and fo
    docker-compose up -d
    ```
 4. **Start the local admin dashboard webpage**  
-   Once compose is up, the required containers start automatically.
-   
+   Once compose is up, the required containers start automatically.  
    Then open your browser to the configured port (e.g. `http://localhost:11451`) to check/finalize settings.
 5. **Start the bot on respective servers/platforms**  
    From the local admin panel, enable whichever platform adapters you need (Discord, Telegram, etc.), and the containers covering those adapters will launch.
@@ -288,17 +287,45 @@ Each adapter translates platform-specific events into calls into the core and fo
 <p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#docker">简中</a>)</p>
 
 #### Self Build
+**Pre-release: [OSBLTSDocker0.1.52](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)**
+
+1. **Download Prebuild**  
+
+   * [Download from releases](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)
+   * [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
+2. **Unzip and Configure**
+
+   * Unzip the prebuild into any directory ([7-Zip](https://www.7-zip.org/) recommended).
+   * Configure variables (Bot Token, etc.) in the config.json
+3. **Install dependencies**
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. **Run**
+
+   ```sh
+   python start.py
+   ```
+   
+5. **Start the local admin dashboard webpage**  
+   Once the running, it opens the port  `11451` as local admin dashboard.  
+   Open your browser to the configured port (e.g. `http://localhost:11451`) to check/finalize settings.  
+7. **Start the bot on respective servers/platforms**  
+   From the local admin panel, enable whichever platform adapters you need (Discord, Telegram, etc.), and the containers covering those adapters will launch.  
+   
+---
 
 **Pre-release: [Internal-3 (i3)](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
 
-1. **Download Prebuild**
+1. **Download Prebuild**  
 
    * [Download from releases](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)
    * [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
 2. **Unzip and Configure**
 
-   * Unzip the prebuild into any directory (7-Zip recommended).
-   * Configure variables (Bot Token, `admin_ids`, etc.) per the instructions in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/0-Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt).
+   * Unzip the prebuild into any directory ([7-Zip](https://www.7-zip.org/) recommended).
+   * Configure variables (Bot Token, `admin_ids`, etc.) refering to the instructions in [README.txt](https://github.com/aosumi-rena/XiuXianBot/blob/main/0-Releases/LTS/OSBLTSDiscord_pre-3.0.2/README.txt).
 3. **Install dependencies**
 
    ```sh

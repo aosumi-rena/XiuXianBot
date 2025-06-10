@@ -212,7 +212,7 @@ class CultivateCommand(commands.Cog):
 class XiuXianBot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="^", intents=intents, help_command=None)
-        self.version = "OSRELDocker0.1.50-dev (Discord Adapter 0.1.0)"
+        self.version = "OSRELDocker0.1.51-beta (Discord Adapter 0.1.0)"
 
     async def setup_hook(self):
         await self.add_cog(RegisterCommand(self))

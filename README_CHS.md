@@ -289,6 +289,35 @@ root/
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#docker">English</a>)</p>
 
 #### 自建
+**Pre-release: [OSBLTSDocker0.1.52](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)**
+&&& 待翻译，不行了得睡了困死了 &&&
+1. **Download Prebuild**  
+
+   * [Download from releases](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)
+   * [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
+2. **Unzip and Configure**
+
+   * Unzip the prebuild into any directory ([7-Zip](https://www.7-zip.org/) recommended).
+   * Configure variables (Bot Token, etc.) in the config.json
+3. **Install dependencies**
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. **Run**
+
+   ```sh
+   python start.py
+   ```
+   
+5. **Start the local admin dashboard webpage**  
+   Once the running, it opens the port  `11451` as local admin dashboard.  
+   Open your browser to the configured port (e.g. `http://localhost:11451`) to check/finalize settings.  
+6. **Start the bot on respective servers/platforms**  
+   From the local admin panel, enable whichever platform adapters you need (Discord, Telegram, etc.), and the containers covering those adapters will launch.
+
+---
+
 
 **Pre-release: [Internal-3 (i3)](https://github.com/aosumi-rena/XiuXianBot/releases/tag/vPre-i3.0.2-LTS)**
 

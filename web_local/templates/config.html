@@ -15,7 +15,7 @@
 <script>
   const container = document.getElementById('jsoneditor');
   const initialConfig = JSON.parse(container.getAttribute('data-config'));
-  window.editor = new JSONEditor(container, { mode: 'tree', onError: err => alert(err) });
+  window.editor = new JSONEditor(container, { mode: 'tree', onError: err => showPopup(err) });
   editor.set(initialConfig);
 </script>
 {% endblock %}

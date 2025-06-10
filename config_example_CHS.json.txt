@@ -21,6 +21,10 @@
   "db": {                                                   # 数据库配置
     "mongo_uri": "mongodb://localhost:27017",               # 你的MongoDB的URI，一般情况下为`mongodb://localhost:27017`
     "mongo_db_name": "XiuXianBotV4",                        # Bot储存数据时使用的数据库的名字
+    "sqlite_path": "data/xiu_xian.db",                      # SQLite 数据库文件路径
     "universal_uid_start": 1000000                          # 设置通用uid起始数，设定为"1000000"即表示第一个用户的uid为"1000001"
+  },
+  "core_server": {
+    "port": 11450                                           # 核心服务器端口
   }
 }

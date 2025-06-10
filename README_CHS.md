@@ -12,7 +12,7 @@
 
 # 修仙机器人
 
-一个文字游戏机器人，通过使用通用的核心逻辑及“适配器”，并共享同一套游戏引擎和数据库，同时在 Telegram 和 Discord 运行
+一个文字游戏机器人，通过使用通用的核心逻辑及“适配器”，并共享同一套游戏引擎和数据库，同时在 Telegram 和 Discord 运行  
 
 ![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
 
@@ -82,7 +82,14 @@
 - **核心库**：实现所有游戏逻辑、数据库模型和本地化  
 - 多个**适配器**：支持不同聊天平台（Discord、Telegram、Matrix 等）  
 - **Web 界面**：用于管理员控制与公开账号管理  
-- 单**启动脚本** (`start.py`)：加载配置并启动对应的适配器  
+- 单**启动脚本** (`start.py`)：加载配置并启动对应的适配器
+
+### 最新更新（由 AI 编写，待人工检查）
+
+- 管理面板改为全模态弹窗操作。
+- 数据库表格新增复制 ID、封禁和停用按钮。
+- Telegram 适配器现能正确渲染 Markdown。
+- 底层数据库已迁移至 SQLite，无需 MongoDB。
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#about-the-project">English</a>)</p>
 
@@ -111,7 +118,7 @@ root/
 │   ├── game/       # 从 i3 版本迁移后的游戏核心逻辑，现与命令完全分离
 │   ├── utils/      # 辅助执行特定命令的工具逻辑
 │   └── …           # 未来功能的扩展文件夹
-├── web\_local/      # 本地管理控制台 GUI（配置管理、服务器控制等）
+├── web_local/      # 本地管理控制台 GUI（配置管理、服务器控制等）
 │   ├── app.py      # 在预设端口启动管理员控制台
 │   ├── templates/
 │   │   ├── base.html   # 公共布局（nav-tabs、footer）
@@ -129,7 +136,7 @@ root/
 │       └── js/
 │           ├── config.js# 配置页面逻辑
 │           └── …        # 其他页面逻辑
-├── web\_public/     # 公开网页 GUI（账号关联、注册等）
+├── web_public/     # 公开网页 GUI（账号关联、注册等）
 ├── backups/        # 用户与物品备份
 ├── config.json     # Token、适配器开关、数据库配置等
 └── start.py        # 一键启动脚本
@@ -162,7 +169,7 @@ root/
     - [ ] 繁体中文（部分完成）  
     - [ ] 其他  
 - **database/**  
-  - **connection.py**：MongoDB 连接、`user_id` 自动生成、备份逻辑。
+  - **connection.py**：SQLite 连接工厂，自动创建表结构的相关辅助函数。
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#core-modules">English</a>)</p>
 
@@ -176,6 +183,7 @@ root/
 - **Telegram**  
   - 支持斜杠命令 & Inline Keyboard  
   - 不支持时回退为纯文本输出  
+  - 现已正确渲染 Markdown 信息
 - **Matrix**  
   - 使用 Matrix SDK（例如 `matrix-nio`）进行原型开发  
   - 纯文本与回复按钮  
@@ -185,6 +193,7 @@ root/
 ### 网页界面
 - **本地网页管理面板** (`web_local/`)  
   基于 Flask 的本地网页版管理面板，默认运行在 `http://localhost:11451`，提供单页标签式界面：  
+  - 管理面板的所有界面均改为模态弹窗操作。
   1. **配置管理** (`localhost:11451/config`)  
      - 将 `config.json` 以 GUI 形式加载，所有键值以可编辑字段显示。  
      - “保存”按钮通过 Fetch POST 接口提交更新后的 JSON，写回磁盘并提示保存成功，同时提醒是否需要重启 `start.py`，无需刷新页面。  
@@ -202,6 +211,7 @@ root/
   5. **数据库浏览** (`localhost:11451/database`)  
      - 按条件查询 `users` 集合（自动关联 `items` 集合中的玩家物品信息）。  
      - 以分页表格显示结果，并支持导出。  
+     - 每行均提供复制 ID、封禁和停用按钮。
   6. **账号管理** (`localhost:11451/accounts`)  
      - 浏览与搜索玩家信息。  
      - 封禁/解封、停用/重新激活，或手动关联第三方账号 ID。  
@@ -227,11 +237,12 @@ root/
 ### 环境准备
 
 **Docker 部署**：  
-- Docker（必备）
+- Docker（废话）
 
 **自建**：  
 - Python 3.12+  
-- MongoDB
+- SQLite（内置，无需额外安装）
+- MongoDB （仅`i3`版本需要）
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#getting-started">English</a>)</p>
 
@@ -309,6 +320,7 @@ root/
 运行后，机器人将：
 
 * 在 `http://localhost:11451`（默认端口，可在 `config.json` 中修改）打开本地管理面板网页。
+* 核心服务器默认监听 `http://localhost:11450`。
 * 在该面板里启用所需平台后，机器人会：
 
   * 连接 Discord 并响应 `^start`、`^cul`、`^hunt`、`^asc`、`^ele`、`/shop` 等命令。
@@ -325,8 +337,9 @@ root/
 
 * [x] 将核心逻辑拆分至 **core/**
 * [ ] 在 **core/commands/** 制作命令监听/响应逻辑
-* [ ] 完善 **Discord** 适配器
-* [ ] 添加 **Telegram** 适配器
+* [ ] 改为使用`C#`制作核心服务器
+* [X] 完善 **Discord** 适配器
+* [X] 添加 **Telegram** 适配器
 * [ ] 试作 **Matrix** 适配器
 * [x] 构建 **web\_local** 管理面板 GUI
 * [ ] 构建 **web\_public** 公开网页

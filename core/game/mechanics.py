@@ -1,17 +1,13 @@
-"""
-Core game mechanics for XiuXianBot.
-
-This module contains the essential game calculations and mechanics,
-including the element system, cultivation mechanics, and other core
-game functions that are shared across different platforms.
-
-!VERY BUGGY FOR NOW!
-"""
-
 import random
 import datetime
 from typing import Dict, Any, Tuple, Optional, List, Union
 import cnlunar
+
+def initialize_game_mechanics():
+    print("Game mechanics initialized successfully")
+    print(f"Elements system loaded: {ELEMENTS}")
+    print(f"Daily element: {get_daily_element()}")
+    return True
 
 ELEMENTS = ["木", "土", "水", "火", "金"]
 
@@ -84,36 +80,33 @@ def get_daily_element() -> str:
     
     return "未知"
 
-def calculate_cultivation_gain(user_element: Optional[str] = None) -> Tuple[int, int, int]:
+DECAY_RATE = 4.0  # hours until gain halves, this will be moved to game constants config in future
 
-    base_culti_gain = random.randint(150, 250)
-    
+def calculate_cultivation_gain(user_element: Optional[str] = None) -> int:
+    base_gain = random.randint(150, 250)
     daily_element = get_daily_element()
-    
     if user_element is None:
         multiplier = 1.0
     else:
         multiplier = get_element_multipliers(user_element, daily_element)["cul"]
-    
-    actual_culti_gain = int(base_culti_gain * multiplier)
-    
-    cultivation_duration = 7200
-    
-    return base_culti_gain, actual_culti_gain, cultivation_duration
+    return int(base_gain * multiplier)
 
 def start_cultivation(user_id: str, user_element: Optional[str] = None) -> Dict[str, Any]:
-    _, actual_culti_gain, duration = calculate_cultivation_gain(user_element)
-    
+    gain_per_hour = calculate_cultivation_gain(user_element)
     start_time = datetime.datetime.now()
-    end_time = start_time + datetime.timedelta(seconds=duration)
-    
     return {
         "user_id": user_id,
         "start_time": int(start_time.timestamp()),
-        "end_time": int(end_time.timestamp()),
         "type": "cultivation",
-        "culti_gain": actual_culti_gain
+        "base_gain": gain_per_hour,
     }
+
+def calculate_cultivation_progress(timing: Dict[str, Any]) -> int:
+    start = datetime.datetime.fromtimestamp(timing["start_time"])
+    elapsed_hours = (datetime.datetime.now() - start).total_seconds() / 3600.0
+    gain_per_hour = timing.get("base_gain", 0)
+    total_gain = gain_per_hour * elapsed_hours * (0.5 ** (elapsed_hours / DECAY_RATE))
+    return int(total_gain)
 
 def calculate_hunt_rewards(user_data: Dict[str, Any], stage_max_value: int) -> Dict[str, int]:
     stage = user_data.get('rank', 0)

@@ -1,23 +1,22 @@
 import logging
 from datetime import datetime
-from core.database.connection import get_collection, DatabaseError
-from core.utils.localisation import load_localisation
+from core.database.connection import fetch_one, DatabaseError
+from core.utils.localisation import load_localisation, get_response
 
 logger = logging.getLogger(__name__)
 
 def get_user_status(user_id, lang="CHS"):
     try:
-        user_collection = get_collection('users')
-        user = user_collection.find_one({"user_id": user_id})
+        user = fetch_one("SELECT * FROM users WHERE user_id = ?", (user_id,))
         
         if not user:
             return None
         
         localisation = load_localisation(lang)
-        
+
         rank = user.get('rank', 1)
-        stage_description = localisation['xx_stage_descriptions'].get(str(rank), "未知境界")
-        max_exp = localisation['xx_stage_max'].get(str(rank), 1000)
+        stage_description = localisation.get('xx_stage_descriptions', {}).get(str(rank), "未知境界")
+        max_exp = localisation.get('xx_stage_max', {}).get(str(rank), 1000)
         
         element = user.get("element")
         if element is None:
@@ -53,46 +52,43 @@ def get_user_status(user_id, lang="CHS"):
         logger.error(f"Error getting user status for {user_id}: {e}")
         return None
 
-def format_status_text(status_info, lang="CHS"):
+def format_status_text(status_info, lang="CHS", platform=None):
     if not status_info:
         return "用户信息未找到 | User information not found"
-    
+
     progress = status_info['progress_percentage']
     progress_bar_length = 10
     filled_length = int(progress_bar_length * progress / 100)
     progress_bar = '█' * filled_length + '░' * (progress_bar_length - filled_length)
-    
-    if lang.upper() == "CHS":
-        return (
-            f"👤 **{status_info['in_game_username']}**\n"
-            f"🆔 UID: `{status_info['user_id']}`\n"
-            f"⭐ 境界: {status_info['stage_description']} (第{status_info['rank']}重)\n"
-            f"💫 修为: {status_info['exp']:,}/{status_info['max_exp']:,}\n"
-            f"📊 进度: {progress_bar} {progress:.1f}%\n"
-            f"🔥 元素: {status_info['element']}\n"
-            f"💰 铜币: {status_info['copper']:,}\n"
-            f"💎 元宝: {status_info['gold']:,}\n"
-            f"📅 每日次数: {status_info['dy_times']}/3\n"
-            f"🧘 状态: {'修炼中' if status_info['state'] else '空闲'}"
-        )
-    else:
-        return (
-            f"👤 **{status_info['in_game_username']}**\n"
-            f"🆔 UID: `{status_info['user_id']}`\n"
-            f"⭐ Stage: {status_info['stage_description']} (Level {status_info['rank']})\n"
-            f"💫 Cultivation: {status_info['exp']:,}/{status_info['max_exp']:,}\n"
-            f"📊 Progress: {progress_bar} {progress:.1f}%\n"
-            f"🔥 Element: {status_info['element']}\n"
-            f"💰 Copper: {status_info['copper']:,}\n"
-            f"💎 Gold: {status_info['gold']:,}\n"
-            f"📅 Daily Times: {status_info['dy_times']}/3\n"
-            f"🧘 State: {'Cultivating' if status_info['state'] else 'Idle'}"
-        )
+    # Progress bar will be changed to discord emoji in future
+
+    state_text = "修炼中" if status_info.get("state") else "空闲"
+    if lang.upper() != "CHS":
+        state_text = "Cultivating" if status_info.get("state") else "Idle"
+
+    _, text = get_response(
+        "user_status",
+        lang=lang,
+        platform=platform,
+        in_game_username=status_info.get("in_game_username"),
+        user_id=status_info.get("user_id"),
+        stage_description=status_info.get("stage_description"),
+        rank=status_info.get("rank"),
+        exp=status_info.get("exp"),
+        max_exp=status_info.get("max_exp"),
+        element=status_info.get("element"),
+        copper=status_info.get("copper"),
+        gold=status_info.get("gold"),
+        dy_times=status_info.get("dy_times"),
+        state_text=state_text,
+        progress_bar=progress_bar,
+        progress=progress,
+    )
+    return text
 
 def check_user_exists(user_id):
     try:
-        user_collection = get_collection('users')
-        user = user_collection.find_one({"user_id": user_id})
+        user = fetch_one("SELECT 1 FROM users WHERE user_id = ?", (user_id,))
         return user is not None
     except Exception as e:
         logger.error(f"Error checking user existence for {user_id}: {e}")

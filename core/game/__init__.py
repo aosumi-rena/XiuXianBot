@@ -1,10 +1,3 @@
-"""
-Game mechanics package for XiuXianBot.
-
-This package contains the core game mechanics and calculations
-that are shared across different platform adapters.
-"""
-
 from core.game.mechanics import (
     calculate_cultivation_gain,
     start_cultivation,

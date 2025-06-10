@@ -3,64 +3,43 @@
         "version_info": {
             "description": "version",
             "type": "plain",
-            "text": "```{version} (Official Release)```",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "test_rewards": {
-            "description": "test",
-            "type": "embed",
-            "text": "\\此\\信\\息\\为\\测\\试\\版\\特\\有\\，\\正\\式\\版\\将\\不\\再\\提\\供\\！",
-            "text_TG": "\\此\\信\\息\\为\\测\\试\\版\\特\\有\\，\\正\\式\\版\\将\\不\\再\\提\\供\\！",
-            "text_Matrix": ""
-        },
-        "welcome_message": {
-            "description": "welcome",
-            "type": "plain",
-            "text": "欢迎 {user} 加入，您的账号已创建，请开始您的修仙之旅！",
-            "text_TG": "欢迎 {user} 加入，您的账号已创建，请开始您的修仙之旅！",
+            "text": "```{version} (官方版)```",
+            "text_TG": "```{version} (官方版)```",
             "text_Matrix": ""
         },
         "user_status": {
             "description": "User status details",
             "type": "embed",
-            "text": "👤 **{status_info['in_game_username']}**\n🆔 UID: `{status_info['user_id']}`\n⭐ 境界: {status_info['stage_description']} (第{status_info['rank']}重)\n💫 修为: {status_info['exp']:,}/{status_info['max_exp']:,}\n📊 进度: {progress_bar} {progress:.1f}%\n🔥 五行: {status_info['element']}\n💰 铜币: {status_info['copper']:,}\n💎 元宝: {status_info['gold']:,}\n📅 打野次数: {status_info['dy_times']}/3\n🧘 状态: {'修炼中' if status_info['state'] else '空闲'}",
-            "text_TG": "👤 **{status_info['in_game_username']}**\n🆔 UID: `{status_info['user_id']}`\n⭐ 境界: {status_info['stage_description']} (第{status_info['rank']}重)\n💫 修为: {status_info['exp']:,}/{status_info['max_exp']:,}\n📊 进度: {progress_bar} {progress:.1f}%\n🔥 五行: {status_info['element']}\n💰 铜币: {status_info['copper']:,}\n💎 元宝: {status_info['gold']:,}\n📅 打野次数: {status_info['dy_times']}/3\n🧘 状态: {'修炼中' if status_info['state'] else '空闲'}",
+            "text": "## 👤 {in_game_username}\n🆔 UID: `{user_id}`\n⭐ 境界: {stage_description} (第{rank}重)\n💫 修为: {exp:,}/{max_exp:,}\n📊 进度: {progress_bar} {progress:.1f}%\n🔥 五行: {element}\n💰 铜币: {copper:,}\n💎 元宝: {gold:,}\n📅 打野次数: {dy_times}/3\n🧘 状态: {state_text}",
+            "text_TG": "👤 *{in_game_username}*\n🆔 UID: `{user_id}`\n⭐ 境界: {stage_description} (第{rank}重)\n💫 修为: {exp:,}/{max_exp:,}\n📊 进度: {progress_bar} {progress:.1f}%\n🔥 五行: {element}\n💰 铜币: {copper:,}\n💎 元宝: {gold:,}\n📅 打野次数: {dy_times}/3\n🧘 状态: {state_text}",
             "text_Matrix": ""
         },
         "no_account": {
             "description": "Account not created",
             "type": "plain",
-            "text": "{user} 您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
-            "text_TG": "❌ **未找到账号 | No Account Found**\n\n{user} 您还没有创建账号，请使用 `/register` 指令创建账号！\n{user} You have not created an account yet, please use `/register` to create one!",
+            "text": "## ❌未找到账号\n{user}，您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
+            "text_TG": "❌**未找到账号**\n\n{user}，您还没有创建账号，请使用 `/register` 指令创建账号！\n{user} You have not created an account yet, Please use `/register` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
             "text_Matrix": ""
         },
         "cultivation_start": {
             "description": "cultivation_start",
             "type": "plain",
-            "text": "{user} 您已开始修炼，{end_time} 结束\n结束后将获得修为\\***{culti_gain}**",
-            "text_TG": "🧘 **开始修炼 | Cultivation Started**\n\n{user} 您已开始修炼，{end_time} 结束\n结束后将获得修为: **{culti_gain}**\n\n修炼期间部分指令将被锁定\nSome commands will be locked during cultivation",
+            "text": "## 🧘开始修炼\n{user} 您已开始修炼，稍后可使用`^cul end`结束修炼",
+            "text_TG": "🧘**开始修炼**\n\n{user}，您已开始修炼，稍后可使用`/cul end`结束修炼",
             "text_Matrix": ""
         },
         "cultivation_end": {
             "description": "Cultivation end reminder",
             "type": "plain",
-            "text": "修炼结束！您已获得修为：**{culti_gain}**。\n现可使用`^zt`查看您的状态。\n-# 如果获得的修为无法和修炼开始消息对上，则大概率代表出错，请立刻联系Bot管理员。",
-            "text_TG": "✅ **修炼结束 | Cultivation Complete**\n\n修炼结束！您已获得修为: **{culti_gain}**\nCultivation complete! You gained **{culti_gain}** cultivation\n\n使用 `/stat` 或 `状态` 查看您的状态\nUse `/stat` or `状态` to check your status",
-            "text_Matrix": ""
-        },
-        "wild_success": {
-            "description": "wild_success",
-            "type": "plain",
-            "text": "恭喜 {user} 打野成功，获得修为*{cultivation_gain}、铜钱*{copper_gain}、元宝*{yuanbao_gain}",
-            "text_TG": "🎉 **打野成功 | Hunt Success**\n\n恭喜 {user} 打野成功！\n\n**奖励 | Rewards:**\n• 修为: **{cultivation_gain}**\n• 铜钱: **{copper_gain}**\n• 元宝: **{yuanbao_gain}**",
+            "text": "## ✅修炼结束\n修炼结束！您已获得修为：**{culti_gain}**。\n使用`/stat`或`状态`查看您的状态。",
+            "text_TG": "✅**修炼结束**\n\n修炼结束！您已获得修为: **{culti_gain}**\n使用`/stat`或`状态`查看您的状态。",
             "text_Matrix": ""
         },
         "already_account": {
             "description": "already_account",
             "type": "plain",
-            "text": "{user} 您已创建过账号，请使用其他指令。\n-# 如果`^stat`或`/acc`提示没有创建账号，可能是数据库错误，请将此汇报给Bot管理员！",
-            "text_TG": "✅ **账号已存在 | Account Already Exists**\n\n{user} 您已创建过账号，请使用其他指令。\n{user} You already have an account, please use other commands.\n\n使用 `/stat` 查看状态 | Use `/stat` to check status",
+            "text": "✅ 账号已存在\n{user} 您已创建过账号，请使用其他指令。\n使用`^stat`查看状态\n -# 使用`^help`查看可用指令",
+            "text_TG": "✅ **账号已存在**\n\n{user} 您已创建过账号，请使用其他指令。\n使用`/stat`查看状态，或`/help`查看可用指令",
             "text_Matrix": ""
         },
         "train_in_progress": {
@@ -70,25 +49,11 @@
             "text_TG": "🧘 **修炼中 | Cultivating**\n\n{user} 您正在修炼中，无法使用此命令\n{user} You are currently cultivating, unable to use this command",
             "text_Matrix": ""
         },
-        "waiting_time": {
-            "description": "waiting_time",
-            "type": "plain",
-            "text": "{user} 您已经打野过了，请耐心等待60分钟！",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "intro_text": {
-            "description": "intro",
-            "type": "embed",
-            "text": "## 欢迎使用此Bot！\n介绍\n\n### Title 3\n「Introduction_CHS」",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
         "xx_commands": {
             "description": "Command list for help",
             "type": "embed",
             "text": "## 修仙指令列表（别名均为`^`开头，方便英文输入）：\n### 私聊/DM指令：\n- `开始` —— 创建账号。\n    别名：`^ks`、`^start`、`^begin`\n- `/acc` —— 查看账号细节，修改名称/语言及使用兑换码。\n### 游戏指令：\n- `介绍` —— 获取修仙相关介绍。\n    别名：`^js`、`^intro`、`^intro`\n- `修炼` —— 修炼两小时（期间不可使用其他部分指令）。\n    别名：`^xl`、`^sit`、`^cul`\n- `打野` —— 击杀野怪（可获得铜币、修为，极小概率获得元宝）。\n    别名：`^dy`、`^wild`\n- `突破` —— 当当前修为达到上限的100%或更多时，使用此指令提升阶段。\n    别名：`^tp`、`^ascend`、`^asc`\n- `状态` —— 查看当前修为、状态。\n    别名：`^zt`、`^stat`\n- `物品栏` —— 查看当前物品栏。\n    别名：`^wp`、`^inv`\n- `测试` —— 查看当前测试版本详情。\n    别名：`^cs`、`^beta`、`^test`\n- `商店` —— 购买物品。\n    别名：`^sd`、`^shop`\n- `元素` —— 查看或选择元素。\n    别名：`^ys`、`^wx`、`^ele`\n- `探索` —— (test)探索。\n    别名：`^ts`、`^exp`\n- `挑战` —— (test)进行特殊挑战，例如副本。\n    别名：`^tz`、`^challenge`\n### 其他指令：\n- `/help` —— 显示此消息\n    别名： `帮助`、`指令`、`命令`、`^help`、`^h`、`^bz`\n- `/luck` —— 查看今日运势（纯属娱乐，无任何实际意义）\n- `/lunar` —— 查看黄历（可指定日期），信则有不信则无，请勿过度依赖\n修仙版本：`{xx_version} (Internal)`",
-            "text_TG": "",
+            "text_TG": "待添加",
             "text_Matrix": ""
         },
         "account_creation_prompt": {
@@ -98,306 +63,60 @@
             "text_TG": "",
             "text_Matrix": ""
         },
-        "ascend_success": {
-            "description": "Successful Ascend",
-            "type": "plain",
-            "text": "恭喜 {user_ingame_name} 突破成功！您已进入{new_stage_description}。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ascend_fail": {
-            "description": "Failed Ascend",
-            "type": "plain",
-            "text": "很遗憾，{user_ingame_name} **渡劫失败**。修为减少50%。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "lightning_progress": {
-            "description": "Lightning Strike Progress",
-            "type": "plain",
-            "text": "第{lightningNum}道雷落下，{user_ingame_name} **{condition}**。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "condition_safe": {
-            "description": "Safe during lightning",
-            "type": "plain",
-            "text": "安然无恙",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "condition_failed": {
-            "description": "Failed during lightning",
-            "type": "plain",
-            "text": "晕厥了",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "insufficient_exp": {
-            "description": "Not enough EXP for asc",
-            "type": "plain",
-            "text": "您的修为未达到当前阶段的最大值，无法突破。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "sign_success": {
-            "description": "Daily sign-in success",
-            "type": "plain",
-            "text": "{user_ingame_name}，您已成功签到！获得 **1\\*元宝**、**500\\*铜币**。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "already_sign": {
-            "description": "Already signed in today",
-            "type": "plain",
-            "text": "{user_ingame_name}，您今日已签到过了！请明日04:00(服务器时间)再次使用此命令。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "hunt_success": {
-            "description": "Hunt success message",
-            "type": "embed",
-            "text": "**{user}打野成功！**\n\n奖励：\n- **修为**: {cultivation_gain}\n- **铜币**: {copper_gain}\n- **元宝**: {yuanbao_gain}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "hunt_cooldown": {
-            "description": "Hunt cooldown message",
-            "type": "plain",
-            "text": "{user}打野功能正在冷却中，{remaining_time}结束。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "currency_description": {
-            "description": "Inv Currency",
-            "type": "plain",
-            "text": "### 货币\n- 铜币：**{copper}**\n- 元宝：**{gold}**",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "items_description": {
-            "description": "Inv Item",
-            "type": "plain",
-            "text": "### 物品栏\n{items_section}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "no_items": {
-            "description": "No Item",
-            "type": "plain",
-            "text": "空空如也...",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "account_setting": {
-            "description": "Embed details of user's account settings",
-            "type": "embed",
-            "text": "**用户名**：{user}\n**UID**：`{uid}`\n**当前语言**：{acc_lang}\n**当前元素**：{element}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "privacy": {
-            "description": "response for dm commands used in public",
-            "type": "plain",
-            "text": "为了保护您的隐私，请在与Bot的私聊中使用此命令！",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_not_found": { 
-            "description": "1",
-            "type": "plain",
-            "text": "无效的兑换码" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_expired": { 
-            "description": "1",
-            "type": "plain",
-            "text": "该兑换码已过期或尚未开始" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_not_allowed": { 
-            "description": "1",
-            "type": "plain",
-            "text": "非法用户" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_no_user": { 
-            "description": "1",
-            "type": "plain",
-            "text": "无法在数据库定位到用户，可能是数据库问题，请稍后再试并将此问题报告给Bot管理员！\n`ERR:redeem_code_no_user`" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_already": { 
-            "description": "1",
-            "type": "plain",
-            "text": "您已经使用过此兑换码" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_success": { 
-            "description": "1",
-            "type": "plain",
-            "text": "兑换成功！获得**铜币**\\*{copper_gained}，**元宝**\\*{gold_gained}{items_section}" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_title": {
-            "type": "plain",
-            "text": "Shop"
-        },
-        "shop_view_description": {
-            "type": "plain",
-            "text": "欢迎光临商店，使用 `^shop buy <ID>` 购买物品。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_view_table_line": {
-            "type": "plain",
-            "text": "{shop_item_id}. {item_name}\\*{quantity} — {price} {currency}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_no_items": {
-            "type": "plain",
-            "text": "暂无商品。"
-        },
-        "shop_invalid_subcommand": {
-            "type": "plain",
-            "text": "未知副命令，使用 `^shop` 或 `^shop view` 显示商店页面，使用 `^shop buy <ID>` 购买物品。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_item_not_found": {
-            "type": "plain",
-            "text": "商品ID `{shop_item_id}` 未找到。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_buy_prompt": {
-            "type": "plain",
-            "text": "确认购买{item_name}\\*{quantity}（价格：{price} {currency}）？",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_buy_insufficient_funds": {
-            "type": "plain",
-            "text": "{currency}不足以购买{item_name}。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_buy_success": {
-            "type": "plain",
-            "text": "购买成功，获得{item_name}\\*{quantity}。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_check": {
-            "type": "embed",
-            "text": "今日五行元素：`{daily_element}`。\n\n其他相关命令：\n- `^ele choose`——查看可选择的元素\n- `^ele choose <数字>`——选择元素\n- `^ele rule`——查看元素加成规则",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_stage_too_low": {
-            "type": "plain",
-            "text": "您的阶段不足 {required_stage}，暂时无法选择元素！",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_cd_active": {
-            "type": "plain",
-            "text": "您已在一个月内选择过元素，请等待 {remaining_time} 再次更换！",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_choose_prompt": {
-            "type": "plain",
-            "text": "请选择您想要的元素\n-# 请使用 `^ele choose <数字>` 进行选择\n{available}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_invalid_choice": {
-            "type": "plain",
-            "text": "选择无效，请输入数字或正确的元素名称！",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_choose_success": {
-            "type": "plain",
-            "text": "选择成功，您当前的元素为 `{chosen}`。",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
         "account_link_request": {
             "description": "Account linking request",
             "type": "plain",
-            "text": "🔗 **账号关联请求 | Account Link Request**\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。\n\nGenerating verification code...\nOTP will be sent to your preferred platform.",
-            "text_TG": "🔗 **账号关联请求 | Account Link Request**\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。\n\n使用 `/verify <验证码>` 完成关联\nUse `/verify <OTP>` to complete linking",
+            "text": "## 🔗 Account Link Request\nGenerating verification code...\nOTP will be sent to your preferred platform.\nUse `/verify <OTP>` to complete linking\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。\n使用`/verify <验证码>`完成关联",
+            "text_TG": "🔗 **Account Link Request**\n\nGenerating verification code...\nOTP will be sent to your preferred platform.\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。\nUse `/verify <OTP>` to complete linking\n使用`/verify <验证码>`完成关联",
             "text_Matrix": ""
         },
         "account_link_success": {
             "description": "Account linking success",
             "type": "plain",
-            "text": "✅ **账号关联成功 | Account Linked Successfully**\n\n您的 {platform} 账号已成功关联到游戏账号！\nYour {platform} account has been successfully linked to the game account!",
-            "text_TG": "✅ **账号关联成功 | Account Linked Successfully**\n\n您的 Telegram 账号已成功关联到游戏账号！\nYour Telegram account has been successfully linked to the game account!",
+            "text": "## ✅ Account Linked Successfully\n您的 {platform} 账号已成功关联到此游戏账号！",
+            "text_TG": "✅ **Account Linked Successfully**\n\n您的 {platform} 账号已成功关联到此游戏账号！",
             "text_Matrix": ""
         },
         "account_link_failed": {
             "description": "Account linking failed",
             "type": "plain",
-            "text": "❌ **账号关联失败 | Account Linking Failed**\n\n关联过程中出现错误，请稍后重试。\nAn error occurred during linking, please try again later.",
-            "text_TG": "❌ **账号关联失败 | Account Linking Failed**\n\n关联过程中出现错误，请稍后重试。\nAn error occurred during linking, please try again later.",
+            "text": "## ❌ Account Linking Failed\nAn error occurred during linking, please try again later.\n关联过程中出现错误，请稍后重试。",
+            "text_TG": "❌ **Account Linking Failed**\n\nAn error occurred during linking, please try again later.\n关联过程中出现错误，请稍后重试。",
             "text_Matrix": ""
         },
         "otp_sent": {
             "description": "OTP sent notification",
             "type": "plain",
-            "text": "📨 **验证码已发送 | OTP Sent**\n\n验证码已发送到您的 {platform} 账号。\n请在 5 分钟内使用验证码完成关联。\n\nOTP has been sent to your {platform} account.\nPlease use the verification code within 5 minutes to complete linking.",
-            "text_TG": "📨 **验证码已发送 | OTP Sent**\n\n验证码已发送到您的账号。\n请使用 `/verify <验证码>` 在 5 分钟内完成关联。\n\nOTP has been sent to your account.\nPlease use `/verify <OTP>` within 5 minutes to complete linking.",
+            "text": "## 📨 OTP Sent\nOTP has been sent to your {platform} account.\nPlease use the verification code within 5 minutes to complete linking.\n\n验证码已发送到您的 {platform} 账号。\n请在 5 分钟内使用验证码完成关联。",
+            "text_TG": "📨 **OTP Sent**\n\nOTP has been sent to your account.\nPlease use `/verify <OTP>` within 5 minutes to complete linking.\n\n验证码已发送到您的账号。\n请使用 `/verify <验证码>` 在 5 分钟内完成关联。",
             "text_Matrix": ""
         },
         "otp_invalid": {
             "description": "Invalid OTP",
             "type": "plain",
-            "text": "❌ **验证码无效 | Invalid OTP**\n\n验证码无效或已过期，请重新申请。\nOTP is invalid or expired, please request a new one.",
-            "text_TG": "❌ **验证码无效 | Invalid OTP**\n\n验证码无效或已过期，请重新申请。\nOTP is invalid or expired, please request a new one.",
+            "text": "## ❌ Invalid OTP\nOTP is invalid or expired, please request a new one.\n验证码无效或已过期，请重新申请。",
+            "text_TG": "❌ **Invalid OTP**\n\nOTP is invalid or expired, please request a new one.\n验证码无效或已过期，请重新申请。",
             "text_Matrix": ""
         },
         "account_unlink_success": {
             "description": "Account unlinking success",
             "type": "plain",
-            "text": "✅ **账号解除关联成功 | Account Unlinked Successfully**\n\n您的 {platform} 账号已成功解除关联。\nYour {platform} account has been successfully unlinked.",
-            "text_TG": "✅ **账号解除关联成功 | Account Unlinked Successfully**\n\n您的 {platform} 账号已成功解除关联。\nYour {platform} account has been successfully unlinked.",
+            "text": "## ✅ Account Unlinked Successfully\nYour {platform} account has been successfully unlinked.\n您的 {platform} 账号已成功解除关联。",
+            "text_TG": "✅ **Account Unlinked Successfully**\n\nYour {platform} account has been successfully unlinked.\n您的 {platform} 账号已成功解除关联。",
             "text_Matrix": ""
         },
         "account_unlink_failed": {
             "description": "Account unlinking failed",
             "type": "plain",
-            "text": "❌ **账号解除关联失败 | Account Unlinking Failed**\n\n解除关联过程中出现错误，请稍后重试。\nAn error occurred during unlinking, please try again later.",
-            "text_TG": "❌ **账号解除关联失败 | Account Unlinking Failed**\n\n解除关联过程中出现错误，请稍后重试。\nAn error occurred during unlinking, please try again later.",
+            "text": "## ❌ Account Unlinking Failed\nAn error occurred during unlinking, please try again later.\n解除关联过程中出现错误，请稍后重试。",
+            "text_TG": "❌ **Account Unlinking Failed**\n\nAn error occurred during unlinking, please try again later.\n解除关联过程中出现错误，请稍后重试。",
             "text_Matrix": ""
         },
         "platform_not_found": {
             "description": "Platform not found for unlinking",
             "type": "plain",
-            "text": "❌ **平台未关联 | Platform Not Linked**\n\n您的账号尚未关联到 {platform} 平台。\nYour account is not linked to {platform} platform.",
-            "text_TG": "❌ **平台未关联 | Platform Not Linked**\n\n您的账号尚未关联到 {platform} 平台。\nYour account is not linked to {platform} platform.",
-            "text_Matrix": ""
-        },
-        "ele_cannot_choose": {
-            "type": "plain",
-            "text": "您正在修炼中，无法完成此操作！",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_rules": {
-            "description": "元素加成规则",
-            "type": "embed",
-            "text": "【元素加成规则】\n\n1. **匹配元素**（当您选择的元素与今日元素相同时）：\n   - 修炼收益：**1.5倍**\n   - 打野收益 – 铜币收益：**2.0倍**\n   - 打野收益 – 元宝获得几率：**2.0倍**\n   - 升突破基础失败率：**8%**\n\n2. **克制元素**（木克土、土克水、水克火、火克金、金克木）：\n   - 修炼收益：**0.75倍**\n   - 打野收益 – 铜币收益：**0.75倍**\n   - 打野收益 – 元宝获得几率：无变化\n   - 突破基础失败率：**15%**\n\n3. **相生元素**（木生火、火生土、土生金、金生水、水生木）：\n   - 修炼收益：**2.0倍**\n   - 打野收益 – 铜币收益：**1.5倍**\n   - 打野收益 – 元宝获得几率：无变化\n   - 突破基础失败率：**10%**\n\n4. **其他情况**：不作任何倍率调整。\n\n*注：所有倍率计算后，非整数部分均向下取整。*\n*特别鸣谢：ChatGPT——分析加成系统代码并生成Textmap。*",
-            "text_TG": "",
+            "text": "## ❌ Platform Not Linked\nYour account is not linked to {platform} platform.\n您的账号尚未关联到 {platform} 平台。",
+            "text_TG": "❌ **Platform Not Linked**\n\nYour account is not linked to {platform} platform.\n您的账号尚未关联到 {platform} 平台。",
             "text_Matrix": ""
         }
     },

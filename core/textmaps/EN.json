@@ -4,91 +4,49 @@
             "description": "version",
             "type": "plain",
             "text": "```{version} (Official Release)```",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "test_rewards": {
-            "description": "test",
-            "type": "embed",
-            "text": "\\此\\信\\息\\为\\测\\试\\版\\特\\有\\，\\正\\式\\版\\将\\不\\再\\提\\供\\！",
-            "text_TG": "\\此\\信\\息\\为\\测\\试\\版\\特\\有\\，\\正\\式\\版\\将\\不\\再\\提\\供\\！",
-            "text_Matrix": ""
-        },
-        "welcome_message": {
-            "description": "welcome",
-            "type": "plain",
-            "text": "Welcome {user} for joining this game, your account has been successfully created, please have fun!",
-            "text_TG": "Welcome {user} for joining this game, your account has been successfully created, please have fun!",
+            "text_TG": "```{version} (Official Release)```",
             "text_Matrix": ""
         },
         "user_status": {
             "description": "User status details",
             "type": "embed",
-            "text": "👤 **{status_info['in_game_username']}**\n🆔 UID: `{status_info['user_id']}`\n⭐ Stage: {status_info['stage_description']} (Level {status_info['rank']})\n💫 Cultivation: {status_info['exp']:,}/{status_info['max_exp']:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {status_info['element']}\n💰 Copper: {status_info['copper']:,}\n💎 Gold: {status_info['gold']:,}\n📅 HuntTimes: {status_info['dy_times']}/3\n🧘 State: {'Cultivating' if status_info['state'] else 'Idle'}",
-            "text_TG": "👤 **{status_info['in_game_username']}**\n🆔 UID: `{status_info['user_id']}`\n⭐ Stage: {status_info['stage_description']} (Level {status_info['rank']})\n💫 Cultivation: {status_info['exp']:,}/{status_info['max_exp']:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {status_info['element']}\n💰 Copper: {status_info['copper']:,}\n💎 Gold: {status_info['gold']:,}\n📅 HuntTimes: {status_info['dy_times']}/3\n🧘 State: {'Cultivating' if status_info['state'] else 'Idle'}",
+            "text": "👤 **{in_game_username}**\n🆔 UID: `{user_id}`\n⭐ Stage: {stage_description} (Level {rank})\n💫 Cultivation: {exp:,}/{max_exp:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {element}\n💰 Copper: {copper:,}\n💎 Gold: {gold:,}\n📅 HuntTimes: {dy_times}/3\n🧘 State: {state_text}",
+            "text_TG": "👤 *{in_game_username}*\n🆔 UID: `{user_id}`\n⭐ Stage: {stage_description} (Level {rank})\n💫 Cultivation: {exp:,}/{max_exp:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {element}\n💰 Copper: {copper:,}\n💎 Gold: {gold:,}\n📅 HuntTimes: {dy_times}/3\n🧘 State: {state_text}",
             "text_Matrix": ""
         },
         "no_account": {
             "description": "Account not created",
             "type": "plain",
-            "text": "{user} 您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
+            "text": "## ❌ No Account Found\n{user} 您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
             "text_TG": "❌ **No Account Found**\n\n{user} You have not created an account yet, please use `/register` to create one!\n您还没有创建账号，请使用 `/register` 指令创建账号！",
             "text_Matrix": ""
         },
         "cultivation_start": {
             "description": "cultivation_start",
             "type": "plain",
-            "text": "{user}, You have started your 2 hour long cultivation, which ends {end_time}\nYou will receive **{culti_gain}** cultivation afterwards.",
-            "text_TG": "",
+            "text": "{user}, you have begun cultivating. Use ^cul end when you wish to finish.",
+            "text_TG": "🧘 **Cultivation Started**\n\n{user}, you have started cultivating, you may use `/cul end` anytime to end cultivation.",
             "text_Matrix": ""
         },
         "cultivation_end": {
             "description": "Cultivation end reminder",
             "type": "plain",
-            "text": "Your cultivation just ended! You have received **{culti_gain}** cultivation.\nUse `^stat` to check your new status.\n-# If the received cultivation in this message does not match with the one stated in starting message, this high chance indicates that tere is an error. Report it to Bot Admin ASAP.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "wild_success": {
-            "description": "wild_success",
-            "type": "plain",
-            "text": "Congratulations to {user}, you have successfully finished hunting. Received the following rewards:\n- Cultivation\\*{cultivation_gain}\n- Copper\\*{copper_gain}\n- Gold\\*{yuanbao_gain}",
-            "text_TG": "",
+            "text": "Your cultivation just ended! You have received **{culti_gain}** cultivation.\nUse `^stat` to check your new status.\n-# If the new cultivation is not correct, this is likely caused by an error. Report it to Bot Admin ASAP.",
+            "text_TG": "Your cultivation just ended! You have received **{culti_gain}** cultivation.\nUse `/stat` to check your new status.\n>If the new cultivation is not correct, this is likely caused by an error. Report it to Bot Admin ASAP.",
             "text_Matrix": ""
         },
         "already_account": {
             "description": "already_account",
             "type": "plain",
-            "text": "{user}, You have already created an account, please use other commands.\n-# If `^stat` or `/acc` \"says you have not created an account yet\", it might be database error, report it to Bot Admin(s) immediately!",
-            "text_TG": "✅ **Account Already Exists**\n\n{user} You already have an account, please use other commands.\n您已创建过账号，请使用其他指令。\n\nUse `/stat` to check status | 使用 `/stat` 查看状态",
-            "text_Matrix": ""
-        },
-        "train_in_progress": {
-            "description": "train_in_progress",
-            "type": "plain",
-            "text": "{user}, You are currently cultivating, unable to use this command.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "waiting_time": {
-            "description": "waiting_time",
-            "type": "plain",
-            "text": "{user}, You have aready hunted within the last 60min, please wait patiently!",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "intro_text": {
-            "description": "intro",
-            "type": "embed",
-            "text": "## Thank you for using this Bot!\nDescription.\n\n### Title 3\n「Introduction_EN」",
-            "text_TG": "",
+            "text": "## ✅ Account Already Exists\n{user}, You have already created an account, please use other commands.\nUse `……stat` to check status, or `/help` to check available commands.",
+            "text_TG": "✅ **Account Already Exists**\n\n{user} You already have an account, please use other commands.\nUse `/stat` to check status, or `/help` to check available commands.",
             "text_Matrix": ""
         },
         "xx_commands": {
             "description": "Command list for help",
             "type": "embed",
             "text": "## Bot Command List (Prefix: `^`):\n### DM Commands:\n- `^start` —— Create account\n    Alias: `^begin` | `^ks`\n- `^/acc` —— View account details, or change your in-game name and language, or redeem codes.\n### Game Commands:\n- `^intro` —— Get introduction of this Bot.\n    Alias: `^js`\n- `^cul` —— Cultivate for 2hr, some commands will be locked.\n    Alias: `^sit` | `^xl`\n- `^hunt` —— Go for a hunting, to get copper, cultivation, and low chance for gold.\n    Alias: `wild` | `^dy`\n- `^asc` —— Increase your stage level when your cultivation has reached current stage\\'s maximum.\n    Alias: `^ascend` | `^tp`\n- `^stat` —— View your current status.\n    Alias: `^zt`\n- `^inv` —— View your inventory.\n    Alias: `^wp`\n- `^test` —— View test details.\n    Alias: `^beta` | `^cs`\n- `^shop` —— Purchase items.\n    Alias: `^sd`\n- `^ele` —— Check or choose elements.\n    Alias: `^element` | `^ys`\n- `^exp` —— Missing textmap\n    Alias: `^ts`\n- `^challenge` —— Missing textmap\n    Alias: `^tz`\n### Other Commands\n- `/help` —— Shows this message.\n    Alias: `^help` | `^h` | `^bz`\n- `/luck` —— Missing textmap\n- `/lunar` —— Missing textmap\nCurrent Ver: `{xx_version} (Internal)`",
-            "text_TG": "",
+            "text_TG": "## Bot Command List \n TBA",
             "text_Matrix": ""
         },
         "account_creation_prompt": {
@@ -98,312 +56,134 @@
             "text_TG": "",
             "text_Matrix": ""
         },
-        "ascend_success": {
-            "description": "Successful Ascend",
-            "type": "plain",
-            "text": "Congratulations, {user_ingame_name}, You ascended successfully! Now your are in {new_stage_description}.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ascend_fail": {
-            "description": "Failed Ascend",
-            "type": "plain",
-            "text": "Sadly, {user_ingame_name} **failed to ascend**. Cultivation reduced to 50%.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "lightning_progress": {
-            "description": "Lightning Strike Progress",
-            "type": "plain",
-            "text": "The lightning no. {lightningNum} has fallen, and {user_ingame_name} **{condition}**.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "condition_safe": {
-            "description": "Safe during lightning",
-            "type": "plain",
-            "text": "is still fine",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "condition_failed": {
-            "description": "Failed during lightning",
-            "type": "plain",
-            "text": "fainted",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "insufficient_exp": {
-            "description": "Not enough EXP for asc",
-            "type": "plain",
-            "text": "Your cultivation has not reached the stage maximum, unable to ascend.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "sign_success": {
-            "description": "Daily sign-in success",
-            "type": "plain",
-            "text": "{user_ingame_name}, You have successfully signed in, received **Gold\\*1** and **Copper\\*500**.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "already_sign": {
-            "description": "Already signed in today",
-            "type": "plain",
-            "text": "{user_ingame_name}, You have already signed in today! Use this command again tomorrow 04:00 (Server Time).",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "hunt_success": {
-            "description": "Hunt success message",
-            "type": "embed",
-            "text": "**{user} - Hunting Success!**\n\nRewards:\n- **Cultivation**: {cultivation_gain}\n- **Copper**: {copper_gain}\n- **Gold**: {yuanbao_gain}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "hunt_cooldown": {
-            "description": "Hunt cooldown message",
-            "type": "plain",
-            "text": "{user}, Your hunting is still in cool down, which ends {remaining_time}.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "currency_description": {
-            "description": "Inv Currency",
-            "type": "plain",
-            "text": "### Currency\n- Copper: **{copper}**\n- Gold: **{gold}**",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "items_description": {
-            "description": "Inv Item",
-            "type": "plain",
-            "text": "### Inventory\n{items_section}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "no_items": {
-            "description": "No Item for inv commands",
-            "type": "plain",
-            "text": "Nothing here...",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "account_setting": {
-            "description": "Embed details of user's account settings",
-            "type": "embed",
-            "text": "**Account Name**: {user}\n**UID**: `{uid}`\n**Language**: {acc_lang}\n**Element**: {element}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "privacy": {
-            "description": "response for dm commands used in public",
-            "type": "plain",
-            "text": "For your privacy, please use this command in DM with the bot!",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_not_found": { 
-            "description": "1",
-            "type": "plain",
-            "text": "Invalid redemption code!" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_expired": { 
-            "description": "1",
-            "type": "plain",
-            "text": "Code expired or have not started redeeming" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_not_allowed": { 
-            "description": "1",
-            "type": "plain",
-            "text": "User not authorised" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_no_user": { 
-            "description": "1",
-            "type": "plain",
-            "text": "textmapEN(redeem_code_no_user)" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_already": { 
-            "description": "1",
-            "type": "plain",
-            "text": "Code already used" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "redeem_code_success": { 
-            "description": "1",
-            "type": "plain",
-            "text": "Redemption success!\nReceived **Copper**\\*{copper_gained}, **Gold**\\*{gold_gained}{items_section}" ,
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_title": {
-            "type": "plain",
-            "text": "Shop",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_view_description": {
-            "type": "plain",
-            "text": "Welcome to the shop. Use `^shop buy <ID>` to purchase.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_view_table_line": {
-            "type": "plain",
-            "text": "{shop_item_id}. {item_name}\\*{quantity} — {price} {currency}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_no_items": {
-            "type": "plain",
-            "text": "No items found in the shop.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_invalid_subcommand": {
-            "type": "plain",
-            "text": "Invalid subcommand. Use `^shop` or `^shop view` to list items, `^shop buy <ID>` to purchase.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_item_not_found": {
-            "type": "plain",
-            "text": "No shop item found with ID `{shop_item_id}`.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_buy_prompt": {
-            "type": "plain",
-            "text": "Affirm buying {item_name}\\*{quantity} for {price} {currency}?",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_buy_insufficient_funds": {
-            "type": "plain",
-            "text": "You do not have enough {currency} to buy {item_name}.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "shop_buy_success": {
-            "type": "plain",
-            "text": "Purchase success, obtained {item_name}\\*{quantity}.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_check": {
-            "type": "plain",
-            "text": "Today's Element: `{daily_element}`.\n\nOther Related Commands:\n- `^ele choose`——Check available elements for choosing.\n- `^ele choose <num>`——Choose your desired element.\n- `^ele rule`——To view rules of the element buffing system.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_stage_too_low": {
-            "type": "plain",
-            "text": "Your stage has not reached {required_stage}, unable to choose an element now!",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_cd_active": {
-            "type": "plain",
-            "text": "You have already chosen an element in the past 30 days, please wait {remaining_time} before changing again!",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_choose_prompt": {
-            "type": "plain",
-            "text": "Please select the element you would like to have\n-# Please Use `^ele choose <number> to choose`\n{available}",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_invalid_choice": {
-            "type": "plain",
-            "text": "Invalid selection, please enter the correct number or element name!",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_choose_success": {
-            "type": "plain",
-            "text": "Selection success, your current element is `{chosen}`.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_cannot_choose": {
-            "type": "plain",
-            "text": "You are currently cultivating, unable to complete this action.",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
-        "ele_rules": {
-            "description": "Element Buff Rules",
-            "type": "embed",
-            "text": "【Element Buff Rules】\n\n1. **Matching Element** (When your chosen element matches today’s element):\n   - Cultivation Gain: **1.5x**\n   - Hunt Command – Copper Gain: **2.0x**\n   - Hunt Command – Gold Chance: **2.0x**\n   - Ascension Failure Rate: **8%**\n\n2. **Restrained Element** (When today’s element restrains your chosen element: Dendro→Geo, Geo→Hydro, Hydro→Pyro, Pyro→Metallo, Metallo→Dendro):\n   - Cultivation Gain: **0.75x**\n   - Hunt Command – Copper Gain: **0.75x**\n   - Hunt Command – Gold Chance: No change\n   - Ascension Failure Rate: **15%**\n\n3. **Mutual Element** (When today’s element is mutually beneficial with your chosen element: Dendro→Pyro, Pyro→Geo, Geo→Metallo, Metallo→Hydro, Hydro→Dendro):\n   - Cultivation Gain: **2.0x**\n   - Hunt Command – Copper Gain: **1.5x**\n   - Hunt Command – Gold Chance: No change\n   - Ascension Failure Rate: **10%**\n\n4. **Other Cases**: No changes are applied.\n\n*Note: Multipliers are applied to base values and any fractional results are rounded down.*\n*Special thanks to ChatGPT for analysing of code and textmap generating.*",
-            "text_TG": "",
-            "text_Matrix": ""
-        },
         "account_link_request": {
             "description": "Account linking request",
             "type": "plain",
-            "text": "🔗 **Account Link Request**\n\nGenerating verification code...\nOTP will be sent to your preferred platform.\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。",
-            "text_TG": "🔗 **Account Link Request**\n\nGenerating verification code...\nOTP will be sent to your preferred platform.\n\nUse `/verify <OTP>` to complete linking\n使用 `/verify <验证码>` 完成关联",
+            "text": "## 🔗 Account Link Request\nGenerating verification code...\nOTP will be sent to your preferred platform.\nUse `/verify <OTP>` to complete linking\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。\n使用`/verify <验证码>`完成关联",
+            "text_TG": "🔗 **Account Link Request**\n\nGenerating verification code...\nOTP will be sent to your preferred platform.\n\n正在为您生成验证码...\n验证码将发送到您的首选平台。\nUse `/verify <OTP>` to complete linking\n使用`/verify <验证码>`完成关联",
             "text_Matrix": ""
         },
         "account_link_success": {
             "description": "Account linking success",
             "type": "plain",
-            "text": "✅ **Account Linked Successfully**\n\nYour {platform} account has been successfully linked to the game account!\n您的 {platform} 账号已成功关联到游戏账号！",
-            "text_TG": "✅ **Account Linked Successfully**\n\nYour Telegram account has been successfully linked to the game account!\n您的 Telegram 账号已成功关联到游戏账号！",
+            "text": "## ✅ Account Linked Successfully\nYour {platform} account has been successfully linked to this game account!\n您的 {platform} 账号已成功关联到此游戏账号！",
+            "text_TG": "✅ **Account Linked Successfully**\n\nYour Telegram account has been successfully linked to this game account!\n您的 {platform} 账号已成功关联到此游戏账号！",
             "text_Matrix": ""
         },
         "account_link_failed": {
             "description": "Account linking failed",
             "type": "plain",
-            "text": "❌ **Account Linking Failed**\n\nAn error occurred during linking, please try again later.\n关联过程中出现错误，请稍后重试。",
+            "text": "## ❌ Account Linking Failed\nAn error occurred during linking, please try again later.\n关联过程中出现错误，请稍后重试。",
             "text_TG": "❌ **Account Linking Failed**\n\nAn error occurred during linking, please try again later.\n关联过程中出现错误，请稍后重试。",
             "text_Matrix": ""
         },
         "otp_sent": {
             "description": "OTP sent notification",
             "type": "plain",
-            "text": "📨 **OTP Sent**\n\nOTP has been sent to your {platform} account.\nPlease use the verification code within 5 minutes to complete linking.\n\n验证码已发送到您的 {platform} 账号。\n请在 5 分钟内使用验证码完成关联。",
+            "text": "## 📨 OTP Sent\nOTP has been sent to your {platform} account.\nPlease use the verification code within 5 minutes to complete linking.\n\n验证码已发送到您的 {platform} 账号。\n请在 5 分钟内使用验证码完成关联。",
             "text_TG": "📨 **OTP Sent**\n\nOTP has been sent to your account.\nPlease use `/verify <OTP>` within 5 minutes to complete linking.\n\n验证码已发送到您的账号。\n请使用 `/verify <验证码>` 在 5 分钟内完成关联。",
             "text_Matrix": ""
         },
         "otp_invalid": {
             "description": "Invalid OTP",
             "type": "plain",
-            "text": "❌ **Invalid OTP**\n\nOTP is invalid or expired, please request a new one.\n验证码无效或已过期，请重新申请。",
+            "text": "## ❌ Invalid OTP\nOTP is invalid or expired, please request a new one.\n验证码无效或已过期，请重新申请。",
             "text_TG": "❌ **Invalid OTP**\n\nOTP is invalid or expired, please request a new one.\n验证码无效或已过期，请重新申请。",
             "text_Matrix": ""
         },
         "account_unlink_success": {
             "description": "Account unlinking success",
             "type": "plain",
-            "text": "✅ **Account Unlinked Successfully**\n\nYour {platform} account has been successfully unlinked.\n您的 {platform} 账号已成功解除关联。",
+            "text": "## ✅ Account Unlinked Successfully\nYour {platform} account has been successfully unlinked.\n您的 {platform} 账号已成功解除关联。",
             "text_TG": "✅ **Account Unlinked Successfully**\n\nYour {platform} account has been successfully unlinked.\n您的 {platform} 账号已成功解除关联。",
             "text_Matrix": ""
         },
         "account_unlink_failed": {
             "description": "Account unlinking failed",
             "type": "plain",
-            "text": "❌ **Account Unlinking Failed**\n\nAn error occurred during unlinking, please try again later.\n解除关联过程中出现错误，请稍后重试。",
+            "text": "## ❌ Account Unlinking Failed\nAn error occurred during unlinking, please try again later.\n解除关联过程中出现错误，请稍后重试。",
             "text_TG": "❌ **Account Unlinking Failed**\n\nAn error occurred during unlinking, please try again later.\n解除关联过程中出现错误，请稍后重试。",
             "text_Matrix": ""
         },
         "platform_not_found": {
             "description": "Platform not found for unlinking",
             "type": "plain",
-            "text": "❌ **Platform Not Linked**\n\nYour account is not linked to {platform} platform.\n您的账号尚未关联到 {platform} 平台。",
+            "text": "## ❌ Platform Not Linked\nYour account is not linked to {platform} platform.\n您的账号尚未关联到 {platform} 平台。",
             "text_TG": "❌ **Platform Not Linked**\n\nYour account is not linked to {platform} platform.\n您的账号尚未关联到 {platform} 平台。",
             "text_Matrix": ""
         }
+    },
+    "xx_stage_descriptions": {
+        "1": "Beginner",
+        "2": "炼气期（一阶）",
+        "3": "炼气期（二阶）",
+        "4": "炼气期（三阶）",
+        "5": "炼气期（四阶）",
+        "6": "炼气期（五阶）",
+        "7": "筑基期（一阶）",
+        "8": "筑基期（二阶）",
+        "9": "筑基期（三阶）",
+        "10": "筑基期（四阶）",
+        "11": "筑基期（五阶）",
+        "12": "筑基期（六阶）",
+        "13": "筑基期（七阶）",
+        "14": "金丹期（一阶）",
+        "15": "金丹期（二阶）",
+        "16": "金丹期（三阶）",
+        "17": "金丹期（四阶）",
+        "18": "金丹期（五阶）",
+        "19": "金丹期（六阶）",
+        "20": "金丹期（七阶）",
+        "21": "金丹期（八阶）",
+        "22": "金丹期（九阶）",
+        "23": "元婴期（一阶）",
+        "24": "元婴期（二阶）",
+        "25": "元婴期（三阶）",
+        "26": "元婴期（四阶）",
+        "27": "元婴期（五阶）",
+        "28": "元婴期（六阶）",
+        "29": "元婴期（七阶）",
+        "30": "元婴期（八阶）",
+        "31": "元婴期（九阶）",
+        "32": "化神期（一阶）",
+        "33": "化神期（二阶）",
+        "34": "化神期（三阶）",
+        "35": "化神期（四阶）",
+        "36": "化神期（五阶）",
+        "37": "化神期（六阶）",
+        "38": "化神期（七阶）",
+        "39": "化神期（八阶）",
+        "40": "化神期（九阶）",
+        "41": "炼虚期（一阶）",
+        "42": "炼虚期（二阶）",
+        "43": "炼虚期（三阶）",
+        "44": "炼虚期（四阶）",
+        "45": "炼虚期（五阶）",
+        "46": "炼虚期（六阶）",
+        "47": "炼虚期（七阶）",
+        "48": "炼虚期（八阶）",
+        "49": "炼虚期（九阶）",
+        "50": "合体期（一阶）",
+        "51": "合体期（二阶）",
+        "52": "合体期（三阶）",
+        "53": "合体期（四阶）",
+        "54": "合体期（五阶）",
+        "55": "合体期（六阶）",
+        "56": "合体期（七阶）",
+        "57": "合体期（八阶）",
+        "58": "合体期（九阶）",
+        "59": "大乘期（一阶）",
+        "60": "大乘期（二阶）",
+        "61": "大乘期（三阶）",
+        "62": "大乘期（四阶）",
+        "63": "大乘期（五阶）",
+        "64": "大乘期（六阶）",
+        "65": "大乘期（七阶）",
+        "66": "大乘期（八阶）",
+        "67": "大乘期（九阶）",
+        "68": "渡劫期",
+        "69": "飞升期",
+        "70": "羽化成仙"
     },
     "items":{
         "itm_type1": {

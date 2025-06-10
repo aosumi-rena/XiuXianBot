@@ -1,3 +1,7 @@
+"""
+OTP system for account linking across platforms, not used yet
+"""
+
 import random
 import time
 import logging
@@ -12,7 +16,6 @@ class OTPManager:
         self.user_collection = get_collection('users')
         
     def generate_otp(self, user_id, purpose='account_link', expires_in_minutes=10):
-
         otp_code = str(random.randint(100000, 999999))
         
         expires_at = datetime.now() + timedelta(minutes=expires_in_minutes)
@@ -43,7 +46,6 @@ class OTPManager:
             return None
     
     def verify_otp(self, user_id, otp_code, purpose='account_link'):
-
         try:
             otp_record = self.otp_collection.find_one({
                 "user_id": user_id,

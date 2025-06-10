@@ -11,16 +11,16 @@ document.getElementById('save-btn').addEventListener('click', async () => {
     const data = await resp.json();
     if (data.status === 'ok') {
       if (data.full_restart) {
-        alert('⚠️ ' + data.message + '\n' + 'Core restart required.' + '\n' + 'i.e. You need to restart `start.py`');
+        showPopup('⚠️ ' + data.message + '\n' + 'Core restart required.' + '\n' + 'i.e. You need to restart `start.py`');
       } else if (data.adapter_restart) {
-        alert('⚠️ ' + data.message + '\n' + 'Adapter restart required.' + '\n' + 'i.e. You only need to restart affect platform adapter(s)');
+        showPopup('⚠️ ' + data.message + '\n' + 'Adapter restart required.' + '\n' + 'i.e. You only need to restart affect platform adapter(s)');
       } else {
-        alert('✅ ' + data.message);
+        showPopup('✅ ' + data.message);
       }
     } else {
-      alert('❌ ' + data.message);
+      showPopup('❌ ' + data.message);
     }
   } catch (e) {
-    alert('Error: ' + e);
+    showPopup('Error: ' + e);
   }
 });

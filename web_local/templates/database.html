@@ -104,6 +104,9 @@
       users: [
         { field: 'user_id', type: 'string', label: '{{ trans.get("database_field_user_id", "User ID") }}' },
         { field: 'in_game_username', type: 'string', label: '{{ trans.get("database_field_username", "Username") }}' },
+        { field: 'discord_id', type: 'string', label: 'Discord ID' },
+        { field: 'telegram_id', type: 'string', label: 'Telegram ID' },
+        { field: 'matrix_id', type: 'string', label: 'Matrix ID' },
         { field: 'exp', type: 'number', label: '{{ trans.get("database_field_exp", "Experience") }}' },
         { field: 'copper', type: 'number', label: '{{ trans.get("database_field_copper", "Copper") }}' },
         { field: 'gold', type: 'number', label: '{{ trans.get("database_field_gold", "Gold") }}' },
@@ -129,6 +132,7 @@
     let currentFilters = [];
     let viewMode = 'table';
     let itemsPerPage = 20;
+    let lastResults = [];
     
     const collectionSelect = document.getElementById('collection-select');
     const tableViewRadio = document.getElementById('table-view');
@@ -162,6 +166,7 @@
         viewMode = 'table';
         tableViewContainer.style.display = 'block';
         jsonViewContainer.style.display = 'none';
+        displayResults(lastResults);
       }
     });
     
@@ -170,6 +175,7 @@
         viewMode = 'json';
         tableViewContainer.style.display = 'none';
         jsonViewContainer.style.display = 'block';
+        displayResults(lastResults);
       }
     });
     
@@ -203,13 +209,13 @@
     
     itemsPerPageSelect.addEventListener('change', function() {
       itemsPerPage = parseInt(this.value);
-      currentPage = 1;
+      currentPage = 1; 
       runQuery();
     });
     
     function initializePage() {
       addFilter();
-
+      
       runQuery();
     }
     
@@ -331,15 +337,16 @@
       .then(response => response.json())
       .then(data => {
         if (data.status === 'ok') {
-          displayResults(data.results);
+          lastResults = data.results;
+          displayResults(lastResults);
           updatePagination(data.page, data.total_pages, data.count);
         } else {
-          alert('Error: ' + data.message);
+          showPopup('Error: ' + data.message);
         }
       })
       .catch(error => {
         console.error('Error running query:', error);
-        alert('Error running query. Please try again.');
+        showPopup('Error running query. Please try again.');
       });
     }
     
@@ -366,20 +373,35 @@
       
       const allKeys = new Set();
       results.forEach(result => {
-        Object.keys(result).forEach(key => allKeys.add(key));
+        for (const k of Object.keys(result)) {
+          const key = k.trim().toLowerCase();
+          if (key === 'actions' || key === 'action') {
+            delete result[k];
+            continue;
+          }
+          allKeys.add(k);
+        }
       });
       
       const headerRow = resultsTableHeader.querySelector('tr');
       const schema = collectionSchemas[currentCollection];
       
+      let actionHeaderAdded = false;
       schema.forEach(field => {
+        if (currentCollection === 'users' && field.field === 'user_id' && !actionHeaderAdded) {
+          const actTh = document.createElement('th');
+          actTh.textContent = 'Actions';
+          headerRow.appendChild(actTh);
+          actionHeaderAdded = true;
+        }
         const th = document.createElement('th');
         th.textContent = field.label;
         headerRow.appendChild(th);
       });
       
       allKeys.forEach(key => {
-        if (key === '_id' || schema.some(f => f.field === key)) return;
+        if (key === '_id' || key.trim().toLowerCase() === 'actions' || schema.some(f => f.field === key)) return;
+        
         const th = document.createElement('th');
         th.textContent = key;
         headerRow.appendChild(th);
@@ -387,8 +409,20 @@
       
       results.forEach(result => {
         const row = document.createElement('tr');
-        
+
         schema.forEach(field => {
+          if (currentCollection === 'users' && field.field === 'user_id') {
+            const actTd = document.createElement('td');
+            actTd.className = 'actions-cell';
+            actTd.innerHTML = `
+              <button class="btn btn-sm btn-danger me-1 action-del">Del</button>
+              <button class="btn btn-sm btn-secondary me-1 action-copy">Copy</button>
+              <button class="btn btn-sm btn-warning me-1 action-ban">Ban</button>
+              <button class="btn btn-sm btn-secondary action-deactivate">Deactivate</button>
+            `;
+            row.appendChild(actTd);
+          }
+
           const td = document.createElement('td');
           const value = result[field.field];
           
@@ -402,9 +436,10 @@
           
           row.appendChild(td);
         });
-        
+
         allKeys.forEach(key => {
-          if (key === '_id' || schema.some(f => f.field === key)) return;
+          if (key === '_id' || key.trim().toLowerCase() === 'actions' || schema.some(f => f.field === key)) return; // Skip internal fields and our actions column
+          
           const td = document.createElement('td');
           const value = result[key];
           
@@ -419,6 +454,21 @@
           row.appendChild(td);
         });
         
+        if (currentCollection === 'users') {
+          row.querySelector('.action-del').addEventListener('click', function() {
+            confirmDeleteUser(result.user_id);
+          });
+          row.querySelector('.action-copy').addEventListener('click', function() {
+            copyUser(result.user_id);
+          });
+          row.querySelector('.action-ban').addEventListener('click', function() {
+            toggleBan(this);
+          });
+          row.querySelector('.action-deactivate').addEventListener('click', function() {
+            toggleActive(this);
+          });
+        }
+
         resultsTableBody.appendChild(row);
       });
     }
@@ -430,10 +480,12 @@
       }
       
       try {
-        const formattedJson = JSON.stringify(results, null, 2);
+        let formattedJson = JSON.stringify(results, null, 2);
+        if (formattedJson.length > 10000) {
+          formattedJson = formattedJson.slice(0, 10000) + '...';
+        }
         jsonResults.textContent = formattedJson;
-        
-        if (viewMode === 'json') {
+                if (viewMode === 'json') {
           tableViewContainer.style.display = 'none';
           jsonViewContainer.style.display = 'block';
         } else {
@@ -448,7 +500,8 @@
     
     function updatePagination(page, pages, count) {
       currentPage = page;
-      totalPages = pages;
+      totalPages = pages;  
+      
       pageIndicator.textContent = '{{ trans.get("database_page_indicator", "Page {0} of {1}") }}'
         .replace('{0}', page)
         .replace('{1}', pages);
@@ -457,6 +510,59 @@
       nextPageBtn.disabled = page >= totalPages;
       
       resultsCount.textContent = `${count} {{ trans.get('database_results_found', 'results found') }}`;
+    }
+
+    function confirmDeleteUser(uid) {
+      showPopup('Delete user ' + uid + '?', [
+        { label: 'Delete', onClick: () => deleteUser(uid) },
+        { label: 'Cancel' }
+      ]);
+    }
+
+    function deleteUser(uid) {
+      fetch(`/database/delete/${uid}`, { method: 'POST' })
+        .then(r => r.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            showPopup('User deleted');
+            runQuery();
+          } else {
+            showPopup(data.message || 'Error');
+          }
+        })
+        .catch(e => {
+          console.error(e);
+          showPopup('Error deleting user');
+        });
+    }
+
+    function copyUser(uid) {
+      fetch(`/database/user/${uid}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            const text = JSON.stringify(data.user, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+              showPopup('Copied');
+            });
+          } else {
+            showPopup(data.message || 'Error');
+          }
+        })
+        .catch(e => {
+          console.error(e);
+          showPopup('Error copying data');
+        });
+    }
+
+    function toggleBan(btn) {
+      btn.textContent = btn.textContent === 'Ban' ? 'Unban' : 'Ban';
+      showPopup('Not implemented yet');
+    }
+
+    function toggleActive(btn) {
+      btn.textContent = btn.textContent === 'Deactivate' ? 'Activate' : 'Deactivate';
+      showPopup('Not implemented yet');
     }
   });
 </script>

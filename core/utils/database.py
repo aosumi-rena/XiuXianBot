@@ -1,10 +1,15 @@
 import os
 import json
+import logging
 from datetime import datetime
-from pymongo import MongoClient
+from core.database.connection import (
+    get_collection,
+    DatabaseError,
+    fetch_one,
+    execute,
+)
 
-client = None
-db = None
+logger = logging.getLogger("database.utils")
 
 def load_config():
     config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'config.json')
@@ -35,50 +40,17 @@ def ensure_defaults(user_collection):
         if update_data:
             user_collection.update_one({"_id": user["_id"]}, {"$set": update_data})
 
-def connect_mongo():
-    global client, db
-    config = load_config()
-    uri = config.get('db', {}).get('mongo_uri', "mongodb://localhost:27017")
-    db_name = config.get('db', {}).get('mongo_db_name', "XiuXianGameV4")
-    
+
+def generate_universal_uid() -> str:
     try:
-        client = MongoClient(uri)
-        db = client[db_name]
-        print(f"Connected to MongoDB database: {db_name}")
-    except Exception as e:
-        print(f"Failed to connect to MongoDB: {e}")
-
-class DatabaseError(Exception):
-    pass
-
-def get_collection(collection_name):
-    global db
-
-    if db is None:
-        raise DatabaseError("No database connection found.")
-
-    try:
-        return db[collection_name]
-    except KeyError as e:
-        raise DatabaseError(f"Collection '{collection_name}' not found.") from e
-    except Exception as e:
-        raise DatabaseError(f"Unknown database error: {e}") from e
-
-def generate_universal_uid():
-    try:
-        user_collection = get_collection('users')
-        highest_user = user_collection.find_one(
-            {"user_id": {"$regex": "^[0-9]+$"}}, 
-            sort=[("user_id", -1)]
+        row = fetch_one(
+            "SELECT user_id FROM users WHERE user_id GLOB '[0-9]*' ORDER BY CAST(user_id AS INTEGER) DESC LIMIT 1"
         )
-        if highest_user:
-            next_uid = int(highest_user["user_id"]) + 1
-        else:
-            next_uid = 1000001
+        next_uid = int(row["user_id"]) + 1 if row else 1000001
         return str(next_uid)
     except Exception as e:
-        print(f"Error generating UID: {e}")
-        return None
+        logger.error(f"Error generating UID: {e}")
+        raise DatabaseError(f"UID generation failed: {e}")
 
 def migrate_existing_accounts():
     try:

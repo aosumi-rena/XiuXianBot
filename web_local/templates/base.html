@@ -34,7 +34,6 @@
 </head>
 <body>
 <div class="app-container">
-  <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
       <h3 class="sidebar-title">XiuXianBot</h3>
@@ -98,10 +97,12 @@
           <option value="zh" {% if current_lang=='zh'%}selected{%endif%}>简体中文</option>
         </select>
       </form>
+
+      <button id="theme-toggle" class="btn btn-sm btn-secondary mt-2">{{ trans.get('toggle_theme') }}</button>
       
       <div class="version-info">
-        <small>Core-i4.0.1</small>
-        <small>Web-v0.2.0</small>
+        <small>Core-OSRELDocker0.1.50-dev</small>
+        <small>Web-v0.3.0</small>
       </div>
     </div>
   </div>
@@ -125,9 +126,17 @@
       </h1>
     </div>
     
-    <div class="content-body">
+  <div class="content-body">
       {% block content %}{% endblock %}
     </div>
+  </div>
+</div>
+
+<div id="popup-overlay" class="popup-overlay" style="display:none;">
+  <div class="popup-box">
+    <button type="button" class="popup-close btn-close" aria-label="Close"></button>
+    <div id="popup-message" class="popup-message"></div>
+    <div id="popup-actions" class="popup-actions mt-3"></div>
   </div>
 </div>
 
@@ -148,6 +157,51 @@
         sidebar.classList.toggle('show');
       });
     }
+  });
+
+  function hidePopup() {
+    const overlay = document.getElementById('popup-overlay');
+    overlay.classList.add('fade-out');
+    setTimeout(function() {
+      overlay.style.display = 'none';
+      overlay.classList.remove('fade-out');
+    }, 200);
+  }
+
+  function showPopup(message, actions) {
+    document.getElementById('popup-message').innerHTML = message;
+    const actionsContainer = document.getElementById('popup-actions');
+    actionsContainer.innerHTML = '';
+    if (actions && Array.isArray(actions)) {
+      actions.forEach(act => {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-primary me-2';
+        btn.textContent = act.label;
+        btn.addEventListener('click', function() {
+          hidePopup();
+          if (act.onClick) act.onClick();
+        });
+        actionsContainer.appendChild(btn);
+      });
+    }
+    const overlay = document.getElementById('popup-overlay');
+    overlay.classList.remove('fade-out');
+    overlay.style.display = 'flex';
+  }
+
+  document.querySelector('.popup-close').addEventListener('click', hidePopup);
+  document.getElementById('popup-overlay').addEventListener('click', function(e) {
+    if (e.target === this) hidePopup();
+  });
+
+  const themeToggle = document.getElementById('theme-toggle');
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+  themeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-theme');
+    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
   });
 </script>
 

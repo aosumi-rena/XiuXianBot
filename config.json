@@ -18,8 +18,10 @@
     "matrix_pass": "123456"
   },
   "db": {
-    "mongo_uri": "mongodb://localhost:27017",
-    "mongo_db_name": "XiuXianGameV4",
+    "sqlite_path": "data/xiu_xian.db",
     "universal_uid_start": 1000000
+  },
+  "core_server": {
+    "port": 11450
   }
 }

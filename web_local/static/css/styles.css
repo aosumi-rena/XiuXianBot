@@ -28,7 +28,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background-color: var(--background-color);
   background-image: url('https://api.tomys.top/api/acgimg');
   background-size: cover;
@@ -36,6 +36,12 @@ body {
   color: #333;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+body.dark-theme {
+  --background-color: #1e1e1e;
+  --card-bg: rgba(48, 48, 48, 0.85);
+  color: #eee;
 }
 
 .app-container {
@@ -81,6 +87,7 @@ body {
 .sidebar-item {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding: 0.75rem 1.5rem;
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
@@ -106,6 +113,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.sidebar-item span {
+  flex: 1;
+  text-align: left;
 }
 
 .icon-svg {
@@ -211,7 +223,7 @@ body {
 }
 
 .servers-container h1 {
-  display: none; 
+  display: none;
 }
 
 .server-card {
@@ -278,6 +290,11 @@ body {
 .status-stopped {
   background-color: var(--danger-color);
   box-shadow: 0 0 5px var(--danger-color);
+}
+
+.status-enabled {
+  background-color: var(--warning-color);
+  box-shadow: 0 0 5px var(--warning-color);
 }
 
 .adapters-info {
@@ -538,7 +555,65 @@ body {
     justify-content: space-between;
   }
   
-  .logs-filters .row {
+.logs-filters .row {
     flex-direction: column;
   }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.popup-box {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 17px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 30px 20px 20px;
+  width: 20vw;
+  height: 20vh;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-message {
+  padding-top: 10px;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.popup-actions {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.fade-out {
+  animation: fadeOut 0.2s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

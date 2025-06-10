@@ -1,10 +1,3 @@
-"""
-Database schema definitions for XiuXianBot.
-
-This module defines the schemas for the database collections used by the bot,
-including users, items, and timings.
-"""
-
 from typing import Dict, Any, Union, List
 
 USER_SCHEMA = {
@@ -31,7 +24,7 @@ USER_DEFAULT_VALUES = {
     "lang": "CHS",
     "state": False,
     "exp": 0,
-    "rank": 1,                # Important! Defaulting to 0 will cause bugs
+    "rank": 1,
     "dy_times": 0,
     "copper": 0,
     "gold": 0,
@@ -50,9 +43,8 @@ ITEM_SCHEMA = {
 TIMING_SCHEMA = {
     "user_id": str,           # User ID
     "start_time": int,        # Unix timestamp
-    "end_time": int,          # Unix timestamp
-    "type": str,              # "cultivation" or "hunt_cd", or more in future mechanics
-    "culti_gain": int,        # For cultivation timings
+    "type": str,              # "cultivation" or "hunt_cd"
+    "base_gain": int,         # Base hourly gain for cultivation
 }
 
 COLLECTIONS = {

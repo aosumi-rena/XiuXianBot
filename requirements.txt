@@ -1,11 +1,12 @@
-pymongo
 discord
 discord.py
+requests
 python-dotenv
-asyncio
 datetime
 cnlunar
 flask
 psutil
-telegram
+python-telegram-bot==20.7
 uuid
+aiohttp
+sqlite3

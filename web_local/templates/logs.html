@@ -6,7 +6,6 @@
   
   <div class="logs-filters">
     <div class="row">
-      <!-- Source Filter -->
       <div class="col-md-4 mb-3">
         <label for="source-filter" class="form-label">{{ trans.get('logs_filter_source', 'Filter by Source') }}</label>
         <select id="source-filter" class="form-select">
@@ -19,7 +18,6 @@
         </select>
       </div>
       
-      <!-- Level Filter -->
       <div class="col-md-4 mb-3">
         <label for="level-filter" class="form-label">{{ trans.get('logs_filter_level', 'Filter by Level') }}</label>
         <select id="level-filter" class="form-select">
@@ -32,7 +30,6 @@
         </select>
       </div>
       
-      <!-- Time Filter -->
       <div class="col-md-4 mb-3">
         <label for="time-filter" class="form-label">{{ trans.get('logs_filter_time', 'Filter by Time') }}</label>
         <select id="time-filter" class="form-select">
@@ -61,7 +58,6 @@
     <div id="logs-placeholder" class="text-center p-5">
       {{ trans.get('logs_empty', 'No logs to display') }}
     </div>
-
   </div>
 </div>
 {% endblock %}
@@ -77,6 +73,7 @@
     const clearButton = document.getElementById('clear-logs');
     const logsContent = document.getElementById('logs-content');
     const logsPlaceholder = document.getElementById('logs-placeholder');
+    
     let logsData = [];
     
     fetchLogs();
@@ -88,7 +85,7 @@
     downloadButton.addEventListener('click', downloadLogs);
     clearButton.addEventListener('click', clearLogsView);
     
-    setInterval(fetchLogs, 10000); // 10s
+    setInterval(fetchLogs, 10000);
     
     function fetchLogs() {
       fetch('/logs/data?lang={{ current_lang }}')

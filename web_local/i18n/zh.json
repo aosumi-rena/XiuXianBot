@@ -1,5 +1,6 @@
 {
   "home_title": "修仙机器人控制面板",
+  "dashboard_welcome": "欢迎来到控制面板。",
   "panel_config": "控制面板设置",
   "panel_port": "端口",
   "api_switch": "API已启用",
@@ -8,7 +9,6 @@
   "config_heading": "配置",
   "save_changes": "保存更改",
   "config_saved": "配置已成功保存！",
-  
   "servers_title": "服务器控制",
   "core_server": "核心服务器",
   "status_checking": "检查中...",
@@ -18,11 +18,9 @@
   "start": "启动",
   "stop": "停止",
   "adapters_info": "适配器在核心服务器运行前将被禁用",
-  
   "discord_adapter": "Discord 适配器",
   "telegram_adapter": "Telegram 适配器",
   "matrix_adapter": "Matrix 适配器",
-  
   "logs_title": "系统日志",
   "logs_filter": "筛选日志",
   "logs_source": "来源",
@@ -32,31 +30,26 @@
   "logs_download": "下载日志",
   "logs_clear_filters": "清除筛选",
   "logs_no_results": "没有符合筛选条件的日志条目",
-  
   "source_all": "所有来源",
   "source_core": "核心",
   "source_discord": "Discord",
   "source_telegram": "Telegram",
   "source_matrix": "Matrix",
   "source_web_local": "管理面板",
-  
   "severity_all": "所有级别",
   "severity_debug": "调试",
   "severity_info": "信息",
   "severity_warning": "警告",
   "severity_error": "错误",
   "severity_critical": "严重",
-  
   "timerange_all": "全部时间",
   "timerange_hour": "最近一小时",
   "timerange_day": "最近24小时",
   "timerange_week": "最近一周",
-  
   "timestamp": "时间戳",
   "source": "来源",
   "level": "级别",
   "message": "消息",
-  
   "admin_title": "管理控制",
   "admin_description": "管理用户、物品和游戏机制",
   "admin_player_specifics": "设置玩家属性",
@@ -82,7 +75,6 @@
   "admin_user_modified": "用户 {0} 修改成功",
   "admin_user_not_found": "未找到用户",
   "admin_no_results": "未找到结果",
-  
   "database_title": "数据库管理",
   "database_description": "查询和管理数据库集合",
   "database_collection": "集合",
@@ -99,8 +91,8 @@
   "database_results": "结果",
   "database_results_found": "个结果",
   "database_no_results": "未找到结果",
+  "toggle_theme": "切换主题",
   "database_page_indicator": "第 {0} / {1} 页",
-  
   "database_field_user_id": "用户ID",
   "database_field_username": "用户名",
   "database_field_exp": "修为",
@@ -113,13 +105,16 @@
   "database_field_level": "等级",
   "database_field_action": "操作",
   "database_field_timestamp": "时间戳",
-  
   "database_operator_equals": "等于",
   "database_operator_not_equals": "不等于",
   "database_operator_greater_than": "大于",
   "database_operator_greater_equals": "大于等于",
   "database_operator_less_than": "小于",
   "database_operator_less_equals": "小于等于",
-  "database_operator_regex": "正则表达式"
+  "database_operator_regex": "正则表达式",
+  "logs_filter_source": "按来源筛选",
+  "logs_filter_level": "按等级筛选",
+  "logs_filter_time": "按时间筛选",
+  "logs_refresh": "刷新",
+  "logs_clear": "清除视图"
 }
-  

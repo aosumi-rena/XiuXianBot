@@ -23,7 +23,7 @@
   <div class="adapters-info mb-3">
     <p>{{ trans.get('adapters_info', 'Specific adapters not displayed or grayed until core server is switched on by user') }}</p>
   </div>
-
+  
   <div class="adapters-container" id="adapters-container">
     <div class="row">
       {% for adapter_name, enabled in config.get('adapters', {}).items() %}
@@ -85,23 +85,19 @@
       fetch('/servers/status?lang=' + '{{ current_lang }}')
         .then(response => response.json())
         .then(data => {
-          updateServiceStatus('core', data.core);
-      
+          updateServiceStatus('core', data.core, data.core.running);
+          
           for (const [adapter, status] of Object.entries(data.adapters)) {
-            updateServiceStatus(adapter, status);
+            updateServiceStatus(adapter, status, data.core.running);
           }
-       
-          const adaptersEnabled = data.core.running;
-          document.querySelectorAll('.adapter-start, .adapter-stop').forEach(button => {
-            button.disabled = !adaptersEnabled;
-          });
+          
         })
         .catch(error => {
           console.error('Error checking status:', error);
         });
     }
-
-    function updateServiceStatus(service, status) {
+    
+    function updateServiceStatus(service, status, coreRunning) {
       const statusDot = document.getElementById(`${service}-status-dot`);
       const statusText = document.getElementById(`${service}-status-text`);
       const startButton = document.getElementById(`${service}-start`);
@@ -120,17 +116,11 @@
           statusDot.className = 'status-dot status-stopped';
           statusText.textContent = '{{ trans.get("status_stopped", "Stopped") }}';
         }
-        startButton.disabled = false;
+        startButton.disabled = service === 'core' ? false : !coreRunning;
         stopButton.disabled = true;
-
-        if (service !== 'core') {
-          const coreRunning = document.getElementById('core-status-dot').classList.contains('status-running');
-          startButton.disabled = !coreRunning;
-          stopButton.disabled = true;
-        }
       }
     }
-
+    
     function toggleService(service, action) {
       fetch(`/servers/${action}/${service}?lang={{ current_lang }}`, {
         method: 'POST'
@@ -139,8 +129,17 @@
         .then(data => {
           if (data.status === 'ok') {
             checkStatus();
+            const startBtn = document.getElementById(`${service}-start`);
+            const stopBtn = document.getElementById(`${service}-stop`);
+            if (action === 'start') {
+              if (startBtn) startBtn.disabled = true;
+              if (stopBtn) stopBtn.disabled = false;
+            } else {
+              if (startBtn) startBtn.disabled = false;
+              if (stopBtn) stopBtn.disabled = true;
+            }
           } else {
-            alert(data.message || 'An error occurred');
+            showPopup(data.message || 'An error occurred');
           }
         })
         .catch(error => {

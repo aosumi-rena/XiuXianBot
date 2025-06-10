@@ -81,6 +81,13 @@ XiuXianBot is a cultivation-themed RPG text-based game bot originally built for 
 - **Web interfaces** for admin control and public account management.
 - A **single bootstrap** (`start.py`) that loads configuration and starts the desired adapters.
 
+### Recent Updates (AI generated, pending checks)
+
+- Admin dashboard now uses modal dialogs for most actions.
+- Database browser table features Copy ID, Ban and Deactivate controls.
+- Telegram adapter correctly renders Markdown-formatted messages.
+- Core storage migrated to SQLite; SQLite (built-in; automatically created) is no longer required.
+
 <p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#关于">简中</a>)</p>
 
 ---
@@ -107,7 +114,7 @@ root/
 │   ├── game/       # Migrated core logics for the main game from i3 versions, now fully separated from commands
 │   ├── utils/      # Additional utility tools for the bot to execute certain sub-functions of commands
 │   └── ???/        # Additional folders containing future features
-├── web\_local/      # Local admin GUI (config management, server control)
+├── web_local/      # Local admin GUI (config management, server control)
 │   ├── app.py                  # To launch the admin dash page at specified port
 │   ├── templates/
 │   │   ├── base.html           # Common layout (nav-tabs, footer)
@@ -125,7 +132,7 @@ root/
 │       └── js/
 │           ├── config.js       # Logic for config's page
 │           └── ...             # Additional logic files
-├── web\_public/     # Public web portal (account linking, registration)
+├── web_public/     # Public web portal (account linking, registration)
 ├── backups/        # Backups of users and items
 ├── config.json     # Tokens, adapter toggles, DB settings
 └── start.py        # Main switch to load core and adapters
@@ -158,7 +165,7 @@ root/
     - [ ] CHT (Partially done)  
     - [ ] ???  
 - **database/**  
-  - **connection.py**: MongoDB connection, unified `user_id` generation, backup routines for both `users` and `items` collections.
+  - **connection.py**: SQLite connection factory and helpers for automatic table creation.
 
 <p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#核心模块">简中</a>)</p>
 
@@ -172,6 +179,7 @@ Each adapter translates platform-specific events into calls into the core and fo
 - **Telegram**  
   - Slash commands + inline keyboards.  
   - Fallback to plain text if necessary.
+  - Messages now correctly support Markdown formatting.
 - **Matrix**  
   - (Future) Prototyped using a Matrix SDK (e.g. `matrix-nio`).  
   - Uses plain text messages and reply buttons.
@@ -181,6 +189,7 @@ Each adapter translates platform-specific events into calls into the core and fo
 ### Web Interfaces
 - **Local admin GUI** (`web_local/`)  
   A Flask-based dashboard running on your local machine (e.g. `http://localhost:11451`) that provides a single-page, tabbed interface for:  
+  - Modal dialogs are used for editing and confirmations.
   1. **Config Management** (`localhost:11451/config`)  
      - Loads `config.json` into a user-friendly form; each key/value appears as an editable field.  
      - “Save” button sends updated JSON via Fetch to a POST endpoint, writes back to disk, and displays a success feedback—all without reloading the page, and reminds the user if a full restart of `start.py` is required.  
@@ -198,6 +207,8 @@ Each adapter translates platform-specific events into calls into the core and fo
   5. **Database Browser** (`localhost:11451/database`)  
      - Query `users` (automatically joins `items` collection info) with filters.  
      - Displays results in a paginated table with export options.  
+     - Each row provides Copy ID, Ban and Deactivate controls.
+     - See [docs/sqlite_guide.md](docs/sqlite_guide.md) for tips on editing the SQLite database.
   6. **Account Management** (`localhost:11451/accounts`)  
      - Browse and search player information.  
      - Ban/unban, deactivate/reactivate, or manually link third-party IDs.  
@@ -224,11 +235,12 @@ Each adapter translates platform-specific events into calls into the core and fo
 ### Prerequisites
 
 **Docker Deployment**:  
-- Docker (obvious).
+- Docker (obviously)
 
 **Self Build**:  
 - Python 3.12+  
-- MongoDB
+- SQLite (built-in; automatically created)
+- MongoDB (For `i3` version)
 
 <p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#快速上手">简中</a>)</p>
 
@@ -307,6 +319,7 @@ Each adapter translates platform-specific events into calls into the core and fo
 Once running, the bot will:
 
 * Provide a local web dashboard at `http://localhost:11451` (by default; you may change this in `config.json`) for admin control.
+* The core game server listens on `http://localhost:11450` by default.
 * In that dashboard, enable whichever servers/platforms you need, and then:
 
   * Connect to Discord and respond to `^start`, `^cul`, `^hunt`, `^asc`, `^ele`, `/shop`, etc.
@@ -323,8 +336,9 @@ Once running, the bot will:
 
 * [x] Refactor core logic into **core/** package
 * [ ] Create command listener and response logic in **core/commands/**
-* [ ] Implement **Discord** adapter
-* [ ] Add **Telegram** adapter with slash commands
+* [ ] Re-construct the core server using `C#`
+* [X] Implement **Discord** adapter
+* [X] Add **Telegram** adapter with slash commands
 * [ ] Prototype **Matrix** adapter
 * [x] Build **web\_local** admin GUI
 * [ ] Build **web\_public** portal for account linking

@@ -128,12 +128,13 @@
 {% block scripts %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const psContent = document.getElementById('player-specifics-content');
     const dropdownHeaders = document.querySelectorAll('.dropdown-header');
     dropdownHeaders.forEach(header => {
       header.addEventListener('click', function() {
         const content = this.nextElementSibling;
         const icon = this.querySelector('i');
-        
+
         if (content.style.maxHeight) {
           content.style.maxHeight = null;
           icon.classList.remove('bi-chevron-up');
@@ -163,7 +164,7 @@
           })
           .catch(error => {
             console.error('Error searching for user:', error);
-            alert('Error searching for user. Please try again.');
+            showPopup('Error searching for user. Please try again.');
           });
       });
     }
@@ -177,7 +178,7 @@
         const value = document.getElementById('value-input').value;
         
         if (!userId || !field || !action || !value) {
-          alert('Please fill in all fields');
+          showPopup('Please fill in all fields');
           return;
         }
         
@@ -196,14 +197,14 @@
         .then(response => response.json())
         .then(data => {
           if (data.status === 'ok') {
-            alert(data.message);
+            showPopup(data.message);
           } else {
-            alert('Error: ' + data.message);
+            showPopup('Error: ' + data.message);
           }
         })
         .catch(error => {
           console.error('Error modifying user:', error);
-          alert('Error modifying user. Please try again.');
+          showPopup('Error modifying user. Please try again.');
         });
       });
     }
@@ -220,12 +221,12 @@
             if (data.status === 'ok') {
               displayInventory(data);
             } else {
-              alert('Error: ' + data.message);
+              showPopup('Error: ' + data.message);
             }
           })
           .catch(error => {
             console.error('Error fetching inventory:', error);
-            alert('Error fetching inventory. Please try again.');
+            showPopup('Error fetching inventory. Please try again.');
           });
       });
     }
@@ -276,11 +277,12 @@
       
       document.getElementById('search-results').style.display = 'block';
       document.getElementById('user-info').style.display = 'none';
+      psContent.style.maxHeight = psContent.scrollHeight + 'px';
     }
     
     function displayUserInfo(user) {
       if (!user) {
-        alert('User not found');
+        showPopup('User not found');
         return;
       }
       
@@ -289,6 +291,7 @@
       
       document.getElementById('search-results').style.display = 'none';
       document.getElementById('user-info').style.display = 'block';
+      psContent.style.maxHeight = psContent.scrollHeight + 'px';
     }
     
     function displayInventory(data) {
@@ -340,12 +343,12 @@
           if (data.status === 'ok') {
             displayInventory(data);
           } else {
-            alert('Error: ' + data.message);
+            showPopup('Error: ' + data.message);
           }
         })
         .catch(error => {
           console.error('Error fetching inventory page:', error);
-          alert('Error fetching inventory page. Please try again.');
+          showPopup('Error fetching inventory page. Please try again.');
         });
     }
   });

@@ -6,7 +6,13 @@ import psutil
 import logging
 import datetime
 import re
-from core.database.connection import connect_mongo, get_collection
+from core.database.connection import (
+    connect_sqlite,
+    create_tables,
+    fetch_one,
+    fetch_all,
+    execute,
+)
 from flask import Flask, render_template, request, jsonify, send_file
 
 logging.basicConfig(
@@ -45,17 +51,20 @@ def load_config():
         return {}
 
 cfg = load_config()
-db_name = cfg.get('db', {}).get('mongo_db_name', 'XiuXianGameV4')
-connect_mongo(db_name=db_name)
+db_path = cfg.get('db', {}).get('sqlite_path', os.path.join('data', 'xiu_xian.db'))
+connect_sqlite(db_path)
+create_tables()
 
 def save_config(cfg):
     with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
 
 def load_translations(lang):
-    path = os.path.join(I18N_DIR, f'{lang}.json')
+    alias_map = {"CHS": "zh", "EN": "en"}
+    lang_code = alias_map.get(lang.upper(), lang)
+    path = os.path.join(I18N_DIR, f"{lang_code}.json")
     try:
-        with open(path, encoding='utf-8') as f:
+        with open(path, encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
         logger.warning(f"Translation file not found: {path}")
@@ -76,21 +85,21 @@ def start_core():
         logger.info("Starting core server")
         
         try:
-            from core.database.connection import connect_mongo, ensure_defaults
+            from core.database.connection import connect_sqlite, create_tables
             from core.game.mechanics import initialize_game_mechanics
-            
-            connect_mongo()
-            user_collection = get_collection('users')
-            ensure_defaults(user_collection)
-            
+
+            connect_sqlite(db_path)
+            create_tables()
+
             initialize_game_mechanics()
-            
+
             logger.info("Core components initialized successfully")
         except Exception as init_error:
             logger.error(f"Failed to initialize core components: {init_error}")
         
+        server_path = os.path.join(ROOT_DIR, 'core', 'server.py')
         process = subprocess.Popen(
-            [sys.executable, '-c', 'from core.server import start_server; start_server(); import time; time.sleep(3600)'],
+            [sys.executable, server_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
@@ -181,9 +190,20 @@ def stop_adapter(adapter_name):
         logger.error(f"Failed to stop {adapter_name} adapter: {e}")
         return False
 
+def parse_lang(arg: str) -> str:
+    alias_map = {"CHS": "zh", "EN": "en"}
+    return alias_map.get(arg.upper(), arg)
+
+
+@app.context_processor
+def inject_utils():
+    return dict(parse_lang=parse_lang)
+
+
 @app.context_processor
 def inject_i18n():
-    lang = request.args.get('lang', 'en')
+    raw_lang = request.args.get('lang', 'en')
+    lang = parse_lang(raw_lang)
     trans = load_translations(lang)
     return dict(trans=trans, current_lang=lang)
 
@@ -199,7 +219,7 @@ def config_get():
 
 @app.route('/config', methods=['POST'])
 def config_post():
-    lang  = request.args.get('lang', 'en')
+    lang = parse_lang(request.args.get('lang', 'en'))
     trans = load_translations(lang)
 
     old_cfg = load_config()
@@ -251,18 +271,15 @@ def search_user():
         logger.info(f"Attempting to find user by ID: {query}")
         user = get_user(query)
         if user:
-            logger.info(f"User found by ID: {user.get('user_id')} / {user.get('in_game_username')}")
-            if '_id' in user:
-                user['_id'] = str(user['_id'])
+            logger.info(
+                f"User found by ID: {user.get('user_id')} / {user.get('in_game_username')}"
+            )
             return jsonify({'status': 'ok', 'user': user})
         
         logger.info(f"User not found by ID, searching by username regex: {query}")
         users = search_users({'in_game_username': {'$regex': query, '$options': 'i'}}, limit=10)
         if users:
             logger.info(f"Found {len(users)} users by username search")
-            for u in users:
-                if '_id' in u:
-                    u['_id'] = str(u['_id'])
             return jsonify({'status': 'ok', 'users': users})
         
         logger.warning(f"No users found for query: {query}")
@@ -270,9 +287,6 @@ def search_user():
     except Exception as e:
         logger.error(f"Error in search_user: {str(e)}", exc_info=True)
         return jsonify({'status': 'error', 'message': f'Server error: {str(e)}'}), 500
-    except Exception as e:
-        logger.error(f"Error in search_user: {e}")
-        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 @app.route('/admin/modify_user', methods=['POST'])
 def modify_user():
@@ -307,8 +321,7 @@ def get_inventory(user_id):
         page = int(request.args.get('page', 1))
         items_per_page = 10
         
-        from core.admin.user_management import get_user
-        from core.database.connection import get_collection
+        from core.admin.user_management import get_user, get_user_inventory
         
         user = get_user(user_id)
         if not user:
@@ -320,8 +333,6 @@ def get_inventory(user_id):
         if 'gold' not in user:
             user['gold'] = 0
         
-        if '_id' in user:
-            user['_id'] = str(user['_id'])
         
         if 'inventory' in user and isinstance(user['inventory'], list):
             logger.info(f"Using embedded inventory for user {user_id}")
@@ -333,24 +344,9 @@ def get_inventory(user_id):
             end_idx = min(start_idx + items_per_page, total_items)
             items = all_items[start_idx:end_idx]
             
-            for item in items:
-                if '_id' in item:
-                    item['_id'] = str(item['_id'])
         else:
-            logger.info(f"Using items collection for user {user_id}")
-            items_collection = get_collection('items')
-            total_items = items_collection.count_documents({'user_id': user_id})
-            total_pages = (total_items + items_per_page - 1) // items_per_page
-            
-            items = list(items_collection.find(
-                {'user_id': user_id},
-                skip=(page - 1) * items_per_page,
-                limit=items_per_page
-            ))
-            
-            for item in items:
-                if '_id' in item:
-                    item['_id'] = str(item['_id'])
+            logger.info(f"Using items table for user {user_id}")
+            items, total_pages = get_user_inventory(user_id, page, items_per_page)
         
         return jsonify({
             'status': 'ok',
@@ -590,7 +586,7 @@ def servers_status():
 
 @app.route('/servers/start/core', methods=['POST'])
 def start_core_route():
-    lang = request.args.get('lang', 'en')
+    lang = parse_lang(request.args.get('lang', 'en'))
     trans = load_translations(lang)
     
     if start_core():
@@ -606,7 +602,7 @@ def start_core_route():
 
 @app.route('/servers/stop/core', methods=['POST'])
 def stop_core_route():
-    lang = request.args.get('lang', 'en')
+    lang = parse_lang(request.args.get('lang', 'en'))
     trans = load_translations(lang)
     
     if stop_core():
@@ -622,7 +618,7 @@ def stop_core_route():
 
 @app.route('/servers/start/<adapter_name>', methods=['POST'])
 def start_adapter_route(adapter_name):
-    lang = request.args.get('lang', 'en')
+    lang = parse_lang(request.args.get('lang', 'en'))
     trans = load_translations(lang)
     
     if start_adapter(adapter_name):
@@ -638,7 +634,7 @@ def start_adapter_route(adapter_name):
 
 @app.route('/servers/stop/<adapter_name>', methods=['POST'])
 def stop_adapter_route(adapter_name):
-    lang = request.args.get('lang', 'en')
+    lang = parse_lang(request.args.get('lang', 'en'))
     trans = load_translations(lang)
     
     if stop_adapter(adapter_name):
@@ -660,28 +656,57 @@ def database_query(collection_name):
         page = int(request.args.get('page', 1))
         items_per_page = int(request.args.get('items_per_page', 20))
         
-        from core.database.connection import get_collection
-        
         if collection_name not in ['users', 'items', 'timings']:
-            return jsonify({
-                'status': 'error',
-                'message': f'Invalid collection name: {collection_name}'
-            }), 400
-        
-        collection = get_collection(collection_name)
-        
-        total_items = collection.count_documents(query)
+            return (
+                jsonify({'status': 'error', 'message': f'Invalid collection name: {collection_name}'}),
+                400,
+            )
+
+        conditions = []
+        params = []
+        for field, value in query.items():
+            if isinstance(value, dict) and '$regex' in value:
+                conditions.append(f"{field} LIKE ?")
+                params.append(f"%{value['$regex']}%")
+            elif isinstance(value, dict) and '$ne' in value:
+                conditions.append(f"{field} != ?")
+                params.append(value['$ne'])
+            elif isinstance(value, dict) and '$gt' in value:
+                conditions.append(f"{field} > ?")
+                params.append(value['$gt'])
+            elif isinstance(value, dict) and '$gte' in value:
+                conditions.append(f"{field} >= ?")
+                params.append(value['$gte'])
+            elif isinstance(value, dict) and '$lt' in value:
+                conditions.append(f"{field} < ?")
+                params.append(value['$lt'])
+            elif isinstance(value, dict) and '$lte' in value:
+                conditions.append(f"{field} <= ?")
+                params.append(value['$lte'])
+            else:
+                conditions.append(f"{field} = ?")
+                params.append(value)
+
+        where_clause = ''
+        if conditions:
+            where_clause = 'WHERE ' + ' AND '.join(conditions)
+
+        count_row = fetch_one(
+            f"SELECT COUNT(*) as c FROM {collection_name} {where_clause}",
+            tuple(params),
+        )
+        total_items = count_row['c'] if count_row else 0
         total_pages = (total_items + items_per_page - 1) // items_per_page
-        
-        results = list(collection.find(
-            query,
-            skip=(page - 1) * items_per_page,
-            limit=items_per_page
-        ))
-        
-        for result in results:
-            if '_id' in result:
-                result['_id'] = str(result['_id'])
+
+        params.extend([items_per_page, (page - 1) * items_per_page])
+        results = fetch_all(
+            f"SELECT * FROM {collection_name} {where_clause} LIMIT ? OFFSET ?",
+            tuple(params),
+        )
+        for r in results:
+            for k in list(r.keys()):
+                if k.strip().lower() == 'actions':
+                    r.pop(k, None)
         
         return jsonify({
             'status': 'ok',
@@ -696,6 +721,30 @@ def database_query(collection_name):
             'status': 'error',
             'message': str(e)
         }), 500
+
+
+@app.route('/database/delete/<user_id>', methods=['POST'])
+def database_delete_user(user_id):
+    try:
+        execute('DELETE FROM users WHERE user_id = ?', (user_id,))
+        execute('DELETE FROM items WHERE user_id = ?', (user_id,))
+        execute('DELETE FROM timings WHERE user_id = ?', (user_id,))
+        return jsonify({'status': 'ok'})
+    except Exception as e:
+        logger.error(f"Error in database_delete_user: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/database/user/<user_id>')
+def database_get_user(user_id):
+    try:
+        user = fetch_one('SELECT * FROM users WHERE user_id = ?', (user_id,))
+        if not user:
+            return jsonify({'status': 'error', 'message': 'User not found'}), 404
+        return jsonify({'status': 'ok', 'user': user})
+    except Exception as e:
+        logger.error(f"Error in database_get_user: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 if __name__ == '__main__':
     cfg  = load_config()

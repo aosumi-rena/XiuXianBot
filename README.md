@@ -311,7 +311,7 @@ Each adapter translates platform-specific events into calls into the core and fo
 5. **Start the local admin dashboard webpage**  
    Once the running, it opens the port  `11451` as local admin dashboard.  
    Open your browser to the configured port (e.g. `http://localhost:11451`) to check/finalize settings.  
-7. **Start the bot on respective servers/platforms**  
+6. **Start the bot on respective servers/platforms**  
    From the local admin panel, enable whichever platform adapters you need (Discord, Telegram, etc.), and the containers covering those adapters will launch.  
    
 ---

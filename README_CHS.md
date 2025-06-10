@@ -68,7 +68,7 @@
       </ul>
     <li><a href="#其他">其他</a></li>
       <ul>
-        <li><a href="#star历史">Star 历史</a></li>
+        <li><a href="#star-历史">Star 历史</a></li>
       </ul>
   </ol>
 </details>

@@ -478,7 +478,7 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
  </picture>
 </a>
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#star历史">简中</a>)</p>
+<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#star-历史">简中</a>)</p>
 
 <!-- URL -->
 

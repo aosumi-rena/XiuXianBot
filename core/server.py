@@ -28,6 +28,7 @@ from core.game.mechanics import (
 )
 from core.utils.database import generate_universal_uid
 from core.utils.account_status import get_user_status
+from core.utils.lang_file import get_user_lang, set_user_lang
 
 LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -78,17 +79,20 @@ def lookup_user():
         return jsonify({"success": False, "message": "Missing parameters"}), 400
     column = f"{platform}_id"
     row = fetch_one(
-        f"SELECT user_id, lang, in_game_username FROM users WHERE {column} = ?",
+        f"SELECT user_id, in_game_username, lang FROM users WHERE {column} = ?",
         (platform_id,),
     )
     if not row:
         return jsonify({"success": False, "message": "User not found"}), 404
-    return jsonify({
-        "success": True,
-        "user_id": row["user_id"],
-        "lang": row.get("lang", "CHS"),
-        "username": row.get("in_game_username")
-    })
+
+    return jsonify(
+        {
+            "success": True,
+            "user_id": row["user_id"],
+            "username": row.get("in_game_username"),
+            "lang": row.get("lang", "EN"),
+        }
+    )
 
 
 @core_app.route("/api/register", methods=["POST"])
@@ -103,9 +107,21 @@ def register_user():
         return jsonify({"success": False, "message": "Missing parameters"}), 400
 
     column = f"{platform}_id"
-    existing = fetch_one(f"SELECT user_id, lang FROM users WHERE {column} = ?", (platform_id,))
+    existing = fetch_one(
+        f"SELECT user_id, lang FROM users WHERE {column} = ?", (platform_id,)
+    )
     if existing:
-        return jsonify({"success": False, "message": "User already exists", "user_id": existing["user_id"], "lang": existing.get("lang", "CHS")}), 400
+        return (
+            jsonify(
+                {
+                    "success": False,
+                    "message": "User already exists",
+                    "user_id": existing["user_id"],
+                    "lang": existing.get("lang", "CHS"),
+                }
+            ),
+            400,
+        )
 
     try:
         uid = generate_universal_uid()
@@ -143,6 +159,8 @@ def register_user():
             user_data["third_party_ids"].get("matrix"),
         ),
     )
+    # store language preference under platform-specific user ID
+    set_user_lang(platform, platform_id, lang)
     logger.info(f"Created account {uid} for {platform}:{platform_id}")
     return jsonify({"success": True, "user_id": uid})
 
@@ -175,7 +193,13 @@ def cultivate_start():
     )
     execute("UPDATE users SET state = 1 WHERE user_id = ?", (user_id,))
 
-    return jsonify({"success": True, "start_time": timing["start_time"], "gain_per_hour": timing["base_gain"]})
+    return jsonify(
+        {
+            "success": True,
+            "start_time": timing["start_time"],
+            "gain_per_hour": timing["base_gain"],
+        }
+    )
 
 
 @core_app.route("/api/cultivate/end", methods=["POST"])
@@ -189,13 +213,17 @@ def cultivate_end():
     if not user or not user.get("state"):
         return jsonify({"success": False, "message": "Not cultivating"}), 400
 
-    timing = fetch_one("SELECT * FROM timings WHERE user_id = ? AND type = 'cultivation'", (user_id,))
+    timing = fetch_one(
+        "SELECT * FROM timings WHERE user_id = ? AND type = 'cultivation'", (user_id,)
+    )
     if not timing:
         return jsonify({"success": False, "message": "Timing missing"}), 400
 
     gain = calculate_cultivation_progress(timing)
     execute("DELETE FROM timings WHERE id = ?", (timing["id"],))
-    execute("UPDATE users SET state = 0, exp = exp + ? WHERE user_id = ?", (gain, user_id))
+    execute(
+        "UPDATE users SET state = 0, exp = exp + ? WHERE user_id = ?", (gain, user_id)
+    )
     return jsonify({"success": True, "gain": gain})
 
 
@@ -208,16 +236,20 @@ def cultivate_status(user_id):
     if not user.get("state"):
         return jsonify({"success": True, "state": False})
 
-    timing = fetch_one("SELECT * FROM timings WHERE user_id = ? AND type = 'cultivation'", (user_id,))
+    timing = fetch_one(
+        "SELECT * FROM timings WHERE user_id = ? AND type = 'cultivation'", (user_id,)
+    )
     if not timing:
         return jsonify({"success": False, "message": "Timing missing"}), 400
     gain = calculate_cultivation_progress(timing)
-    return jsonify({
-        "success": True,
-        "state": True,
-        "start_time": timing["start_time"],
-        "current_gain": gain,
-    })
+    return jsonify(
+        {
+            "success": True,
+            "state": True,
+            "start_time": timing["start_time"],
+            "current_gain": gain,
+        }
+    )
 
 
 def load_config():
@@ -239,7 +271,7 @@ def run_core_server():
         port = config.get("core_server", {}).get("port", 11450)
         logger.info(f"Starting core server on http://127.0.0.1:{port}")
         core_app.run(host="127.0.0.1", port=port, debug=False, use_reloader=False)
-    except Exception as exc: 
+    except Exception as exc:
         logger.error(f"Core server error: {exc}")
     finally:
         server_running = False

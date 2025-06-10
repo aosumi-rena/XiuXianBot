@@ -15,6 +15,12 @@ if ROOT_DIR not in sys.path:
 
 from core.utils.localisation import get_response, load_localisation
 from core.utils.account_status import format_status_text
+from core.utils.lang_file import get_user_lang, set_user_lang
+
+PLATFORM = "telegram"
+
+TELEGRAM_VERSION = os.getenv("TELEGRAM_VERSION", "DEV")
+CORE_VERSION = os.getenv("CORE_VERSION", "DEV")
 
 LOG_DIR = os.path.abspath(os.path.join(ROOT_DIR, "logs"))
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -36,14 +42,28 @@ async def http_get(url, **kwargs):
     timeout = aiohttp.ClientTimeout(total=15)
     async with aiohttp.ClientSession(timeout=timeout) as session:
         async with session.get(url, **kwargs) as resp:
-            return await resp.json()
+            try:
+                return await resp.json(content_type=None)
+            except Exception:
+                text = await resp.text()
+                try:
+                    return json.loads(text)
+                except Exception:
+                    raise
 
 
 async def http_post(url, **kwargs):
     timeout = aiohttp.ClientTimeout(total=15)
     async with aiohttp.ClientSession(timeout=timeout) as session:
         async with session.post(url, **kwargs) as resp:
-            return await resp.json()
+            try:
+                return await resp.json(content_type=None)
+            except Exception:
+                text = await resp.text()
+                try:
+                    return json.loads(text)
+                except Exception:
+                    raise
 
 
 def require_account(handler):
@@ -56,17 +76,23 @@ def require_account(handler):
                 params={"platform": "telegram", "platform_id": user_id},
                 timeout=15,
             )
+            lang = get_user_lang(PLATFORM, user_id, None)
+            if lang is None and r.get("success"):
+                lang = r.get("lang", "EN")
+                set_user_lang(PLATFORM, user_id, lang)
+            if lang is None:
+                lang = "EN"
             if not r.get("success"):
                 _, text = get_response(
                     "no_account",
                     user=update.effective_user.mention_html(),
-                    lang="CHS",
+                    lang=lang,
                     platform="telegram",
                 )
                 await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
                 return
             context.user_data["uid"] = r["user_id"]
-            context.user_data["lang"] = r.get("lang", "CHS")
+            context.user_data["lang"] = lang
             context.user_data["username"] = r.get("username", update.effective_user.first_name)
         except Exception as exc:
             logger.error(f"lookup error: {exc}")
@@ -85,7 +111,10 @@ async def register_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
             timeout=15,
         )
         if r.get("success"):
-            lang = r.get("lang", "CHS")
+            lang = get_user_lang(PLATFORM, user_id, None)
+            if lang is None:
+                lang = r.get("lang", "EN")
+                set_user_lang(PLATFORM, user_id, lang)
             username = r.get("username", update.effective_user.first_name)
             _, text = get_response(
                 "already_account",
@@ -98,16 +127,14 @@ async def register_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as exc:
         logger.error(f"lookup error: {exc}")
 
-    if len(context.args) < 2:
-        await update.message.reply_text("Usage: /register <username> <lang>")
+    if len(context.args) < 1:
+        await update.message.reply_text("Usage: /register <username>")
         return
     username = context.args[0].strip()
-    lang = context.args[1].strip().upper() or "CHS"
     payload = {
         "platform": "telegram",
         "platform_id": user_id,
         "username": username,
-        "lang": lang,
     }
     try:
         data = await http_post(f"{SERVER_URL}/api/register", json=payload, timeout=15)
@@ -186,6 +213,70 @@ async def cultivate_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"cultivate error: {exc}")
         await update.message.reply_text("Server error")
 
+async def lang_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) < 1:
+        await update.message.reply_text("Usage: /lang <code>")
+        return
+    code = context.args[0].strip().upper()
+    user_id = str(update.effective_user.id)
+    try:
+        set_user_lang(user_id, code)
+        context.user_data["lang"] = code
+        await update.message.reply_text(f"Language set to {code}")
+    except Exception as exc:
+        logger.error(f"lang error: {exc}")
+        await update.message.reply_text("Error")
+
+async def lang_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) < 1:
+        await update.message.reply_text("Usage: /lang <code>")
+        return
+    code = context.args[0].strip().upper()
+    user_id = str(update.effective_user.id)
+    try:
+        set_user_lang(PLATFORM, user_id, code)
+        context.user_data["lang"] = code
+        await update.message.reply_text(f"Language set to {code}")
+    except Exception as exc:
+        logger.error(f"lang error: {exc}")
+        await update.message.reply_text("Error")
+
+
+async def lang_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) < 1:
+        await update.message.reply_text("Usage: /lang <code>")
+        return
+    code = context.args[0].strip().upper()
+    user_id = str(update.effective_user.id)
+    try:
+        set_user_lang(PLATFORM, user_id, code)
+        context.user_data["lang"] = code
+        await update.message.reply_text(f"Language set to {code}")
+    except Exception as exc:
+        logger.error(f"lang error: {exc}")
+        await update.message.reply_text("Error")
+
+
+async def lang_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) < 1:
+        await update.message.reply_text("Usage: /lang <code>")
+        return
+    code = context.args[0].strip().upper()
+    user_id = str(update.effective_user.id)
+    try:
+        set_user_lang(PLATFORM, user_id, code)
+        context.user_data["lang"] = code
+        await update.message.reply_text(f"Language set to {code}")
+    except Exception as exc:
+        logger.error(f"lang error: {exc}")
+        await update.message.reply_text("Error")
+
+
+async def version_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        f"Core-{CORE_VERSION} (Telegram Adapter {TELEGRAM_VERSION})"
+    )
+
 
 def load_config():
     path = os.path.join(ROOT_DIR, "config.json")
@@ -210,11 +301,15 @@ def main():
     app.add_handler(CommandHandler("register", register_cmd))
     app.add_handler(CommandHandler(["stat", "status"], stat_cmd))
     app.add_handler(CommandHandler(["cul", "cultivate"], cultivate_cmd))
+    app.add_handler(CommandHandler("lang", lang_cmd))
+    app.add_handler(CommandHandler("version", version_cmd))
 
     commands = [
         BotCommand("register", "Create account"),
         BotCommand("stat", "Show status"),
         BotCommand("cul", "Cultivate"),
+        BotCommand("lang", "Change language"),
+        BotCommand("version", "Show version"),
     ]
     try:
         app.bot.set_my_commands(commands)

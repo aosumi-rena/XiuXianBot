@@ -207,6 +207,16 @@ def inject_i18n():
     trans = load_translations(lang)
     return dict(trans=trans, current_lang=lang)
 
+
+@app.context_processor
+def inject_versions():
+    return dict(
+        core_version=os.getenv("CORE_VERSION", "dev"),
+        web_version=os.getenv("WEB_VERSION", "dev"),
+        discord_version=os.getenv("DISCORD_VERSION", "dev"),
+        telegram_version=os.getenv("TELEGRAM_VERSION", "dev"),
+    )
+
 @app.route('/')
 def index():
     cfg = load_config()

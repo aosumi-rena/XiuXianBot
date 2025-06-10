@@ -42,6 +42,63 @@ body.dark-theme {
   --background-color: #1e1e1e;
   --card-bg: rgba(48, 48, 48, 0.85);
   color: #eee;
+  background-image: none;
+}
+
+body.dark-theme .sidebar {
+  background: linear-gradient(135deg, #333, #111);
+}
+
+body.dark-theme .sidebar a span {
+  color: #ddd;
+}
+
+body.dark-theme .sidebar-item {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-theme .sidebar-item.active {
+  background: rgba(255, 255, 255, 0.3);
+  border-left-color: #fff;
+}
+
+.theme-switch-container {
+  width: 100%;
+  text-align: center;
+}
+
+.theme-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.theme-icon-btn svg {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.theme-icon-btn .moon {
+  opacity: 0;
+  transform: scale(0);
+}
+
+body.dark-theme .theme-icon-btn .sun {
+  opacity: 0;
+  transform: scale(0);
+}
+
+body.dark-theme .theme-icon-btn .moon {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .app-container {
@@ -238,14 +295,28 @@ body.dark-theme {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+body.dark-theme .server-card {
+  background: rgba(48, 48, 48, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #eee;
+}
+
 .core-server {
   background: rgba(230, 240, 255, 0.9);
   border-left: 5px solid var(--primary-color);
 }
 
+body.dark-theme .core-server {
+  background: rgba(40, 40, 40, 0.8);
+}
+
 .adapter-card {
   background: rgba(255, 255, 255, 0.9);
   border-left: 5px solid var(--secondary-color);
+}
+
+body.dark-theme .adapter-card {
+  background: rgba(50, 50, 50, 0.8);
 }
 
 .server-header {
@@ -305,6 +376,11 @@ body.dark-theme {
   border-radius: 10px;
   margin-bottom: 1.5rem;
   border-left: 4px solid var(--primary-color);
+}
+
+body.dark-theme .adapters-info {
+  background: rgba(48, 48, 48, 0.8);
+  color: #eee;
 }
 
 @keyframes fadeIn {
@@ -429,6 +505,10 @@ body.dark-theme {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   animation: fadeIn 0.5s ease;
 }
+body.dark-theme .logs-filters {
+  background: rgba(48, 48, 48, 0.8);
+  color: #eee;
+}
 
 .logs-content {
   background: rgba(30, 30, 30, 0.95);
@@ -488,7 +568,7 @@ body.dark-theme {
   margin-right: 0.75rem;
 }
 
-#jsoneditor { 
+#jsoneditor {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -497,6 +577,21 @@ body.dark-theme {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme #jsoneditor {
+  background: rgba(30, 30, 30, 0.95);
+  color: #eee;
+}
+
+body.dark-theme .jsoneditor-outer {
+  background: #1e1e1e;
+  color: #eee;
+}
+
+body.dark-theme .jsoneditor-menu {
+  background: #2a2a2a;
+  border-bottom-color: #555;
 }
 
 .menu-toggle {
@@ -590,6 +685,19 @@ body.dark-theme {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+body.dark-theme .popup-box {
+  background: rgba(48, 48, 48, 0.95);
+  color: #eee;
+}
+
+body.dark-theme .popup-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-theme .popup-close.btn-close {
+  filter: invert(1);
 }
 
 .popup-message {

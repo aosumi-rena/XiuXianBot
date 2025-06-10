@@ -8,6 +8,11 @@ import logging
 import time
 from pathlib import Path
 
+CORE_VERSION = "OSBETADocker0.1.52"
+WEB_VERSION = "0.3.2"
+DISCORD_VERSION = "0.1.0"
+TELEGRAM_VERSION = "0.1.0"
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -46,6 +51,11 @@ def start_web_local(config):
         if web_local_dir not in sys.path:
             sys.path.insert(0, web_local_dir)
             
+        os.environ["CORE_VERSION"] = CORE_VERSION
+        os.environ["WEB_VERSION"] = WEB_VERSION
+        os.environ["DISCORD_VERSION"] = DISCORD_VERSION
+        os.environ["TELEGRAM_VERSION"] = TELEGRAM_VERSION
+
         spec = importlib.util.spec_from_file_location("app", web_local_path)
         web_local = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(web_local)
@@ -77,11 +87,18 @@ def start_adapter(adapter_name, config):
             logger.error(f"Adapter path not found: {adapter_path}")
             return None
         
+        env = os.environ.copy()
+        env["CORE_VERSION"] = CORE_VERSION
+        env["WEB_VERSION"] = WEB_VERSION
+        env["DISCORD_VERSION"] = DISCORD_VERSION
+        env["TELEGRAM_VERSION"] = TELEGRAM_VERSION
+
         process = subprocess.Popen(
             [sys.executable, adapter_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
+            env=env
         )
         
         adapter_processes[adapter_name] = process

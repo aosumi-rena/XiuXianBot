@@ -4,6 +4,10 @@
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+body.dark-theme .database-container {
+  background-color: rgba(48, 48, 48, 0.85);
+  color: #eee;
+}
 
 .database-header {
   margin-bottom: 20px;
@@ -40,6 +44,10 @@
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 20px;
+}
+body.dark-theme .query-builder {
+  background-color: rgba(40, 40, 40, 0.85);
+  color: #eee;
 }
 
 .query-builder-header {
@@ -101,6 +109,10 @@
   position: relative;
   max-width: calc(100vw - var(--sidebar-width) - 120px);
 }
+body.dark-theme .results-container {
+  background-color: rgba(40, 40, 40, 0.85);
+  color: #eee;
+}
 
 .results-header {
   display: flex;
@@ -144,6 +156,10 @@
   white-space: pre-wrap;
   max-height: 500px;
   overflow-y: auto;
+}
+body.dark-theme .json-results {
+  background-color: rgba(40, 40, 40, 0.85);
+  color: #eee;
 }
 
 .actions-cell .btn {

@@ -17,8 +17,8 @@
         "no_account": {
             "description": "Account not created",
             "type": "plain",
-            "text": "## ❌未找到账号\n{user}，您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
-            "text_TG": "❌**未找到账号**\n\n{user}，您还没有创建账号，请使用 `/register` 指令创建账号！\n{user} You have not created an account yet, Please use `/register` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
+            "text": "## ❌未找到账号\n{user}，您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)\n使用 `/lang <语言>` 切换语言。",
+            "text_TG": "❌**未找到账号**\n\n{user}，您还没有创建账号，请使用 `/register` 指令创建账号！\n{user} You have not created an account yet, Please use `/register` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)\n使用 `/lang <语言>` 切换语言。",
             "text_Matrix": ""
         },
         "cultivation_start": {

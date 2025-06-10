@@ -6,6 +6,10 @@
   margin-bottom: 30px;
 }
 
+body.dark-theme .admin-section {
+  color: #eee;
+}
+
 .dropdown-container {
   margin-bottom: 20px;
   border: 1px solid var(--border-color);
@@ -13,6 +17,11 @@
   overflow: hidden;
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme .dropdown-container {
+  background-color: #2b2b2b;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .dropdown-header {
@@ -25,6 +34,10 @@
   transition: background-color 0.3s ease;
 }
 
+body.dark-theme .dropdown-header {
+  background-color: #3a3a3a;
+}
+
 .dropdown-header:hover {
   background-color: #d8e6fd;
 }
@@ -33,6 +46,10 @@
   margin: 0;
   font-size: 1.2rem;
   color: var(--blue-theme-primary);
+}
+
+body.dark-theme .dropdown-header h3 {
+  color: #eee;
 }
 
 .dropdown-content {
@@ -62,6 +79,11 @@
   margin-top: 20px;
 }
 
+body.dark-theme .user-info-container {
+  background-color: #2b2b2b;
+  color: #eee;
+}
+
 .user-info-header {
   display: flex;
   justify-content: space-between;
@@ -88,6 +110,11 @@
   position: relative;
   max-width: calc(100vw - var(--sidebar-width) - 120px);
   display: block;
+}
+
+body.dark-theme .results-container {
+  background-color: #2b2b2b;
+  color: #eee;
 }
 
 .view-container {
@@ -128,6 +155,10 @@
 
 .inventory-display {
   margin-top: 20px;
+}
+
+body.dark-theme .inventory-display {
+  color: #eee;
 }
 
 .inventory-header {
@@ -186,6 +217,19 @@
 .form-control:focus, .form-select:focus {
   border-color: var(--blue-theme-secondary);
   box-shadow: 0 0 0 0.25rem rgba(59, 126, 201, 0.25);
+}
+
+body.dark-theme .form-control,
+body.dark-theme .form-select {
+  background-color: #3a3a3a;
+  color: #eee;
+  border-color: #555;
+}
+
+body.dark-theme .form-control:focus,
+body.dark-theme .form-select:focus {
+  border-color: var(--blue-archive-secondary);
+  box-shadow: 0 0 0 0.25rem rgba(41, 128, 185, 0.5);
 }
 
 .actions-cell .btn {

@@ -10,15 +10,15 @@
         "user_status": {
             "description": "User status details",
             "type": "embed",
-            "text": "👤 **{in_game_username}**\n🆔 UID: `{user_id}`\n⭐ Stage: {stage_description} (Level {rank})\n💫 Cultivation: {exp:,}/{max_exp:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {element}\n💰 Copper: {copper:,}\n💎 Gold: {gold:,}\n📅 HuntTimes: {dy_times}/3\n🧘 State: {state_text}",
+            "text": "## 👤 {in_game_username}\n🆔 UID: `{user_id}`\n⭐ Stage: {stage_description} (Level {rank})\n💫 Cultivation: {exp:,}/{max_exp:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {element}\n💰 Copper: {copper:,}\n💎 Gold: {gold:,}\n📅 HuntTimes: {dy_times}/3\n🧘 State: {state_text}",
             "text_TG": "👤 *{in_game_username}*\n🆔 UID: `{user_id}`\n⭐ Stage: {stage_description} (Level {rank})\n💫 Cultivation: {exp:,}/{max_exp:,}\n📊 Progress: {progress_bar} {progress:.1f}%\n🔥 Element: {element}\n💰 Copper: {copper:,}\n💎 Gold: {gold:,}\n📅 HuntTimes: {dy_times}/3\n🧘 State: {state_text}",
             "text_Matrix": ""
         },
         "no_account": {
             "description": "Account not created",
             "type": "plain",
-            "text": "## ❌ No Account Found\n{user} 您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)",
-            "text_TG": "❌ **No Account Found**\n\n{user} You have not created an account yet, please use `/register` to create one!\n您还没有创建账号，请使用 `/register` 指令创建账号！",
+            "text": "## ❌ No Account Found\n{user} 您还没有创建账号，请使用`开始`（`^ks`、`^start`、`^begin`）指令创建账号！（推荐：在Bot私聊/DM使用此指令，以最大化保护您的隐私。）\n{user} You have not created an account yet, Please use `^start` or `^begin` to create one. (Recommendation: Use this command in Bot DM for maximum privacy protection.)\nUse `/lang <EN/CHS>` to change language.",
+            "text_TG": "❌ **No Account Found**\n\n{user} You have not created an account yet, please use `/register` to create one!\n您还没有创建账号，请使用 `/register` 指令创建账号！\nUse `/lang <EN/CHS>` to change language.",
             "text_Matrix": ""
         },
         "cultivation_start": {

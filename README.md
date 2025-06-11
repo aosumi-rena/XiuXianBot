@@ -392,7 +392,7 @@ Once running, the bot will:
 * For localization, a Weblate site will be hosted for public contributions.
 
 ### Contributors
-#### Main Contributors
+#### Key Contributors
 <table cellpadding="0" cellspacing="0">
   <tr>
     <td valign="middle">

@@ -235,10 +235,10 @@ Each adapter translates platform-specific events into calls into the core and fo
 ### Prerequisites
 
 **Docker Deployment**:  
-- Docker (obviously)
+- Docker (duh)
 
 **Self Build**:  
-- Python 3.12+  
+- [Python 3.12+](https://www.python.org/downloads/)  
 - SQLite (built-in; automatically created)
 - MongoDB (For `i3` version)
 
@@ -296,7 +296,7 @@ Each adapter translates platform-specific events into calls into the core and fo
 2. **Unzip and Configure**
 
    * Unzip the prebuild into any directory ([7-Zip](https://www.7-zip.org/) recommended).
-   * Configure variables (Bot Token, etc.) in the config.json
+   * Configure variables (Bot Token, etc.) in the `config.json`
 3. **Install dependencies**
 
    ```sh
@@ -392,7 +392,7 @@ Once running, the bot will:
 * For localization, a Weblate site will be hosted for public contributions.
 
 ### Contributors
-
+#### Main Contributors
 <table cellpadding="0" cellspacing="0">
   <tr>
     <td valign="middle">
@@ -445,6 +445,9 @@ Once running, the bot will:
     </td>
   </tr>
 </table>
+
+#### Full Contributors List
+[![Contributors](https://contrib.nn.ci/api?repo=aosumi-rena/XiuXianBot)](https://github.com/aosumi-rena/XiuXianBot/graphs/contributors)
 
 <p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#贡献者">简中</a>)</p>
 

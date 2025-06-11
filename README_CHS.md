@@ -103,12 +103,12 @@
 root/
 ├── adapters/
 │   ├── discord/    # Discord 适配：斜杠命令、前缀命令、Modal、Embed
-│   │   └── bot.py  # 启动机器人
+│   │   └── bot.py        # 启动机器人
 │   ├── telegram/   # Telegram 适配：斜杠命令、Inline Keyboard
-│   │   └── bot.py  # 启动机器人
-│   ├── matrix/     # Matrix 适配（TBA）
-│   │   └── bot.py  # 启动机器人
-│   └── …           # 其他平台（TBA）
+│   │   └── bot.py      # 启动机器人
+│   ├── matrix/     # Matrix 适配（待添加）
+│   │   └── bot.py      # 启动机器人
+│   └── …           # 其他平台（待添加）
 ├── core/
 │   ├── commands/   # 游戏命令（hunt.py、cul.py、asc.py、account.py、ele.py 等），决定 Bot 如何回应命令
 │   ├── config/     # 游戏内的一些配置，例如卡池、商店、地图等
@@ -121,21 +121,21 @@ root/
 ├── web_local/      # 本地管理控制台 GUI（配置管理、服务器控制等）
 │   ├── app.py      # 在预设端口启动管理员控制台
 │   ├── templates/
-│   │   ├── base.html   # 公共布局（nav-tabs、footer）
-│   │   ├── index.html  # 首页
-│   │   ├── config.html # 修改配置（root/config.json）的页面
-│   │   ├── servers.html# 控制核心服务及适配器启停
-│   │   ├── admin.html  # 管理命令界面（如：编辑玩家数据、权限修改等）
-│   │   ├── logs.html   # 查看/导出日志
-│   │   ├── accounts.html# 管理玩家账号状态（封禁、停用、手动关联等）
-│   │   └── database.html# 查看玩家信息/渲染数据库内容
+│   │   ├── base.html     # 公共布局（nav-tabs、footer）
+│   │   ├── index.html    # 首页
+│   │   ├── config.html   # 修改配置（root/config.json）的页面
+│   │   ├── servers.html  # 控制核心服务及适配器启停
+│   │   ├── admin.html    # 管理命令界面（如：编辑玩家数据、权限修改等）
+│   │   ├── logs.html     # 查看/导出日志
+│   │   ├── accounts.html # 管理玩家账号状态（封禁、停用、手动关联等）
+│   │   └── database.html # 查看玩家信息/渲染数据库内容
 │   └── static/
 │       ├── css/
 │       │   └── styles.css
-│       ├── icons/      # 管理面板 SVG 图标
+│       ├── icons/        # 管理面板 SVG 图标
 │       └── js/
-│           ├── config.js# 配置页面逻辑
-│           └── …        # 其他页面逻辑
+│           ├── config.js # 配置页面逻辑
+│           └── …         # 其他页面逻辑
 ├── web_public/     # 公开网页 GUI（账号关联、注册等）
 ├── backups/        # 用户与物品备份
 ├── config.json     # Token、适配器开关、数据库配置等
@@ -240,8 +240,8 @@ root/
 - Docker（废话）
 
 **自建**：  
-- Python 3.12+  
-- SQLite（内置，无需额外安装）
+- [Python 3.12+](https://www.python.org/downloads/)  
+- SQLite（内置于Python，无需额外安装）
 - MongoDB （仅`i3`版本需要）
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#getting-started">English</a>)</p>
@@ -290,31 +290,31 @@ root/
 
 #### 自建
 **Pre-release: [OSBLTSDocker0.1.52](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)**
-&&& 待翻译，不行了得睡了困死了 &&&
-1. **Download Prebuild**  
 
-   * [Download from releases](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)
-   * [Download from cloud drive](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
-2. **Unzip and Configure**
+1. **下载 Prebuild**  
 
-   * Unzip the prebuild into any directory ([7-Zip](https://www.7-zip.org/) recommended).
-   * Configure variables (Bot Token, etc.) in the config.json
-3. **Install dependencies**
+   * [从 Release 下载](https://github.com/aosumi-rena/XiuXianBot/releases/tag/v0.1.52-LTS)
+   * [从网盘下载](https://minas.mihoyo.day/d/bea2128c4d9340208f24/)
+2. **解压及配置**
+
+   * 使用 [7-Zip(推荐)](https://www.7-zip.org/) 解压下载文件到任意目录。
+   * 修改`config.json`里的变量配置，包括Bot Token等
+3. **安装依赖**
 
    ```sh
    pip install -r requirements.txt
    ```
-4. **Run**
+4. **启动**
 
    ```sh
    python start.py
    ```
    
-5. **Start the local admin dashboard webpage**  
-   Once the running, it opens the port  `11451` as local admin dashboard.  
-   Open your browser to the configured port (e.g. `http://localhost:11451`) to check/finalize settings.  
-6. **Start the bot on respective servers/platforms**  
-   From the local admin panel, enable whichever platform adapters you need (Discord, Telegram, etc.), and the containers covering those adapters will launch.
+5. **启动本地管理面板网页**  
+   启动脚本后，端口`11451`将会被打开并用于本地控制面板的网页。  
+   打开浏览器访问 `http://localhost:11451`（或配置中指定的端口），检查和最终确认设置。  
+6. **启动机器人各平台适配器**  
+   在本地管理面板中，启用所需平台适配器（Discord、Telegram 等），对应容器将被启动。  
 
 ---
 
@@ -396,6 +396,8 @@ root/
 
 ### 贡献者
 
+#### 重要贡献者
+
 <table cellpadding="0" cellspacing="0">
   <tr>
     <td valign="middle">
@@ -448,6 +450,9 @@ root/
     </td>
   </tr>
 </table>
+
+#### 完整贡献者名单
+[![Contributors](https://contrib.nn.ci/api?repo=aosumi-rena/XiuXianBot)](https://github.com/aosumi-rena/XiuXianBot/graphs/contributors)
 
 <p align="right">(<a href="#readme-top">回到顶部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#contributors">English</a>)</p>
 

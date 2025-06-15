@@ -482,7 +482,7 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 ### AI
 
 * [OpenAI](https://chat.openai.com) – General assistance
-* [Deepwiki](https://deepwiki.com) – Documentation
+* [Deepwiki](https://deepwiki.com) – Providing wiki and flow charts
 
 ### Inspirations
 

@@ -487,7 +487,7 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 ### AI
 
 * [OpenAI](https://chat.openai.com) – 一般帮助
-* [Deepwiki](https://deepwiki.com) – 文档支持
+* [Deepwiki](https://deepwiki.com) – 百科文档支持
 
 ### 灵感
 

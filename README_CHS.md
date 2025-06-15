@@ -391,7 +391,7 @@ root/
 
 ## 贡献
 
-* 欢迎任何人为此仓库贡献，您可以通过 Pull Requests 或 Issues 提出改进建议。
+* 欢迎任何人为此仓库贡献，您可以通过 Fork 仓库并使用 Pull Requests 或 Issues 提出改进建议。
 * 对于本地化贡献，将使用 Weblate 搭建贡献平台，目前可临时通过 Issues 或 Pull Requests 进行贡献。
 
 ### 贡献者
@@ -487,7 +487,7 @@ XiuXianBot ©2024-2025 By 青澄玲奈
 ### AI
 
 * [OpenAI](https://chat.openai.com) – 一般帮助
-* [Deepwiki](https://deepwiki.com) – 文档支持
+* [Deepwiki](https://deepwiki.com) – 百科文档支持
 
 ### 灵感
 

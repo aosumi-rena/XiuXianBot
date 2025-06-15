@@ -388,7 +388,7 @@ Once running, the bot will:
 
 ## Contributing
 
-* All contributions are welcome: make pull requests or open issues if you want to help improve the project.
+* All contributions are welcome: you can fork this repo and make pull requests or open issues if you want to help improve the project.
 * For localization, a Weblate site will be hosted for public contributions.
 
 ### Contributors
@@ -482,7 +482,7 @@ Project Link: [https://github.com/aosumi-rena/XiuXianBot/](https://github.com/ao
 ### AI
 
 * [OpenAI](https://chat.openai.com) – General assistance
-* [Deepwiki](https://deepwiki.com) – Documentation
+* [Deepwiki](https://deepwiki.com) – Providing wiki and flow charts
 
 ### Inspirations
 

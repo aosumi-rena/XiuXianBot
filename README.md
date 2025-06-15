@@ -388,7 +388,7 @@ Once running, the bot will:
 
 ## Contributing
 
-* All contributions are welcome: make pull requests or open issues if you want to help improve the project.
+* All contributions are welcome: you can fork this repo and make pull requests or open issues if you want to help improve the project.
 * For localization, a Weblate site will be hosted for public contributions.
 
 ### Contributors

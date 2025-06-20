@@ -24,64 +24,64 @@ A cultivation-themed text-based RPG game bot supporting multiple platforms (Disc
 [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#readme-top) | [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#readme-top) | [繁體中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#readme-top) | [日本語](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#readme-top)
 
 <p align="right">
-<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#关于">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#修仙機器人">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#修仙Bot">日</a>
+(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#about-the-project">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#关于">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#修仙機器人">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#修仙ゲームbot">日</a>)
 </p>
 
 ---
 
-## Table of Contents
+  ## Table of Contents
 
-<details>
-  <summary>Click To Expand</summary>
-  <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#architecture">Architecture</a>
-      <ul>
-        <li><a href="#file-structure">File Structure</a></li>
-        <li><a href="#core-modules">Core Modules</a></li>
-        <li><a href="#platform-adapters">Platform Adapters</a></li>
-        <li><a href="#web-interfaces">Web Interfaces</a></li>
-      </ul>
-    </li>
-    <li><a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a>
-        <li><a href="#installation">Installation</a>
-          <ul>
-            <li><a href="#docker-installation">Docker Installation</a></li>
-            <li><a href="#self-build">Self Build</a></li>
-          </ul>
-        <li><a href="#older-versions">Older Versions</a>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a>
-      <ul>
-        <li><a href="#core">Core</a></li>
-        <li><a href="#game-functions">Game Functions</a></li>
-      </ul>
-    </li>
-    <li><a href="#contributing">Contributing</a>
-      <ul>
-        <li><a href="#contributors-list">Contributors List</a></li>
-      </ul>
-    </li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a>
-      <ul>
-        <li><a href="#ai">AI</a></li>
-        <li><a href="#inspirations">Inspirations</a></li>
-        <li><a href="#media-resources">Media Resources</a></li>
-      </ul>
-    </li>
-    <li><a href="#others">Others</a></li>
-      <ul>
-        <li><a href="#star-history">Star History</a></li>
-      </ul>
-    </li>
-  </ol>
-</details>
+  <details>
+    <summary>Click To Expand</summary>
+    <ol>
+      <li><a href="#about-the-project">About The Project</a></li>
+      <li><a href="#architecture">Architecture</a>
+        <ul>
+          <li><a href="#file-structure">File Structure</a></li>
+          <li><a href="#core-modules">Core Modules</a></li>
+          <li><a href="#platform-adapters">Platform Adapters</a></li>
+          <li><a href="#web-interfaces">Web Interfaces</a></li>
+        </ul>
+      </li>
+      <li><a href="#getting-started">Getting Started</a>
+        <ul>
+          <li><a href="#prerequisites">Prerequisites</a>
+          <li><a href="#installation">Installation</a>
+            <ul>
+              <li><a href="#docker-installation">Docker Installation</a></li>
+              <li><a href="#self-build">Self Build</a></li>
+            </ul>
+          <li><a href="#older-versions">Older Versions</a>
+        </ul>
+      </li>
+      <li><a href="#usage">Usage</a></li>
+      <li><a href="#roadmap">Roadmap</a>
+        <ul>
+          <li><a href="#core">Core</a></li>
+          <li><a href="#game-functions">Game Functions</a></li>
+        </ul>
+      </li>
+      <li><a href="#contributing">Contributing</a>
+        <ul>
+          <li><a href="#contributors-list">Contributors List</a></li>
+        </ul>
+      </li>
+      <li><a href="#license">License</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#acknowledgments">Acknowledgments</a>
+        <ul>
+          <li><a href="#ai">AI</a></li>
+          <li><a href="#inspirations">Inspirations</a></li>
+          <li><a href="#media-resources">Media Resources</a></li>
+        </ul>
+      </li>
+      <li><a href="#others">Others</a></li>
+        <ul>
+          <li><a href="#star-history">Star History</a></li>
+        </ul>
+      </li>
+    </ol>
+  </details>
 
 ---
 
@@ -101,7 +101,7 @@ XiuXianBot is a cultivation-themed RPG text-based game bot originally built for 
 - **Hot-Reloadable Config**: Admin UI can reload core configuration at runtime without full restart.
 - **Localization**: Full EN, CHS, CHT support in core; JP partial with README now fully translated.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#关于">简</a>)</p>
+<p align="right">(<a href="#readme-top">回到頂部</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#about-the-project">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#关于">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#關於">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#概要">日</a>)</p>
 
 ---
 
@@ -165,7 +165,7 @@ root/
 └── LICENSE.txt         # GPL-3.0 license
 ```
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#文件结构">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#architecture">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#文件结构">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#檔案結構">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#ファイル構成">日</a>)</p>
 
 ### Core Modules
 - **C# Core Server** (`Server/`)
@@ -190,7 +190,7 @@ root/
 - **Public Portal** (`web_public/`)
   - Planned for player self-service: account registration, OTP linking, stat view via web UI.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#核心模块">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#core-modules">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#核心模块">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#核心模組">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#コアモジュール">日</a>)</p>
 
 ### Platform Adapters
 Each adapter translates platform events into HTTP API calls and renders responses:
@@ -206,7 +206,7 @@ Each adapter translates platform events into HTTP API calls and renders response
   - Using a Matrix SDK for future support.
   - Plain-text messages with reply buttons.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#平台适配器">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#platform-adapters">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#平台适配器">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#平台適配器">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#プラットフォームアダプター">日</a>)</p>
 
 ### Web Interfaces
 - **Local Admin GUI** (`web_local/`)
@@ -220,7 +220,8 @@ Each adapter translates platform events into HTTP API calls and renders response
     6. **Accounts**: Manual platform linking & account management.
 - **Public Portal** (`web_public/`) – upcoming web UI for players.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#网页界面">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#web-interfaces">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#网页界面">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#網頁介面">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#ウェブインターフェース">日</a>)</p>
+
 
 ---
 
@@ -237,7 +238,7 @@ Each adapter translates platform events into HTTP API calls and renders response
 - .NET 7 SDK (core server)  
 - SQLite (built into .NET & Python)  
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#快速上手">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#getting-started">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#快速上手">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#快速上手">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#はじめに">日</a>)</p>
 
 ### Installation
 **For Official Releases (`OSRELDocker1.0.0_*` and above) {Under Development}**    
@@ -266,7 +267,7 @@ Each adapter translates platform events into HTTP API calls and renders response
 4. **Access Admin UI**
    Visit `http://localhost:11451` to verify settings, hot-reload config, and control services.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#docker部署">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#docker-installation">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#docker部署">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#docker部署">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#ドッカーによる部署">日</a>)</p>
 
 #### Self Build
 
@@ -308,7 +309,7 @@ Each adapter translates platform events into HTTP API calls and renders response
 6. **Open Admin UI**
    Visit `http://localhost:11451` and enable adapters as needed.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#自建">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#self-build">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#自建">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#自建">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#セルフビルド">日</a>)</p>
 
 
 ### Older Versions
@@ -363,6 +364,8 @@ Each adapter translates platform events into HTTP API calls and renders response
    python bot.py
    ```
 
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#older-versions">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#旧版本">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#舊版本">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#旧バージョン">日</a>)</p>
+
 ---
 
 ## Usage
@@ -375,7 +378,7 @@ Once running:
 * **Telegram**: Same slash commands, with inline buttons.
 * **Matrix**: (when enabled) similar interface.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#使用">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#usage">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#使用">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#使用">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#使い方">日</a>)</p>
 
 ---
 
@@ -402,8 +405,7 @@ Once running:
 * [ ] Gacha/lottery draws
 * [ ] Player trading & marketplace
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#后续">简</a>)</p>
-
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#roadmap">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#后续">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#後續">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#今後の計画">日</a>)</p>
 ---
 
 ## Contributing
@@ -476,7 +478,7 @@ All contributions are welcome! Fork, fix, and submit a pull request, or open an 
 
 [![Contributors](https://contrib.nn.ci/api?repo=aosumi-rena/XiuXianBot)](https://github.com/aosumi-rena/XiuXianBot/graphs/contributors)
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#贡献">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#contributors">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#贡献者名单">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#貢獻者名單">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#貢献者リスト">日</a>)</p>
 
 ---
 
@@ -488,7 +490,7 @@ XiuXianBot ©2024–2025 Aosumi Rena
 
 This program is licensed under the GNU GPL v3.0. See [LICENSE.txt](LICENSE.txt) for details.
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#许可">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#license">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#许可">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#授權">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#ライセンス">日</a>)</p>
 
 ---
 
@@ -498,7 +500,7 @@ Aosumi Rena – [rena.aosumi@mihoyo.day](mailto:rena.aosumi@mihoyo.day)
 
 Project Link: [github.com/aosumi-rena/XiuXianBot](https://github.com/aosumi-rena/XiuXianBot)
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#联系">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#contact">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#联系">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#聯絡">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#連絡先">日</a>)</p>
 
 ---
 
@@ -517,7 +519,7 @@ Project Link: [github.com/aosumi-rena/XiuXianBot](https://github.com/aosumi-rena
 
 * [api.tomys.top](https://tomys.top) – Random anime backgrounds for admin dashboard
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#致谢">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#acknowledgments">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#致谢">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#致謝">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#謝辞">日</a>)</p>
 
 ---
 
@@ -533,11 +535,12 @@ Project Link: [github.com/aosumi-rena/XiuXianBot](https://github.com/aosumi-rena
  </picture>
 </a>
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#star-历史">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#star-history">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#star-历史">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#star-歷史">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#スターの歴史">日</a>)</p>
 
 ---
 
-<p align="right">(<a href="#readme-top">Back to top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#其他">简</a>)</p>
+<p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#others">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#其他">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#其他">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#その他">日</a>)</p>
+
 <!-- Shields & URLs -->
 
 [downloads-shield]: https://img.shields.io/github/downloads/aosumi-rena/XiuXianBot/total?logo=github&style=flat-square

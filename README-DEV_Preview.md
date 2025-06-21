@@ -2,6 +2,8 @@
 This is a preview of the README file for the private XiuXianBotDev repo, which is the development build of this project.  
 It provides a quick overview of the future features and architecture of the XiuXianBot project.  
 It is not the final version and may contain incomplete or placeholder content.  
+<br><br><br><br><br>
+
 
 <a id="readme-top"></a>
 ![XiuXianBot](https://socialify.git.ci/aosumi-rena/XiuXianBot/image?custom_description=A+text-based+XiuXian%2F%E4%BF%AE%E4%BB%99+game+Bot+which+supports+multiple+platforms+at+the+same+time.&description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fminas.mihoyo.day%2Ff%2F1902fc2bd211436baf50%2F%3Fdl%3D1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
@@ -19,7 +21,7 @@ A cultivation-themed text-based RPG game bot supporting multiple platforms (Disc
 
 ![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
 
-**README Variations**
+### README Variations
 
 [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#readme-top) | [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#readme-top) | [繁體中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#readme-top) | [日本語](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#readme-top)
 
@@ -94,7 +96,7 @@ XiuXianBot is a cultivation-themed RPG text-based game bot originally built for 
 - A **public web portal** (in development) for account linking and player self-service.
 - A single bootstrap (`start.py`) for non-Docker setups, and a Docker Compose configuration for containerized deployments.
 
-### Recent Updates
+### TL;DR (If you know about this project already)
 - **Core Rewrite**: Game engine moved from Python to a C# ASP.NET Core Web API for higher concurrency and lower latency.
 - **Docker Single-Container**: All components (`core-server`, adapters, admin-dashboard) run within a single container for simplified deployment.
 - **SQLite**: Default persistence is SQLite; no MongoDB required.

@@ -14,7 +14,16 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
 
 ![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
 
-**README Variations**
+### What's [That](https://github.com/aosumi-rena/XiuXianBot/blob/main/README-DEV_Preview.md)?
+
+That is a preview of the README file for the private XiuXianBotDev repo, which is the development build of this project.  
+It provides a quick overview of the future features and architecture of the XiuXianBot project.  
+It is not the final version and may contain incomplete or placeholder content.  
+
+### Why?
+The current README (This file) is slightly outdated, but since the whole architecture will change again, this README will not be updated and instead use the new one.
+
+### README Variations
 
 [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#关于) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#readme-top)
 
@@ -81,7 +90,7 @@ XiuXianBot is a cultivation-themed RPG text-based game bot originally built for 
 - **Web interfaces** for admin control and public account management.
 - A **single bootstrap** (`start.py`) that loads configuration and starts the desired adapters.
 
-### Recent Updates (AI generated, pending checks)
+**Main updates since the first internal version of the new architecture:**
 
 - Admin dashboard now uses modal dialogs for most actions.
 - Database browser table features Copy ID, Ban and Deactivate controls.

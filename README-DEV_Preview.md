@@ -1,7 +1,7 @@
 # What's this?
-This is a preview of the README file for the private XiuXianBotDev repo, which is the development build of this project.
-It provides a quick overview of the future features and architecture of the XiuXianBot project.
-It is not the final version and may contain incomplete or placeholder content.
+This is a preview of the README file for the private XiuXianBotDev repo, which is the development build of this project.  
+It provides a quick overview of the future features and architecture of the XiuXianBot project.  
+It is not the final version and may contain incomplete or placeholder content.  
 
 <a id="readme-top"></a>
 ![XiuXianBot](https://socialify.git.ci/aosumi-rena/XiuXianBot/image?custom_description=A+text-based+XiuXian%2F%E4%BF%AE%E4%BB%99+game+Bot+which+supports+multiple+platforms+at+the+same+time.&description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fminas.mihoyo.day%2Ff%2F1902fc2bd211436baf50%2F%3Fdl%3D1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)

@@ -408,6 +408,7 @@ Once running:
 * [ ] Player trading & marketplace
 
 <p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#roadmap">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#后续">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#後續">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#今後の計画">日</a>)</p>
+
 ---
 
 ## Contributing

@@ -96,7 +96,7 @@ XiuXianBot is a cultivation-themed RPG text-based game bot originally built for 
 - A **public web portal** (in development) for account linking and player self-service.
 - A single bootstrap (`start.py`) for non-Docker setups, and a Docker Compose configuration for containerized deployments.
 
-### TL;DR (If you know about this project already)
+### Recent Updates
 - **Core Rewrite**: Game engine moved from Python to a C# ASP.NET Core Web API for higher concurrency and lower latency.
 - **Docker Single-Container**: All components (`core-server`, adapters, admin-dashboard) run within a single container for simplified deployment.
 - **SQLite**: Default persistence is SQLite; no MongoDB required.
@@ -143,6 +143,7 @@ root/
 │   └── ...             # More platforms
 │
 ├── server/             # C# core server (ASP.NET Core project)
+│   |                   # Contains all game logic and API endpoints, transited from the previous versions' `core/` folder.
 │   ├── program.cs      # Main server script
 │   ├── controllers/    # API controllers (endpoints)
 │   ├── models/         # Data models (Player, Item, etc.)
@@ -393,7 +394,7 @@ Once running:
 * [x] Containerize with Docker Compose
 * [x] Python adapters for Discord & Telegram
 * [ ] Prototype Matrix adapter
-* [ ] Develop public web portal
+* [ ] Develop public web domain for account management
 * [ ] Explore live script/hot-reload for game logic
 
 ### Game Functions

@@ -2,7 +2,7 @@
 This is a preview of the README file for the private XiuXianBotDev repo, which is the development build of this project.  
 It provides a quick overview of the future features and architecture of the XiuXianBot project.  
 It is not the final version and may contain incomplete or placeholder content.  
-<br><br><br><br><br>
+<br><br><br>
 
 
 <a id="readme-top"></a>

@@ -4,6 +4,7 @@ It provides a quick overview of the future features and architecture of the XiuX
 It is not the final version and may contain incomplete or placeholder content.  
 <br><br><br>
 
+---
 
 <a id="readme-top"></a>
 ![XiuXianBot](https://socialify.git.ci/aosumi-rena/XiuXianBot/image?custom_description=A+text-based+XiuXian%2F%E4%BF%AE%E4%BB%99+game+Bot+which+supports+multiple+platforms+at+the+same+time.&description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fminas.mihoyo.day%2Ff%2F1902fc2bd211436baf50%2F%3Fdl%3D1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
@@ -96,7 +97,7 @@ XiuXianBot is a cultivation-themed RPG text-based game bot originally built for 
 - A **public web portal** (in development) for account linking and player self-service.
 - A single bootstrap (`start.py`) for non-Docker setups, and a Docker Compose configuration for containerized deployments.
 
-### TL;DR (If you know about this project already)
+### TL;DR (If you already know this project)
 - **Core Rewrite**: Game engine moved from Python to a C# ASP.NET Core Web API for higher concurrency and lower latency.
 - **Docker Single-Container**: All components (`core-server`, adapters, admin-dashboard) run within a single container for simplified deployment.
 - **SQLite**: Default persistence is SQLite; no MongoDB required.
@@ -512,16 +513,16 @@ Project Link: [github.com/aosumi-rena/XiuXianBot](https://github.com/aosumi-rena
 
 ### AI
 
-* [OpenAI](https://chat.openai.com) – General assistance on coding
-* [DeepWiki](https://deepwiki.com) – Documentation & flowchart support
+* **[OpenAI](https://chat.openai.com)** – General assistance on coding, some localisations, and architecture design.
+* **[DeepWiki](https://deepwiki.com)** – Documentation & flowchart support
 
 ### Inspirations
 
-* [BlueArchiveGM](https://github.com/PrimeStudentCouncil/BlueArchiveGM) – Admin UI design inspiration
+* **[BlueArchiveGM](https://github.com/PrimeStudentCouncil/BlueArchiveGM)** – Admin UI design inspiration
 
 ### Media Resources
 
-* [api.tomys.top](https://tomys.top) – Random anime backgrounds for admin dashboard
+* **[api.tomys.top](https://tomys.top)** – Random anime backgrounds for admin dashboard
 
 <p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#acknowledgments">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#致谢">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#致謝">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#謝辞">日</a>)</p>
 

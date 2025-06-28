@@ -14,7 +14,7 @@ A text-based game Bot which supports both Telegram and Discord (Matrix and more 
 
 ![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
 
-### What's [That](https://github.com/aosumi-rena/XiuXianBot/blob/main/README-DEV_Preview.md)?
+### What's [README-DEV_Preview.md](https://github.com/aosumi-rena/XiuXianBot/blob/main/README-DEV_Preview.md)?
 
 That is a preview of the README file for the private XiuXianBotDev repo, which is the development build of this project.  
 It provides a quick overview of the future features and architecture of the XiuXianBot project.  

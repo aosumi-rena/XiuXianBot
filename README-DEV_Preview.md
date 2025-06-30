@@ -250,15 +250,15 @@ Each adapter translates platform events into HTTP API calls and renders response
 
 1. **Download the docker-compose.yml**  
    ```bash
-   mkdir XiuXianBot
-   cd XiuXianBot
+   mkdir XiuXianBot && cd XiuXianBot
    wget -qO docker-compose.yml https://raw.githubusercontent.com/aosumi-rena/XiuXianBot/refs/heads/main/docker-compose.yml
    ```
 
 2. **Configure**
    Supply environment variables in `docker-compose.yml` for:
 
-   * `DISCORD_TOKEN`, `TELEGRAM_TOKEN`, `API_SECRET`
+   * Compulsory:
+     * Tokens of bots you are running (`DISCORD_TOKEN`, `TELEGRAM_TOKEN`, ...), `API_SECRET`
    * Optional:
      * `CORE_SERVER_PORT`, `INTERNAL_COMMUNICATION_PORT`, `DB_PATH`, \<Other Features (TBA)\>
      * Switch image versions (latest / beta / ...)

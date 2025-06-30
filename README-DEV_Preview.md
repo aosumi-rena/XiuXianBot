@@ -248,17 +248,20 @@ Each adapter translates platform events into HTTP API calls and renders response
 **For Official Releases (`OSRELDocker1.0.0_*` and above) {Under Development}**    
 #### Docker Installation
 
-1. **Clone the repo**  
+1. **Download the docker-compose.yml**  
    ```bash
-   git clone https://github.com/aosumi-rena/XiuXianBot.git
+   mkdir XiuXianBot
    cd XiuXianBot
+   wget -qO docker-compose.yml https://raw.githubusercontent.com/aosumi-rena/XiuXianBot/refs/heads/main/docker-compose.yml
    ```
 
 2. **Configure**
-   Edit `config.json` or supply environment variables in `docker-compose.yml` for:
+   Supply environment variables in `docker-compose.yml` for:
 
    * `DISCORD_TOKEN`, `TELEGRAM_TOKEN`, `API_SECRET`
-   * Optional: `CORE_SERVER_PORT`, database path, feature toggles
+   * Optional:
+     * `CORE_SERVER_PORT`, `INTERNAL_COMMUNICATION_PORT`, `DB_PATH`, \<Other Features (TBA)\>
+     * Switch image versions (latest / beta / ...)
 
 3. **Start service**
 

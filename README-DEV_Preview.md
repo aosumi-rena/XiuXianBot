@@ -295,14 +295,14 @@ Each adapter translates platform events into HTTP API calls and renders response
 3. **Build C# core**
 
    ```bash
-   cd Server
+   cd server
    dotnet build -c Release
    ```
 
 4. **Run core server**
 
    ```bash
-   cd Server
+   cd server
    dotnet run -c Release
    ```
 

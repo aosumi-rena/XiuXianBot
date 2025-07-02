@@ -153,6 +153,7 @@ root/
 │
 ├── web_local/          # Local admin dashboard (Flask)
 │   ├── app.py          # Flask application entry
+|   |                   # <Will be switched for npm>
 │   ├── templates/      # Jinja2 templates (config.html, logs.html, etc.)
 │   └── static/         # CSS/JS/icons for dashboard
 │

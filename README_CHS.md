@@ -16,6 +16,13 @@
 
 ![Alt](https://repobeats.axiom.co/api/embed/b40285fbd34567583dc0df228cace66b09a6552c.svg "Repobeats analytics image")
 
+### [README-DEV_Preview.md](https://github.com/aosumi-rena/XiuXianBot/blob/main/README-DEV_Preview.md)是啥？
+
+那是一个私有的Dev版仓库（XiuXianDev）的预览版README，也就是这个项目的内部测试版。简单介绍了XiuXianBot项目的未来功能和架构。不是最终版本，可能包含不完整或占位内容。
+
+### 为什么？
+当前的README（此文件）相比新版差别很大，但由于整个架构将再次发生变化，因此此README将不会更新，并直接使用新的README。
+
 **其他语言的 README**
 
 [简体中文](https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#readme-top) | [English](https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#about-the-project)

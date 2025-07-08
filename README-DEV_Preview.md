@@ -249,14 +249,13 @@ Each adapter translates platform events into HTTP API calls and renders response
 **For Official Releases (`OSRELDocker1.0.0_*` and above) {Under Development}**    
 #### Docker Installation
 
-1. **Download docker-compose.yml**  
-   
+1. **Download the docker-compose.yml**  
    ```bash
    mkdir XiuXianBot && cd XiuXianBot
    wget -qO docker-compose.yml https://raw.githubusercontent.com/aosumi-rena/XiuXianBot/refs/heads/main/docker-compose.yml
    ```
 
-3. **Configure**  
+2. **Configure**
    Supply environment variables in `docker-compose.yml` for:
 
    * Compulsory:
@@ -265,7 +264,7 @@ Each adapter translates platform events into HTTP API calls and renders response
      * `CORE_SERVER_PORT`, `INTERNAL_COMMUNICATION_PORT`, `DB_PATH`, \<Other Features (TBA)\>
      * Switch image versions (latest / beta / ...)
 
-4. **Start service**  
+3. **Start service**
 
    ```bash
    docker-compose up -d
@@ -273,7 +272,7 @@ Each adapter translates platform events into HTTP API calls and renders response
 
    This brings up the core server, adapters, and admin dashboard in a single container.
 
-5. **Access Admin UI**  
+4. **Access Admin UI**
    Visit `http://localhost:11451` to verify settings, hot-reload config, and control services.
 
 <p align="right">(<a href="#readme-top">To Top</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README.md#docker-installation">EN</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHS.md#docker部署">简</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_CHT.md#docker部署">繁</a> | <a href="https://github.com/aosumi-rena/XiuXianBot/blob/main/README_JPN.md#ドッカーによる部署">日</a>)</p>

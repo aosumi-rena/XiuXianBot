@@ -260,6 +260,7 @@ Each adapter translates platform events into HTTP API calls and renders response
 
    * Compulsory:
      * Tokens of bots you are running (`DISCORD_TOKEN`, `TELEGRAM_TOKEN`, ...), `API_SECRET`
+     * These environment variables override values from `config.json` when running adapters
    * Optional:
      * `CORE_SERVER_PORT`, `INTERNAL_COMMUNICATION_PORT`, `DB_PATH`, \<Other Features (TBA)\>
      * Switch image versions (latest / beta / ...)

@@ -1,6 +1,2 @@
-github:
-  - aosumi-rena
-  - Columbina-Dev
-
-custom:
-  - ethereum: 0xe39A90f4B1867A8F49B7D9985D70a567ce38F2b7
+github: [aosumi-rena, Columbina-Dev]
+custom: ["https://etherscan.io/address/0xe39A90f4B1867A8F49B7D9985D70a567ce38F2b7"]
